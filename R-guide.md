@@ -934,9 +934,11 @@ Example from DataCamp Introduction to R course:
         
         ``` r
         dd <- data.frame(b = factor(c("Hi", "Med", "Hi", "Low"),
-          levels = c("Low", "Med", "Hi"), ordered = TRUE),
-          x = c("A", "D", "A", "C"), y = c(8, 3, 9, 9),
-          z = c(1, 1, 1, 2))
+                                    levels = c("Low", "Med", "Hi"), 
+                                    ordered = TRUE),
+                         x = c("A", "D", "A", "C"), y = c(8, 3, 9, 9),
+                         z = c(1, 1, 1, 2)
+                         )
         dd
         ```
         
@@ -1299,7 +1301,7 @@ attach(dataset_name, options)
       - Proportion:
         
         ``` r
-        proportion_name <- data_frame_name$variable_name/(data_frame_name$variable_name+data_frame_name$other_variable_name)
+        proportion_name <- df_name$var_name1/(df_name$var_name1+df_name$var_name2)
         ```
     
       - You can calculate a proportion based on a subset of the data.
@@ -1347,16 +1349,19 @@ attach(dataset_name, options)
         > sample proportions were calculated from the same sample size,
         > they should have the same margin of error, right? Wrong\!
         > While the margin of error does change with sample size, it is
-        > also affected by the
-        proportion.
+        > also affected by the proportion.
         
         ``` r
-        # The first step is to make a vector p that is a sequence from 0 to 1 with each number separated by 0.01:
+        # The first step is to make a vector p that is a sequence
+        # from 0 to 1 with each number separated by 0.01:
         n = 1000
         p = seq(0, 1, 0.01)
-        # We then create a vector of the margin of error (me) associated with each of these values of p using the familiar approximate formula (ME = 2 X SE):
+        # We then create a vector of the margin of error (me)
+        # associated with each of these values of p 
+        # using the familiar approximate formula (ME = 2 X SE):
         me = 1.96 - sqrt(p - (1 - p)/n)
-        # Finally, plot the two vectors against each other to reveal their relationship:
+        # Finally, plot the two vectors against each other 
+        # to reveal their relationship:
         plot(me ~ p)
         ```
 
