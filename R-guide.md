@@ -1,6 +1,68 @@
-R guide
-================
-Brendon Smith [br3ndonland](https://github.com/br3ndonland)
+
+# R guide
+
+Brendon Smith
+
+[br3ndonland](https://github.com/br3ndonland)
+
+[![license](https://img.shields.io/badge/license-MIT-blue.svg?longCache=true&style=for-the-badge)](https://choosealicense.com/)
+
+## Table of Contents <!-- omit in toc -->
+
+- [Intro](#intro)
+- [General R resources](#general-r-resources)
+- [Setup](#setup)
+  - [Installation](#installation)
+  - [My RStudio setup](#my-rstudio-setup)
+- [Working with R files](#working-with-r-files)
+  - [Jupyter Notebook](#jupyter-notebook)
+  - [R Markdown](#r-markdown)
+  - [RStudio Projects](#rstudio-projects)
+  - [R packages](#r-packages)
+  - [Git and GitHub](#git-and-github)
+  - [R packages](#r-packages-1)
+  - [Coding practice](#coding-practice)
+- [Running code](#running-code)
+- [Basic syntax](#basic-syntax)
+- [Data structures](#data-structures)
+  - [Vectors](#vectors)
+  - [Matrices](#matrices)
+  - [Factors](#factors)
+  - [Data frames](#data-frames)
+  - [Lists](#lists)
+- [Importing data into R](#importing-data-into-r)
+  - [CSV file](#csv-file)
+  - [Excel file](#excel-file)
+  - [Website](#website)
+  - [APIs](#apis)
+  - [Manually](#manually)
+  - [Cleaning datasets](#cleaning-datasets)
+  - [Attaching datasets](#attaching-datasets)
+  - [Exporting data frames](#exporting-data-frames)
+- [Statistical models in R](#statistical-models-in-r)
+  - [Helpful resources for statistical modeling](#helpful-resources-for-statistical-modeling)
+  - [Types of variables](#types-of-variables)
+  - [Basic statistics](#basic-statistics)
+  - [Confidence intervals](#confidence-intervals)
+  - [Probability](#probability)
+  - [For loops, bootstrapping, and inference](#for-loops-bootstrapping-and-inference)
+  - [Fisher’s exact test](#fishers-exact-test)
+  - [T-test](#t-test)
+  - [Linear regression](#linear-regression)
+  - [ANOVA](#anova)
+  - [Wilcoxon rank-sum](#wilcoxon-rank-sum)
+  - [Wilcoxon signed rank](#wilcoxon-signed-rank)
+  - [Kruskal-Wallis](#kruskal-wallis)
+  - [Friedman](#friedman)
+  - [Non-parametric factorial datasets](#non-parametric-factorial-datasets)
+  - [Power analysis](#power-analysis)
+  - [Principal Component Analysis](#principal-component-analysis)
+  - [Bioconductor](#bioconductor)
+- [Plots](#plots)
+  - [Helpful resources for plotting](#helpful-resources-for-plotting)
+  - [Base graphics](#base-graphics)
+  - [ggplot2](#ggplot2)
+  - [Other plotting programs](#other-plotting-programs)
 
 ## Intro
 
@@ -44,11 +106,40 @@ From the [R FAQ](http://cran.rstudio.com/faqs.html):
 > authors (Robert Gentleman and Ross Ihaka), and partly a play on the
 > name of the Bell Labs language ‘S’, which stood for System.”
 
+## General R resources
+
   - Read the [R FAQ](https://cran.rstudio.com/faqs.html). *GNU General
     Public License.*
   - [R documentation](https://www.rdocumentation.org/) provides a
     comprehensive listing of R packages that are available in CRAN,
     BioConductor and GitHub.
+  - **[R in
+    Action](https://www.manning.com/books/r-in-action-second-edition)**
+    by Robert Kabacoff is an excellent reference guide. If I had to
+    recommend one single resource, I would direct you here. Second
+    edition *copyright 2015 by Manning Publications Co. All rights
+    reserved.*
+  - [Quick-R](http://www.statmethods.net/) by Robert Kabacoff. Great
+    quick reference. *Copyright Robert I. Kabacoff, PhD.*
+  - [Cookbook for R](http://www.cookbook-r.com/) by Winston Chang. *CC
+    BY-SA 3.0 license (freely shared and adaptable)*
+  - [R Graphics
+    Cookbook](http://proquest.safaribooksonline.com/book/programming/r/9781449363086)
+    by Winston Chang (mostly for ggplot2). *CC0 1.0 license (public
+    domain dedication, no copyright).*
+  - [The R
+    book](https://www.amazon.com/R-Book-Michael-J-Crawley/dp/0470973927)
+    by Crawley
+  - [simpleR PDF by
+    Verzani](https://cran.r-project.org/doc/contrib/Verzani-SimpleR.pdf).
+    \*Copyright John Verzani, 2001-2. All rights reserved.- This book is
+    frequently referenced, but outdated (“Appendix: Teaching Tricks”
+    recommends distributing R code to students on “floppies.”)
+  - [Linear models in
+    R](https://www.amazon.com/Linear-Models-Chapman-Statistical-Science/dp/1439887330/ref=dp_ob_title_bk)
+    by Faraway. *Copyright 2014 by Taylor & Francis Group, LLC.*
+
+[back to top](#top)
 
 ## Setup
 
@@ -70,7 +161,7 @@ From the [R FAQ](http://cran.rstudio.com/faqs.html):
 
 <summary>Anaconda info</summary>
 
-#### Anaconda <!-- omit in toc -->
+#### Anaconda
 
   - I install Anaconda by [direct
     download](https://www.anaconda.com/download/). I have also tried
@@ -86,7 +177,7 @@ From the [R FAQ](http://cran.rstudio.com/faqs.html):
       - Update conda with `$ conda update --prefix <PATH> anaconda`
       - Update packages with `$ conda update --all`
 
-##### Additions to the standard Anaconda install <!-- omit in toc -->
+##### Additions to the standard Anaconda install
 
   - R and RStudio
       - When I was working with R, I preferred to install R and RStudio
@@ -97,7 +188,7 @@ From the [R FAQ](http://cran.rstudio.com/faqs.html):
         and installing a new R version can require reinstallation of
         packages. It’s just too difficult to manage.
         
-        ``` shell
+        ``` sh
         $ conda install -c r r-essentials
         $ conda install rstudio
         ```
@@ -132,46 +223,187 @@ From the [R FAQ](http://cran.rstudio.com/faqs.html):
   - Information on other RStudio options can be found in the [RStudio
     documentation](https://support.rstudio.com/hc/en-us/articles/200549016-Customizing-RStudio).
 
-### R Packages
+[back to top](#top)
+
+## Working with R files
+
+I highly recommend working with a notebook file format. Jupyter Notebook
+and R Markdown are the most popular formats.
+
+### Jupyter Notebook
+
+  - Jupyter Notebook is a file format most widely used for scientific
+    computing. It supports many programming languages, including Python
+    and R. Jupyter Notebook files enable creation of reproducible
+    computational narratives containing Markdown text interspersed with
+    functional code chunks.
+  - Jupyter Notebook files can be run with
+    [JupyterLab](http://jupyterlab.readthedocs.io/en/latest/).
+      - JupyterLab is a development environment produced by [Project
+        Jupyter](http://jupyter.org/).
+      - JupyterLab can run Jupyter Notebooks, R Markdown, Markdown, and
+        many other file formats.
+      - Install Jupyter with Homebrew or the Python `pip` module
+        manager. I previously used [Anaconda](https://www.anaconda.com/)
+        to manage my Python and R distributions, and now use Homebrew. I
+        switched because Anaconda is a very large installation, and not
+        as flexible or general as Homebrew.
+      - Launch from the command line with `jupyter notebook` or
+  - Google provides a cloud-based Jupyter Notebook environment called
+    [Colaboratory](https://colab.research.google.com). At the time of
+    this writing, it only supports Python.
+
+### R Markdown
+
+  - **R Markdown is a document creation package based on Markdown, a
+    syntax for easy generation of HTML files.**
+  - Markdown resources
+      - I have provided a guide to Markdown syntax on
+        [GitHub](https://github.com/br3ndonland/udacity-google/blob/master/markdown-guide.md).
+      - [MarkdownGuide](https://www.markdownguide.org/)
+      - [GitHub-Flavored
+        Markdown](https://guides.github.com/features/mastering-markdown/)
+  - R Markdown resources
+      - [RStudio R Markdown page](http://rmarkdown.rstudio.com/)
+      - [R Markdown: The Definitive Guide by Yihui
+        Xie](https://bookdown.org/yihui/rmarkdown/)
+  - To create an R Markdown document in RStudio, File -\> New File -\> R
+    Markdown.
+  - An RMarkdown file contains three types of data:
+      - YAML front matter header at the top of the file to specify
+        output methods
+      - Markdown-formatted text
+      - Functional code chunks.
+  - When you click the **Knit** button the code will run and the output
+    will be created.
+  - **Unfortunately, RMarkdown does not allow use of HTML image tags.**
+
+#### YAML front matter header
+
+  - The header specifies a document title and subtitle, table of
+    contents, and output options.
+
+#### Functional code chunks
+
+  - In addition to the standard Markdown inline code chunks and Markdown
+    fenced code chunks, RMarkdown includes functional language-specific
+    code chunks that allow code to be run from within the Markdown
+    document.
+  - RMarkdown code chunks are inserted with a modified Markdown code
+    fence format:
+      - Normal Markdown code chunks are enclosed within triple
+        backticks, with the language name after the first set of
+        backticks.
+      - Functional R code is specified with `{r}` after the first set of
+        backticks. R will run this code when knitting the RMarkdown
+        document. If you want to include a standard Markdown code chunk
+        without running the code in R, leave out the `{r}`.
+      - Conclude the code chunk with another set of triple backticks.
+  - See the [R Markdown code chunks
+    page](http://rmarkdown.rstudio.com/lesson-3.html) for more info.
+
+Example:
+
+``` r
+summary(cars)
+```
+
+    ##      speed           dist       
+    ##  Min.   : 4.0   Min.   :  2.00  
+    ##  1st Qu.:12.0   1st Qu.: 26.00  
+    ##  Median :15.0   Median : 36.00  
+    ##  Mean   :15.4   Mean   : 42.98  
+    ##  3rd Qu.:19.0   3rd Qu.: 56.00  
+    ##  Max.   :25.0   Max.   :120.00
+
+  - Change size of figures (at beginning of r code chunk in brackets):
+    
+    ``` text
+    {r, out.width = '1000px', out.height = '2000px'}
+    ```
+
+  - Prevent printing of code in HTML output: `echo=FALSE`
+
+#### Output formats
+
+  - There are [many formats](http://rmarkdown.rstudio.com/formats.html)
+    available. RMarkdown documents can easily be interconverted among
+    the formats.
+  - Unfortunately, only one output format can be specified at a time.
+  - When a report is knit, it will appear in the RStudio viewer, and
+    will automatically be saved to the same directory as the .rmd file.
+  - The [`github_document` output
+    format](https://rmarkdown.rstudio.com/github_document_format.html)
+    outputs a GitHub-friendly Markdown file. It is RStudio-specific, not
+    a Pandoc standard.
+  - The [R Notebook](https://bookdown.org/yihui/rmarkdown/notebook.html)
+    format is similar to a Jupyter Notebook. Code chunks can be executed
+    independently and interactively, rather than having to knit the
+    entire workbook.
+  - I have had many issues with output formats:
+      - The `html_document` `toc_float: true` doesn’t work properly.
+    
+      - The `html_notebook` format doesn’t seem to be running code.
+        What’s the point of it if I already have the .Rmd?
+    
+      - The `md_document` doesn’t generate an HTML preview, doesn’t
+        output front matter, and uses four space indentations, Setext
+        headers, and indented code output instead of fenced. Adding
+        `variant: gfm` helps, but still doesn’t output front matter.
+    
+      - The Markdown output formats sometimes don’t output front matter
+        like headers and the table of contents. The solution is to
+        include a separate header.
+        
+        ``` yaml
+        output:
+          github_document:
+            includes:
+              in_header: R-guide-header.md
+        ```
+
+### RStudio Projects
+
+[RStudio
+Projects](https://support.rstudio.com/hc/en-us/articles/200526207-Using-Projects)
+are the best way to manage code in RStudio. RStudio projects make it
+straightforward to divide your work into multiple contexts, each with
+their own working directory, workspace, history, and source documents.
+Projects allow use of version control with Git. Installing packages into
+the project locally with Packrat is very helpful.
+
+### R packages
+
+  - [Packrat](https://rstudio.github.io/packrat/) is a package
+    dependency management system for R projects.
+  - R is heavily dependent on its package ecosystem, and Packrat helps
+    avoid problems caused by different package versions and
+    installations.
+  - [Packrat works with
+    RStudio](https://rstudio.github.io/packrat/rstudio.html) and gives
+    each project its own private package library.
+
+### Git and GitHub
+
+  - Version control is highly recommended for code of all kinds. Git is
+    a free and widely used version control system.
+  - RStudio provides a [version control
+    guide](https://support.rstudio.com/hc/en-us/articles/200532077-Version-Control-with-Git-and-SVN)
+    for linking with Git.
+  - **Git has a substantial learning curve.** RStudio and GitHub have
+    helpful documentation for getting started.
+  - The directory where the files are located must be [formatted as an R
+    Project](https://support.rstudio.com/hc/en-us/articles/200526207-Using-Projects).
+
+### R packages
 
   - Packages are programs written for R that provide additional
-    functionality. **Dependence on large numbers of packages is a
-    limitation of R.**
+    functionality. **R is dependent on large numbers of packages. This
+    is a major limitation of R.**
   - [Packrat](https://rstudio.github.io/packrat/) manages packages
-    locally for each R project, and has really helped address package
-    dependencies. See [R-reproducibility.rmd](R-reproducibility.rmd).
-
-[back to top](#top)
-
-### General R resources
-
-  - **[R in
-    Action](https://www.manning.com/books/r-in-action-second-edition)**
-    by Robert Kabacoff is an excellent reference guide. If I had to
-    recommend one single resource, I would direct you here. Second
-    edition *copyright 2015 by Manning Publications Co. All rights
-    reserved.*
-  - [Quick-R](http://www.statmethods.net/) by Robert Kabacoff. Great
-    quick reference. *Copyright Robert I. Kabacoff, PhD.*
-  - [Cookbook for R](http://www.cookbook-r.com/) by Winston Chang. *CC
-    BY-SA 3.0 license (freely shared and adaptable)*
-  - [R Graphics
-    Cookbook](http://proquest.safaribooksonline.com/book/programming/r/9781449363086)
-    by Winston Chang (mostly for ggplot2). *CC0 1.0 license (public
-    domain dedication, no copyright).*
-  - [The R
-    book](https://www.amazon.com/R-Book-Michael-J-Crawley/dp/0470973927)
-    by Crawley
-  - [simpleR PDF by
-    Verzani](https://cran.r-project.org/doc/contrib/Verzani-SimpleR.pdf).
-    \*Copyright John Verzani, 2001-2. All rights reserved.- This book is
-    frequently referenced, but outdated (“Appendix: Teaching Tricks”
-    recommends distributing R code to students on “floppies.”)
-  - [Linear models in
-    R](https://www.amazon.com/Linear-Models-Chapman-Statistical-Science/dp/1439887330/ref=dp_ob_title_bk)
-    by Faraway. *Copyright 2014 by Taylor & Francis Group, LLC.*
-
-[back to top](#top)
+    locally for each R project.
+  - Packrat is separate from the general package manager like Homebrew
+    used to install R and RStudio.
 
 ### Coding practice
 
@@ -186,24 +418,10 @@ From the [R FAQ](http://cran.rstudio.com/faqs.html):
 
 [back to top](#top)
 
-### Editing and executing code
+## Running code
 
-See [RStudio
-documentation](https://support.rstudio.com/hc/en-us/articles/200484448-Editing-and-Executing-Code)
-
-### Saving code
-
-  - Create an **R file** (.R) to compile multiple lines of code and save
-    for future use.
-  - Create an **R Markdown file** in RStudio to combine notes and
-    functional code.
-  - **RStudio projects** make it straightforward to divide your work
-    into multiple contexts, each with their own working directory,
-    workspace, history, and source documents. Installing packages into
-    the project locally with Packrat is very helpful.
-
-### Running code
-
+  - See the [RStudio documentation on editing and executing
+    code](https://support.rstudio.com/hc/en-us/articles/200484448-Editing-and-Executing-Code)
   - The basic code entry window is called the **console**. It is
     oriented towards entering and running code one line at a time, and
     does not allow you to save the code.
@@ -220,8 +438,8 @@ documentation](https://support.rstudio.com/hc/en-us/articles/200484448-Editing-a
         including additional, removal, and modification of lines will be
         reflected in this subsequent run of the selection.
     3.  To run the entire document press `Cmd+option+R` (or use the
-        **Source** toolbar button). Using the **Knit** command in
-        RMarkdown documents will run the entire document.
+        **Source** toolbar button). Using the **Knit** command in R
+        Markdown documents will run the entire document.
   - The difference between running lines from a selection and invoking
     **Source** is that when running a selection all lines are inserted
     directly into the console whereas for **Source** the file is saved
@@ -286,9 +504,6 @@ documentation](https://support.rstudio.com/hc/en-us/articles/200484448-Editing-a
         (until you insert a line break with enter).
       - You can also use a semicolon instead of a line break to indicate
         the end of a command.
-      - **Note that in RMarkdown and Markdown, `#` outside of a code
-        block will specify a header.** See the RMarkdown section in
-        [R-reproducibility.rmd](R-reproducibility.rmd).
 
 [back to top](#top)
 
@@ -442,7 +657,9 @@ factor_temperature_vector
 
 ### Data frames
 
-`data.frame()`
+``` r
+data.frame()
+```
 
   - **A data frame is a combination of vectors that functions like a
     spreadsheet within R.**
@@ -2949,3 +3166,5 @@ interfaces with R.
 [plotly](https://plot.ly/d3-js-for-r-and-shiny-charts/) is an online
 tool that can interface with R and Shiny. Shiny is a nice tool for
 creating interactive plots and presentations.
+
+[back to top](#top)
