@@ -36,16 +36,14 @@ Brendon Smith
   - [Website](#website)
   - [APIs](#apis)
   - [Manually](#manually)
-  - [Cleaning datasets](#cleaning-datasets)
-  - [Attaching datasets](#attaching-datasets)
+- [Working with data](#working-with-data)
+  - [Cleaning data](#cleaning-data)
+  - [Attaching data](#attaching-data)
   - [Exporting data frames](#exporting-data-frames)
 - [Statistical models in R](#statistical-models-in-r)
   - [Helpful resources for statistical modeling](#helpful-resources-for-statistical-modeling)
   - [Types of variables](#types-of-variables)
   - [Basic statistics](#basic-statistics)
-  - [Confidence intervals](#confidence-intervals)
-  - [Probability](#probability)
-  - [For loops, bootstrapping, and inference](#for-loops-bootstrapping-and-inference)
   - [Fisher’s exact test](#fishers-exact-test)
   - [T-test](#t-test)
   - [Linear regression](#linear-regression)
@@ -151,51 +149,12 @@ From the [R FAQ](http://cran.rstudio.com/faqs.html):
     separately. R cannot be updated from within RStudio, and installing
     a new R version can require reinstallation of packages. It’s
     difficult to manage.
+
   - I previously used [Anaconda](https://www.anaconda.com/) to manage my
     Python and R distributions, and now use Homebrew. I switched because
     Anaconda is a very large installation, and not as flexible or
     general as Homebrew. Conda and brew are sort of like competing
     package managers.
-
-<details>
-
-<summary>Anaconda info</summary>
-
-#### Anaconda
-
-  - I install Anaconda by [direct
-    download](https://www.anaconda.com/download/). I have also tried
-    installing via Homebrew Cask, but didn’t get the correct command
-    prompt or path.
-  - Anaconda contains the [Conda](https://conda.io/docs/) and
-    [PyPI](https://pypi.python.org/pypi) (pip) package managers.
-    Packages can be installed from `pip`, and will integrate into the
-    Anaconda environment.
-  - [Conda commands](https://conda.io/docs/commands):
-      - Check installed packages with `$ conda list` and `$ pip list`.
-      - Find packages with `$ conda search`.
-      - Update conda with `$ conda update --prefix <PATH> anaconda`
-      - Update packages with `$ conda update --all`
-
-##### Additions to the standard Anaconda install
-
-  - R and RStudio
-      - When I was working with R, I preferred to install R and RStudio
-        via Anaconda for easier version and package management.
-        Otherwise, [R](https://cran.rstudio.com/) and
-        [RStudio](https://www.rstudio.com) must be downloaded and
-        installed separately. R cannot be updated from within RStudio,
-        and installing a new R version can require reinstallation of
-        packages. It’s just too difficult to manage.
-        
-        ``` sh
-        $ conda install -c r r-essentials
-        $ conda install rstudio
-        ```
-
-</details>
-
-#### Homebrew
 
   - Install [Homebrew](https://brew.sh/). Homebrew includes
     [Homebrew-Cask](https://caskroom.github.io/) to manage other macOS
@@ -214,6 +173,48 @@ From the [R FAQ](http://cran.rstudio.com/faqs.html):
   - Check health of installation with `brew doctor`
 
   - See [docs](https://docs.brew.sh) for further info.
+
+  - 
+    
+    <details>
+    
+    <summary>Anaconda info</summary>
+    
+    #### Anaconda
+    
+      - I install Anaconda by [direct
+        download](https://www.anaconda.com/download/). I have also tried
+        installing via Homebrew Cask, but didn’t get the correct command
+        prompt or path.
+      - Anaconda contains the [Conda](https://conda.io/docs/) and
+        [PyPI](https://pypi.python.org/pypi) (pip) package managers.
+        Packages can be installed from `pip`, and will integrate into
+        the Anaconda environment.
+      - [Conda commands](https://conda.io/docs/commands):
+          - Check installed packages with `$ conda list` and `$ pip
+            list`.
+          - Find packages with `$ conda search`.
+          - Update conda with `$ conda update --prefix <PATH> anaconda`
+          - Update packages with `$ conda update --all`
+    
+    ##### Additions to the standard Anaconda install
+    
+      - R and RStudio
+          - When I was working with R, I preferred to install R and
+            RStudio via Anaconda for easier version and package
+            management. Otherwise, [R](https://cran.rstudio.com/) and
+            [RStudio](https://www.rstudio.com) must be downloaded and
+            installed separately. R cannot be updated from within
+            RStudio, and installing a new R version can require
+            reinstallation of packages. It’s just too difficult to
+            manage.
+            
+            ``` sh
+            $ conda install -c r r-essentials
+            $ conda install rstudio
+            ```
+    
+    </details>
 
 ### My RStudio setup
 
@@ -330,17 +331,19 @@ summary(cars)
   - There are [many formats](http://rmarkdown.rstudio.com/formats.html)
     available. RMarkdown documents can easily be interconverted among
     the formats.
-  - Unfortunately, only one output format can be specified at a time.
+  - Only one output format can be specified at a time.
   - When a report is knit, it will appear in the RStudio viewer, and
     will automatically be saved to the same directory as the .rmd file.
   - The [`github_document` output
     format](https://rmarkdown.rstudio.com/github_document_format.html)
     outputs a GitHub-friendly Markdown file. It is RStudio-specific, not
-    a Pandoc standard.
+    a Pandoc standard, and provides some RStudio-specific benefits like
+    local HTML preview.
   - The [R Notebook](https://bookdown.org/yihui/rmarkdown/notebook.html)
     format is similar to a Jupyter Notebook. Code chunks can be executed
     independently and interactively, rather than having to knit the
-    entire workbook.
+    entire workbook. I haven’t found it to be useful, and would prefer
+    to use a Jupyter Notebook.
   - I have had many issues with output formats:
       - The `html_document` `toc_float: true` doesn’t work properly.
     
@@ -482,7 +485,7 @@ the project locally with Packrat is very helpful.
   - Logical Boolean values are entered with `TRUE` or `T`, and `FALSE`
     or `F`.
   - You can check the data type of a variable by entering
-    `class(variable_name).`
+    `class(var_name).`
   - You can perform mathematical operations on variables, but only if
     they have a numerical value assigned.
   - Print (view data) in R by simply typing the variable name. There is
@@ -779,14 +782,13 @@ Example from DataCamp Introduction to R course:
       - If you want to select all elements of the variable `rings`, both
         `planets_df[,5]` and `planets_df[,"rings"]` work.
       - Use the `$` sign to tell R that it only has to look up all the
-        elements of the variable behind the sign:
-        `data_frame_name$variable_name`. You can combine this with the
-        element section above: `data_frame_name$variable_name[rows]`.
-        Note that you do not need to specify a column because it is
-        already specified by the variable name.
+        elements of the variable behind the sign: `df_name$var_name`.
+        You can combine this with the element section above:
+        `df_name$var_name[rows]`. Note that you do not need to specify a
+        column because it is already specified by the variable name.
   - Selecting parts of a data frame conditionally:
       - The `subset()` function selects a subset of a data frame
-        according to conditions you specify. `subset(data_frame_name,
+        according to conditions you specify. `subset(df_name,
         some.condition== “condition”)`. The first argument of `subset()`
         specifies the dataset for which you want a subset. By adding the
         second argument, you give R the necessary information and
@@ -830,7 +832,8 @@ Example from DataCamp Introduction to R course:
         9,100,101, since it first picks the second element of a, then
         the first and then the last.
 
-  - Example from my postdoc Nrf1 proteomics experiments:
+  - Example from my [postdoc Nrf1 proteomics
+    experiments](https://github.com/br3ndonland/R-proteomics-Nrf1):
     
     ``` r
     # Put groups in my preferred order, instead of alphabetically.
@@ -1139,12 +1142,20 @@ to accessing APIs with R.
     CRAN document, and Verzani simpleR Appendix: Entering Data into R
     for more info.
 
-### Cleaning datasets
+[back to top](#top)
 
-`na.omit(dataset_name$optional_variable_name)` will omit any missing
-values (usually labeled “NA”)
+## Working with data
 
-### Attaching datasets
+### Cleaning data
+
+  - The `dplyr` package is one of the most popular for working with data
+    in R. It is similar to Python Pandas. See [Tom Augspurger’s Gist on
+    dplyr and
+    Pandas](https://gist.github.com/TomAugspurger/6e052140eaa5fdb6e8c0).
+  - `na.omit(dataset_name$optional_var_name)` will omit any missing
+    values (usually labeled “NA”)
+
+### Attaching data
 
 ``` r
 attach(dataset_name, options)
@@ -1233,56 +1244,75 @@ attach(dataset_name, options)
       - Stevens SS *Science* 1946, DOI:
         [10.1126/science.103.2684.677](http://science.sciencemag.org/content/103/2684/677)
       - DataCamp introduction to statistics course lesson 1 video
-      - My course notes (not on GitHub)
-          - CPSC 440 Lecture Notes Ch 01-03 p.5
-          - CPSC 440 lab 1 slide 9
-          - PATH 591 Lecture 05 A
+      - My course notes
+          - [CPSC 440 Lecture Notes
+            Chapter 01-03](https://drive.google.com/file/d/1teW1dNHHdUq0x5cCtwYopqDb5WdN20Dn/view?usp=sharing)
+            p.5
+          - [CPSC 440
+            lab 1](https://drive.google.com/file/d/1l6x5kEsasEDSofTqOy0wC9R6ImKa0NYT/view?usp=sharing)
+            slide 9
+          - [PATH 591 Lecture 05
+            A](https://drive.google.com/file/d/1sqkJ8w_nUOiAKgTSFUrnRauv4gRChUV6/view?usp=sharing)
 
 ### Basic statistics
 
   - Mean: `mean()`
-      - Groups of means can be compared with the `by()`
-        function:
+    
+      - Groups of means can be compared with the `by()` function:
         
         ``` r
-        by(data_frame_name$variable_name,data_frame_name$other_variable_name,mean)
+        by(df_name$var_name1,df_name$var_name2,mean)
         ```
+
   - Median: `median()`
+
   - Variance: `variance()`
+
   - Absolute value: `abs(x)`
+
   - Square root: `sqrt(x)`
+
   - Log: `log(x)`
+
   - Computing summary statistics of data subsets:
-    `aggregate(model_formula, data_frame_name, mean)`. This function is
-    useful if you want to calculate means of each group in a dataset.
+    `aggregate(model_formula, df_name, mean)`. This function is useful
+    if you want to calculate means of each group in a dataset.
+
   - Frequency table (to count the number of times each category occurs
-    in a data frame): `table(data_frame_name)`
-      - For a specific variable: `table(data_frame_name$variable_name)`
+    in a data frame): `table(df_name)`
+    
+      - For a specific variable: `table(df_name$var_name)`
     
       - The `table` command can also be used to combine multiple vectors
         of different types into a table:
         
         ``` r
-        smokes = c("Y","N","N","Y","N","Y","Y","Y","N","Y")
+        smokes = c('Y','N','N','Y','N','Y','Y','Y','N','Y')
         amount = c(1,2,2,3,3,1,2,1,3,2)
         table(smokes,amount)
         ```
+
   - Relative frequency table:
-    `table(data_frame_name$variable_name)/number_observations`
+    
+    ``` r
+    table(df_name$var_name1)/number_observations
+    ```
+
   - The `summary()` function gives you an overview description of a
     variable (minimum, first quartile, median, mean, third quartile, and
     maximum). The `describe()` function is similar, but includes more
     information on the distribution (sd, range, skew, kurtosis).
     Remember that skew is classified by the direction of the data tail.
+
   - Using **comparisons** is a good way to facilitate data analysis.
+    
       - To select all elements of a vector that are greater than zero,
         type `new_vector_name <- vector_name >0`
     
-      - To compare vectors/variables (can also use \< or
-        ==):
+      - To compare vectors/variables (can also use `<` or `==`):
         
         ``` r
-        data_frame_name$variable_name>data_frame_name$other_variable_name
+        df_name$var_name1>df_name$var_name2
         ```
     
       - To compare multiple elements of a vector:
@@ -1295,7 +1325,7 @@ attach(dataset_name, options)
         ratio:
         
         ``` r
-        ratio_name <- data_frame_name$variable_name/data_frame_name$other_variable_name
+        ratio_name <- df_name$var_name1/df_name$var_name2
         ```
     
       - Proportion:
@@ -1308,17 +1338,19 @@ attach(dataset_name, options)
         Example:
         
         ``` r
-        # In this example, the 'atheism' data frame has already been loaded into the workspace
+        # The 'atheism' data frame has already been loaded
         # Your code to create the 'us12' subset:
         us12 = subset(atheism, atheism$nationality == "United States" & atheism$year =="2012")
         # Calculate the proportion of atheist responses:
         proportion = nrow(subset(us12,response == 'atheist'))/nrow(us12)
         ```
+
   - Sum vectors with the `sum()` function, and compare sums with
-    `variable_name>other_variable_name`.
+    `var_name>other_var_name`.
+
   - The `scale()` function converts values to z scores.
 
-### Confidence intervals
+#### Confidence intervals
 
   - 95% confidence for a sample size n means that 95% of random samples
     of size n will yield confidence intervals that contain the true
@@ -1344,28 +1376,41 @@ attach(dataset_name, options)
 
   - Margin of error:
     
-      - > Imagine you’ve set out to survey 1000 people on two questions:
-        > are you female? and are you left-handed? Since both of these
-        > sample proportions were calculated from the same sample size,
-        > they should have the same margin of error, right? Wrong\!
-        > While the margin of error does change with sample size, it is
-        > also affected by the proportion.
-        
-        ``` r
-        # The first step is to make a vector p that is a sequence
-        # from 0 to 1 with each number separated by 0.01:
-        n = 1000
-        p = seq(0, 1, 0.01)
-        # We then create a vector of the margin of error (me)
-        # associated with each of these values of p 
-        # using the familiar approximate formula (ME = 2 X SE):
-        me = 1.96 - sqrt(p - (1 - p)/n)
-        # Finally, plot the two vectors against each other 
-        # to reveal their relationship:
-        plot(me ~ p)
-        ```
+    > Imagine you’ve set out to survey 1000 people on two questions: are
+    > you female? and are you left-handed? Since both of these sample
+    > proportions were calculated from the same sample size, they should
+    > have the same margin of error, right? Wrong\! While the margin of
+    > error does change with sample size, it is also affected by the
+    > proportion.
+    > 
+    > The first step is to make a vector `p` that is a sequence from 0
+    > to 1 with each number separated by 0.01:
+    
+    ``` r
+    n = 1000
+    p = seq(0, 1, 0.01)
+    ```
+    
+    > We then create a vector of the margin of error (`me`) associated
+    > with each of these values of `p` using the familiar approximate
+    > formula (ME = 2 X SE):
+    
+    ``` r
+    me = 1.96 - sqrt(p - (1 - p)/n)
+    ```
+    
+        ## Warning in sqrt(p - (1 - p)/n): NaNs produced
+    
+    > Finally, plot the two vectors against each other to reveal their
+    > relationship:
+    
+    ``` r
+    plot(me ~ p)
+    ```
+    
+    ![](R-guide_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
 
-### Probability
+#### Probability
 
   - Simulating a coin flip with `sample()`:
     
@@ -1385,7 +1430,7 @@ attach(dataset_name, options)
       - The sample can also be saved as a vector for further analysis
         (such as calculating the mean, or other statistics)
 
-### For loops, bootstrapping, and inference
+#### For loops, bootstrapping, and inference
 
 > "The **for loop** is a cornerstone of computer programming. The idea
 > behind the for loop is **iteration**: it allows you to execute code as
@@ -1394,105 +1439,104 @@ attach(dataset_name, options)
   - Example for loop (from DataCamp data analysis and statistical
     inference course, also see Verzani simpleR p.48):
     
-      - > In this example, we want to iterate the two lines of code
-        > inside the curly braces that take a random sample of size 50
-        > from area then save the mean of that sample into the sample
-        > means50 vector. Without the for loop, this would be painful:
-        
-        ``` r
-        sample_means50 <- rep(NA, 5000)
-        samp <- sample(area, 50)
-        sample_means50[1] <- mean(samp)
-        samp <- sample(area, 50)
-        sample_means50[2] <- mean(samp)
-        samp <- sample(area, 50)
-        sample_means50[3] <- mean(samp)
-        samp <- sample(area, 50)
-        sample_means50[4] <- mean(samp)
-        ```
-        
-        > and so on… With the for loop, these thousands of lines of code
-        > are compressed into a handful of
-        lines:
-        
-        ``` r
-        # The 'ames' data frame and 'area' and 'price' objects are already loaded into the workspace
-        # Set up an empty vector of 5000 NAs to store sample means:
-        sample_means50 = rep(NA, 5000)
-        # Take 5000 samples of size 50 of 'area' and store all of them in 'sample_means50'.
-        # Also print 'i' (the index counter):
-        for (i in 1:5000)
-        {
-          samp = sample(area, 50)
-          sample_means50[i] = mean(samp)
-          print(i)
-        }
-        ```
+    > In this example, we want to iterate the two lines of code inside
+    > the curly braces that take a random sample of size 50 from area
+    > then save the mean of that sample into the sample means50 vector.
+    > Without the for loop, this would be painful:
     
-      - > In the first line we initialize a vector. In this case, we
-        > created a vector of 5000 NAs called `sample means50`. This
-        > vector will store values generated within the for loop. NA
-        > means not available, and in this case they’re used as
-        > placeholders until we fill in the values with actual sample
-        > means. NA is also often used for missing data in R.
+    ``` r
+    sample_means50 <- rep(NA, 5000)
+    samp <- sample(area, 50)
+    sample_means50[1] <- mean(samp)
+    samp <- sample(area, 50)
+    sample_means50[2] <- mean(samp)
+    samp <- sample(area, 50)
+    sample_means50[3] <- mean(samp)
+    samp <- sample(area, 50)
+    sample_means50[4] <- mean(samp)
+    ```
     
-      - > The second line calls the for loop itself. The syntax can be
-        > loosely read as, “for every element `i` from 1 to 5000, run
-        > the following lines of code”. You can think of `i` as the
-        > counter that keeps track of which loop you’re on. Therefore,
-        > more precisely, the loop will run once when `i`=1, then once
-        > when `i`=2, and so on up to `i`=5000.
+    > and so on… With the for loop, these thousands of lines of code are
+    > compressed into a handful of
+    lines:
     
-      - > The body of the for loop is the part inside the curly braces,
-        > and this set of code is run for each value of `i`. Here, on
-        > every loop, we take a random sample of size 50 from `area`
-        > (note: the sample size can be previously defined by creating a
-        > vector), take its mean, and store it as the ith element of
-        > `sample_means50`. In order to display that this is really
-        > happening, we asked R to print `i` at each iteration. This
-        > line of code is optional and is only used for displaying
-        > what’s going on while the for loop is running.
+    ``` r
+    # The 'ames' data frame and 'area' and 'price' objects are already loaded
+    # Set up an empty vector of 5000 NAs to store sample means:
+    sample_means50 = rep(NA, 5000)
+    # Take 5000 samples of size 50 of 'area' and store in 'sample_means50'.
+    # Also print 'i' (the index counter):
+    for (i in 1:5000)
+    {
+      samp = sample(area, 50)
+      sample_means50[i] = mean(samp)
+      print(i)
+    }
+    ```
     
-      - > The for loop allows us to not just run the code 5000 times,
-        > but to neatly package the results, element by element, into
-        > the empty vector that we initialized at the outset.
+    > In the first line we initialize a vector. In this case, we created
+    > a vector of 5000 NAs called `sample means50`. This vector will
+    > store values generated within the for loop. NA means not
+    > available, and in this case they’re used as placeholders until we
+    > fill in the values with actual sample means. NA is also often used
+    > for missing data in R.
+    > 
+    > The second line calls the for loop itself. The syntax can be
+    > loosely read as, “for every element `i` from 1 to 5000, run the
+    > following lines of code”. You can think of `i` as the counter that
+    > keeps track of which loop you’re on. Therefore, more precisely,
+    > the loop will run once when `i`=1, then once when `i`=2, and so on
+    > up to `i`=5000.
+    > 
+    > The body of the for loop is the part inside the curly braces, and
+    > this set of code is run for each value of `i`. Here, on every
+    > loop, we take a random sample of size 50 from `area` (note: the
+    > sample size can be previously defined by creating a vector), take
+    > its mean, and store it as the ith element of `sample_means50`. In
+    > order to display that this is really happening, we asked R to
+    > print `i` at each iteration. This line of code is optional and is
+    > only used for displaying what’s going on while the for loop is
+    > running.
+    > 
+    > The for loop allows us to not just run the code 5000 times, but to
+    > neatly package the results, element by element, into the empty
+    > vector that we initialized at the outset. You can also run
+    > multiple distributions through the same for
+    loop:
     
-      - > You can also run multiple distributions through the same for
-        > loop:
-        
-        ``` r
-        # The 'ames' data frame and 'area' and 'price' objects are already loaded into the workspace
-        
-        # Initialize the sample distributions:
-        sample_means10 = rep(NA, 5000)
-        sample_means100 = rep(NA, 5000)
-        
-        # Run the for loop:
-        for (i in 1:5000) {
-          samp = sample(area, 10)
-          sample_means10[i] = mean(samp)
-          samp = sample(area, 100)
-          sample_means100[i] = mean(samp)
-        }
-        ```
+    ``` r
+    # The 'ames' data frame and 'area' and 'price' objects are already loaded
     
-      - > Don’t worry about the fact that `samp` is used for the name of
-        > two different objects. In the second command of the for loop,
-        > the mean of `samp` is saved to the relevant place in the
-        > vector `sample_means10`. With the mean saved, we’re now free
-        > to overwrite the object samp with a new sample, this time of
-        > size 100. In general, anytime you create an object using a
-        > name that is already in use, the old object will get replaced
-        > with the new one, i.e. R will write over the existing object
-        > with the new one, which is something you want to be careful
-        > about if you don’t intend to do so."
-
-  - > Another example: Obtain a random sample, calculate the sample’s
+    # Initialize the sample distributions:
+    sample_means10 = rep(NA, 5000)
+    sample_means100 = rep(NA, 5000)
+    
+    # Run the for loop:
+    for (i in 1:5000) {
+      samp = sample(area, 10)
+      sample_means10[i] = mean(samp)
+      samp = sample(area, 100)
+      sample_means100[i] = mean(samp)
+    }
+    ```
+    
+    > Don’t worry about the fact that `samp` is used for the name of two
+    > different objects. In the second command of the for loop, the mean
+    > of `samp` is saved to the relevant place in the vector
+    > `sample_means10`. With the mean saved, we’re now free to overwrite
+    > the object samp with a new sample, this time of size 100. In
+    > general, anytime you create an object using a name that is already
+    > in use, the old object will get replaced with the new one, i.e. R
+    > will write over the existing object with the new one, which is
+    > something you want to be careful about if you don’t intend to do
+    > so."
+    > 
+    > Another example: Obtain a random sample, calculate the sample’s
     > mean and standard deviation, use these statistics to calculate a
     > confidence interval, repeat steps (1)-(3) 50 times.
     
     ``` r
-    # The 'ames' data frame is already loaded into the workspace
+    # The 'ames' data frame is already loaded
     
     # Initialize 'samp_mean', 'samp_sd' and 'n':
     samp_mean = rep(NA, 50)
@@ -1514,9 +1558,9 @@ attach(dataset_name, options)
     
       - Definition (from Google):
         
-          - > a technique of loading a program into a computer by means
-            > of a few initial instructions that enable the introduction
-            > of the rest of the program from an input device.
+        > a technique of loading a program into a computer by means of a
+        > few initial instructions that enable the introduction of the
+        > rest of the program from an input device.
     
       - There is also a `boot` package available for R
     
@@ -1529,7 +1573,7 @@ attach(dataset_name, options)
         analysis and statistical inference course lab 4)
         
         ``` r
-        # The 'nc' data frame is already loaded into the workspace
+        # The 'nc' data frame is already loaded
         
         # Initialize the 'boot_means' object:
         boot_means=rep(NA,100)
@@ -1544,7 +1588,7 @@ attach(dataset_name, options)
         hist(boot_means)
         ```
 
-#### The inference function
+##### The inference function
 
   - Writing a for loop every time you want to calculate a bootstrap
     interval or run a randomization test is cumbersome. This is a custom
@@ -1572,52 +1616,55 @@ attach(dataset_name, options)
   - Example *(Datacamp data analysis and statistical inference course
     lab 4)*:
     
-      - > use the inference function for evaluating whether there is a
-        > difference between the average birth weights of babies born to
-        > smoker and non-smoker mothers:
-        
-        ``` r
-        # The 'nc' data frame is already loaded into the workspace
-        inference(y = nc$weight, x = nc$habit, est = "mean", type = "ci", null = 0, 
-          alternative = "twosided", method = "theoretical",order=c("smoker","nonsmoker")
-        )
-        ```
+    > use the inference function for evaluating whether there is a
+    > difference between the average birth weights of babies born to
+    > smoker and non-smoker mothers:
     
-      - > The first argument is y, which is the response variable that
-        > we are interested in: `nc$weight`.
+    ``` r
+    # The 'nc' data frame is already loaded into the workspace
+    inference(y = nc$weight, x = nc$habit,
+              est = "mean", type = "ci", null = 0,
+              alternative = "twosided", method = "theoretical",
+              order=c("smoker","nonsmoker")
+              )
+    ```
     
-      - > The second argument is the grouping variable `x`, which is the
-        > explanatory variable multiplied by the grouping variable
-        > across the levels of which we’re comparing the average value
-        > for the response variable, smokers and non-smokers:
-        > `nc$habit`.
-    
-      - > The third argument `est` is the parameter we’re interested in:
-        > “mean” (other options are “median”, or “proportion”.)
-    
-      - > Next we decide on the type of inference we want: a hypothesis
-        > test (“ht”) or a confidence interval(“ci”).
-    
-      - > When performing a hypothesis test, we also need to supply the
-        > null value, which in this case is 0, since the null hypothesis
-        > sets the two population means equal to each other.
-    
-      - > The alternative hypothesis can be “less”, “greater”, or
-        > “twosided”.
-    
-      - > The method of inference can be “theoretical” or “simulation”
-        > based.
-    
-      - > The order function changes the order of the variable levels.
-    
-      - > You can also add `success=`, which defines a success for
-        > survey data-type questions.
+    > The first argument is y, which is the response variable that we
+    > are interested in: `nc$weight`.
+    > 
+    > The second argument is the grouping variable `x`, which is the
+    > explanatory variable multiplied by the grouping variable across
+    > the levels of which we’re comparing the average value for the
+    > response variable, smokers and non-smokers: `nc$habit`.
+    > 
+    > The third argument `est` is the parameter we’re interested in:
+    > “mean” (other options are “median”, or “proportion”.)
+    > 
+    > Next we decide on the type of inference we want: a hypothesis test
+    > (“ht”) or a confidence interval(“ci”).
+    > 
+    > When performing a hypothesis test, we also need to supply the null
+    > value, which in this case is 0, since the null hypothesis sets the
+    > two population means equal to each other.
+    > 
+    > The alternative hypothesis can be “less”, “greater”, or
+    > “twosided”.
+    > 
+    > The method of inference can be “theoretical” or “simulation”
+    > based.
+    > 
+    > The order function changes the order of the variable levels.
+    > 
+    > You can also add `success=`, which defines a success for survey
+    > data-type questions.
 
-  - > Another example: Take a subset `spain` of `atheism` with only the
-    > respondents from Spain. Calculate the proportion of atheists
-    > within this subset. Use the `inference` function on this subset,
-    > grouping them by year. *(From Datacamp data analysis and
-    > statistical inference course lab 4)*
+  - Another example:
+    
+    > Take a subset `spain` of `atheism` with only the respondents from
+    > Spain. Calculate the proportion of atheists within this subset.
+    > Use the `inference` function on this subset, grouping them by
+    > year. *(From Datacamp data analysis and statistical inference
+    > course lab 4)*
     
     ``` r
     # Take the 'spain' subset:
@@ -1625,8 +1672,8 @@ attach(dataset_name, options)
     # Calculate the proportion of atheists from the 'spain' subset:
     proportion = nrow(subset(spain,response == 'atheist'))/nrow(spain)
     # Use the inference function:
-    inference(spain$response, spain$year, est = "proportion", type = "ci",
-      method = "theoretical", success = "atheist"
+    inference(spain$response, spain$year, est = "proportion",
+      type = "ci", method = "theoretical", success = "atheist"
     )
     ```
 
@@ -1641,7 +1688,7 @@ attach(dataset_name, options)
   - Data must first be put into a contingency table:
     
     ``` r
-    table_name <- xtabs(formula, data=data_frame_name)
+    table_name <- xtabs(formula, data=df_name)
     ```
 
   - Next, run the test and reference the table
@@ -1685,8 +1732,12 @@ t.test(y~x, alternative = "greater", var.equal = TRUE) # one-tailed t-test
       - Verzani simpleR p.63
       - [T-tests
         Columbia](http://www.stat.columbia.edu/~martin/W2024/R2.pdf)
-      - CPSC 440 ch 6 lecture p.16, CPSC 440 lab 07 notes p.5 (not
-        available on GitHub).
+      - [CPSC 440 Lecture Notes
+        Chapter 06](https://drive.google.com/file/d/15i91VfeZOoq6VcDpJhBblMiQOrKVVB79/view?usp=sharing)
+        p.16
+      - [CPSC 440 lab 07
+        notes](https://drive.google.com/file/d/1WE_3hGmhhHN5Z1lXFat6YcRE7dZajJ7O/view?usp=sharing)
+        p.5
 
 #### Assumptions
 
@@ -1694,18 +1745,19 @@ t.test(y~x, alternative = "greater", var.equal = TRUE) # one-tailed t-test
 
 <!-- end list -->
 
-  - Shapiro-Wilk W test (W\>0.9 desired, see flowchart from PATH 591
-    lecture 03 p.11 in linear regression section):
+  - Shapiro-Wilk W test (W\>0.9 desired, see flowchart from [PATH 591
+    lecture 03](https://drive.google.com/file/d/1V4F1T1M3RrQu3CutBPPxVvKhRvA9ZUn5/view?usp=sharing)
+    p.11 in [linear regression section](#linear-regression)):
     
     ``` r
-    shapiro.test(dependent_variable_name, options)
+    shapiro.test(dependent_var_name, options)
     ```
 
   - Normal quantile-quantile plot
     
     ``` r
-    qqnorm(dependent_variable_name, options)
-    qqline(dependent_variable_name, options)
+    qqnorm(dependent_var_name, options)
+    qqline(dependent_var_name, options)
     ```
     
       - Note that ggplot2 does not have features for easy creation of
@@ -2034,7 +2086,7 @@ plots for evaluating model fit. *To select specific plots, add
 <th>
 
 Residuals are basically the deviation from the model fit. See
-<a href="https://www.dropbox.com/s/5unmjqfne3ht3d0/PATH%20591%20Lecture%2003%20-BasicsLinearRegression-2012%20with%20notes.pdf?dl=0">PATH
+<a href="https://drive.google.com/file/d/1V4F1T1M3RrQu3CutBPPxVvKhRvA9ZUn5/view?usp=sharing">PATH
 591 lecture 03</a> for a clear visual explanation of residuals. Use
 `rstandard()` for standardized residuals (divided by standard deviation,
 fitted including the current data point), `rstudent()` for studentized
@@ -2095,9 +2147,11 @@ Lists the covariance matrix for model parameters.
   - Further information:
       - R in Action 8.6
       - Linear Models with R 8.3
-      - CPSC 542 Lecture 10 pp. 4-7 (not available on GitHub)
+      - [CPSC 542
+        Lecture 10](https://drive.google.com/file/d/1aJ7Hu5GUyndYHAPNrlL-jAM-yEItXn-8/view?usp=sharing)
+        pp. 4-7
 
-#### Linear Regression Assumptions
+#### Linear regression assumptions
 
 1.  **Normality of residuals**
 
@@ -2106,21 +2160,28 @@ Lists the covariance matrix for model parameters.
   - Shapiro-Wilk W statistic: based on mathematics of normal probability
     plots. Compares variance of distribution to variance expected under
     normal distribution. Shapiro-Wilk W statistic trumps p value.
+      - Normality testing workflow from [PATH 591
+        lecture 03](https://drive.google.com/file/d/1V4F1T1M3RrQu3CutBPPxVvKhRvA9ZUn5/view?usp=sharing)
+        p.11:
+        
+        ![Normality testing workflow from PATH 591 lecture 03
+        p.11](img/normality-testing-workflow.png
+        "Normality testing workflow")
+        
+          - **Make sure you are testing residuals and not raw data.** It
+            is acceptable to test normality using **studentized
+            residuals**.
+          - See SAS for mixed models section 10.2.3 p.418, and “Linear
+            Mixed Models: A Practical Guide Using Statistical Software”
+            by West Welch and Galecki p.105.
     
-    ![Normality testing workflow From PATH 591 lecture 03
-    p.11](img/normality-testing-workflow.png
-    "Normality testing workflow")
-    
-      - **Make sure you are testing residuals and not raw data.** It is
-        acceptable to test normality using **studentized residuals**.
-      - See SAS for mixed models section 10.2.3 p.418, and “Linear Mixed
-        Models: A Practical Guide Using Statistical Software” by West
-        Welch and Galecki p.105.
       - Graphical evaluation by normal quantile-quantile plot
+    
       - Skewness: measure of asymmetry in distribution. A perfect normal
         distribution has skewness=0. Positively skewed
         distributions=tail to the right, negatively skewed=tail to the
         left.
+    
       - Kurtosis: another measure of asymmetry in distribution.
         Leptokurtic distributions (kurtosis\<0) will have more
         observations at the center, platykurtic distributions
@@ -2173,8 +2234,9 @@ Lists the covariance matrix for model parameters.
   - Cook’s D is a distance statistic that measures change in regression
     parameter estimates when an observation is deleted.
       - Cook’s D values are sometimes compared with a critical F value
-        F<sub>0.50</sub>(k,n-k-1) (see PATH 591 lecture 03 p.15, not
-        available on GitHub).
+        F<sub>0.50</sub>(k,n-k-1) (see [PATH 591
+        lecture 03](https://drive.google.com/file/d/1V4F1T1M3RrQu3CutBPPxVvKhRvA9ZUn5/view?usp=sharing)
+        p.15).
     
       - According to R in Action 8.4.3, Cook’s D values greater than
         4/(n-k-1), where n is the sample size and k is the number of
@@ -2224,10 +2286,12 @@ Lists the covariance matrix for model parameters.
         residual variances.
   - Further information:
       - Peña EA, Slate EH. Global Validation of Linear Model
-        Assumptions. \*J. Am. Stat. Assoc.- 101:341 (2006).
+        Assumptions. *J. Am. Stat. Assoc.* 101:341 (2006). doi:
+        [10.1198/016214505000000637](https://dx.doi.org/10.1198/016214505000000637).
       - R in Action 8.3, 13, and [Quick-R regression
         diagnostics](http://www.statmethods.net/stats/rdiagnostics.html).
-      - PATH 591 lecture 03 (not available on GitHub)
+      - [PATH 591
+        lecture 03](https://drive.google.com/file/d/1V4F1T1M3RrQu3CutBPPxVvKhRvA9ZUn5/view?usp=sharing)
 
 #### Strategies for addressing model violations
 
@@ -2240,7 +2304,9 @@ Lists the covariance matrix for model parameters.
           - Square root:
           - Reciprocal: 1/(y+1) (particularly effective at reducing
             skewness)
-          - See PATH 591 lecture 03 pp.11-15 (not available on GitHub).
+          - See [PATH 591
+            lecture 03](https://drive.google.com/file/d/1V4F1T1M3RrQu3CutBPPxVvKhRvA9ZUn5/view?usp=sharing)
+            pp.11-15.
       - Variance-stabilizing transformations
           - Square root, log, reciprocal (in order of increasing
             heterogeneity of variance)
@@ -2249,10 +2315,11 @@ Lists the covariance matrix for model parameters.
           - Logarithmic function: linearized by log transformation of x
           - Power function: linearized by log transformation of both x
             and y
-          - See PATH 591 lecture 04 C (not available on GitHub)
+          - See [PATH 591 lecture 04
+            C](https://drive.google.com/file/d/1c5jasrjRjqI9rYIB3M4WMK6J4Kx-dPor/view?usp=sharing)
       - Arcsin(y) can correct non-normality or heteroscedasticity for
-        variables that are proportions (1-100%). See PATH 591 problem
-        set 4 (not available on GitHub).
+        variables that are proportions (1-100%). See [PATH 591 problem
+        set 4](https://drive.google.com/file/d/12E078z9PyUuqgMJjulgVNhWTEZPDautM/view?usp=sharing).
       - The independent variable can also be transformed if it is
         continuous. Categorical independent variables should not be
         transformed.
@@ -2265,10 +2332,11 @@ Lists the covariance matrix for model parameters.
   - **It is not appropriate to simply throw out influential data points
     unless they are due to measurement error or some other problem.**
   - Weighted least squares regression can be used to address serial
-    correlation or influential observations. See PATH 591 lecture 03
-    p.14 (not available on GitHub). It allows influential observations
-    to be re-weighted to minimize interference with the model. SAS
-    provides a “reweight” statement for this purpose.
+    correlation or influential observations. See [PATH 591
+    lecture 03](https://drive.google.com/file/d/1V4F1T1M3RrQu3CutBPPxVvKhRvA9ZUn5/view?usp=sharing)
+    p.14. It allows influential observations to be re-weighted to
+    minimize interference with the model. SAS provides a “reweight”
+    statement for this purpose.
   - Link function violations: as with violations of other assumptions,
     transformation of the data set, addition of variables to the model,
     or use of a different model may be necessary. Different link
@@ -2282,8 +2350,10 @@ Lists the covariance matrix for model parameters.
 F~0.05~(k, n-1 df)=, r^2^, p<
 ```
 
-This information is usually adequate for publication purposes. See PATH
-591 lecture 4a p.8(not available on GitHub).
+This information is usually adequate for publication purposes. See
+[PATH 591 lecture 04
+A](https://drive.google.com/file/d/1BLG5s81lyWEMBlzlYFpSQRKwK9jZOX08/view?usp=sharing)
+p.8.
 
 ### ANOVA
 
@@ -2335,18 +2405,19 @@ on ANOVA.
 
 <!-- end list -->
 
-  - Shapiro-Wilk W test (W\>0.9 desired, see flowchart from PATH 591
-    lecture 03 p.11 in linear regression section):
+  - Shapiro-Wilk W test (W\>0.9 desired, see flowchart from [PATH 591
+    lecture 03](https://drive.google.com/file/d/1V4F1T1M3RrQu3CutBPPxVvKhRvA9ZUn5/view?usp=sharing)
+    p.11 in [linear regression section](#linear-regression)):
     
     ``` r
-    shapiro.test(dependent_variable_name, options)
+    shapiro.test(dependent_var_name, options)
     ```
     
       - Normal quantile-quantile plot
         
         ``` r
-        qqnorm(dependent_variable_name, options)
-        qqline(dependent_variable_name, options)
+        qqnorm(dependent_var_name, options)
+        qqline(dependent_var_name, options)
         ```
 
 <!-- end list -->
@@ -2398,40 +2469,48 @@ on ANOVA.
           - Numerical assessment using fit statistics
               - *I am more familiar with this in SAS. Explanation
                 below.*
+            
               - In general, you want to use the simplest model possible
                 that minimizes AIC, AICC, and BIC while still meeting
                 the assumptions of the model. Mind the assumptions of
-                each covariance structure. See CPSC 542 Lecture 10
-                pp. 4-7 (not available on GitHub).
-              - Dr. Bullock (Illinois CPSC statistics professor): \> You
-                select an error structure with heterogeneous variances
-                \[like unstructured\] and compare that to a model with
-                everything the same with the exception of homogeneous
-                variances \[like compound symmetry\]. The differences in
-                the log likelihoods will be a chi-square with degrees of
-                freedom equal to the differences in the number of
-                estimates in the two models.
-                  - This is also described in the Littell “SAS for mixed
-                    models” text p. 172.
-                  - In other words, run the code using the unstructured
-                    model, and copy/paste the “Fit Statistics” table and
-                    the number of covariance parameter estimates into
-                    Excel. The number of estimates (also called
-                    covariance parameters) is given under “Dimensions”
-                    in the output. Also look at the “-2 Res Log
-                    Likelihood” number under “Fit Statistics” in the
-                    output. Then run the code several more times, using
-                    different covariance structures each time (cs,
-                    ar(1), arh(1), toep, and toeph), and paste the fit
-                    statistics and estimates into excel also. Then, for
-                    each test other than unstructured, type =chidist(x,
-                    df), using the difference between the “-2 Res Log
-                    Likelihood” for unstructured and the other test as
-                    the “x” or chi square, and the difference in
-                    \#parameters between unstructured and the other test
-                    as the df. The answer will be a p value. A
-                    significant p indicates that the unstructured model
-                    provides superior fit.
+                each covariance structure. See [CPSC 542
+                Lecture 10](https://drive.google.com/open?id=1aJ7Hu5GUyndYHAPNrlL-jAM-yEItXn-8)
+                pp. 4-7.
+            
+              - Donald Bullock (Illinois CPSC statistics professor):
+                
+                > You select an error structure with heterogeneous
+                > variances \[like unstructured\] and compare that to a
+                > model with everything the same with the exception of
+                > homogeneous variances \[like compound symmetry\]. The
+                > differences in the log likelihoods will be a
+                > chi-square with degrees of freedom equal to the
+                > differences in the number of estimates in the two
+                > models.
+            
+              - This is also described in the Littell “SAS for mixed
+                models” text p. 172.
+            
+              - In other words, run the code using the unstructured
+                model, and copy/paste the “Fit Statistics” table and the
+                number of covariance parameter estimates into Excel. The
+                number of estimates (also called covariance parameters)
+                is given under “Dimensions” in the output. Also look at
+                the “-2 Res Log Likelihood” number under “Fit
+                Statistics” in the output.
+            
+              - Then run the code several more times, using different
+                covariance structures each time (cs, ar(1), arh(1),
+                toep, and toeph), and paste the fit statistics and
+                estimates into excel also. Then, for each test other
+                than unstructured, type =chidist(x, df), using the
+                difference between the “-2 Res Log Likelihood” for
+                unstructured and the other test as the “x” or chi
+                square, and the difference in \#parameters between
+                unstructured and the other test as the df.
+            
+              - The answer will be a p value. A significant p indicates
+                that the unstructured model provides superior fit.
 
 <!-- end list -->
 
@@ -2453,7 +2532,7 @@ or
 ``` r
 library(multcomp)
 library(RColorBrewer) # load RColorBrewer for additional color palettes.
-tuk <- glht(aov1, linfct=mcp(variable_name="Tukey"))
+tuk <- glht(aov1, linfct=mcp(var_name="Tukey"))
 cld(tuk)
 plot(cld(tuk, level=.05), col=brewer.pal(8,"Pastel1")) 
 # "I'm a very vivacious man... Earth tones are so passe. I'm a pastel man." Larry David
@@ -2529,8 +2608,8 @@ forest, setting blocks as random would indicate that you want to block
 for just all forests everywhere in general and these forests are
 representative of all forests, whereas setting blocks as fixed would
 indicate that you want to block for these specific forests you’re
-evaluating. See CPSC 440 lecture notes ch 08 ANOVA (not available on
-GitHub).
+evaluating. See [CPSC 440 Lecture Notes Chapter 08
+ANOVA](https://drive.google.com/file/d/1taEWV9VHuVb9NzO8Ej02raaWt1iA5HA9/view?usp=sharing).
 
 **The covariance structure must be appropriately specified.** Fit
 statistics and information criteria can be used to identify an
@@ -2634,7 +2713,7 @@ friedman.test(y~a | b, data)
 ```
 
   - where `y` is the numeric outcome variable, `A` is a grouping
-    variable, and`B` is a blocking variable that identifies matched
+    variable, and `B` is a blocking variable that identifies matched
     observations. In both cases, `data` is an option argument specifying
     a matrix or data frame containing the variables.
   - Useful for non-parametric non-independent data with ≥2 groups (such
@@ -2706,7 +2785,7 @@ Bioconductor is a repository of R packages for bioinformatic analysis.
 #### Proteomics
 
   - I walked through the [“Mass spectrometry and proteomics data
-    analysis”](http://www.bioconductor.org/help/workflows/proteomics/)
+    analysis”](https://master.bioconductor.org/packages/release/workflows/html/proteomics.html)
     workflow in 2014. Running the code (at least all at once) was only
     partially successful.
 
@@ -2755,7 +2834,7 @@ Bioconductor is a repository of R packages for bioinformatic analysis.
         
         ``` r
         new_calculation=vector+vector
-        boxplot(new_calculation~data_frame_name$variable_name)
+        boxplot(new_calculation~df_name$var_name)
         ```
     
       - Setting line widths for individual parts of the boxplot:
@@ -2770,11 +2849,10 @@ Bioconductor is a repository of R packages for bioinformatic analysis.
             `aggregate()` function: \`means \<- aggregate(model,
             data.frame, mean)
         
-          - Next, create a separate `points()`
-            function:
+          - Next, create a separate `points()` function:
             
             ``` r
-            points(means$dependent_variable_name, cex=2, pch=23, bg=0, lwd=4)
+            points(means$dependent_var_name, cex=2, pch=23, bg=0, lwd=4)
             ```
         
           - **Note that, as with other functions in R, variables will be
@@ -2797,14 +2875,14 @@ Bioconductor is a repository of R packages for bioinformatic analysis.
         boxplot(len ~ supp, data = ToothGrowth)
         ```
         
-        ![](R-guide_files/figure-gfm/unnamed-chunk-7-1.png)<!-- -->
+        ![](R-guide_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
         
         ``` r
         # Put interaction of two variables on x-axis
         boxplot(len ~ supp + dose, data = ToothGrowth)
         ```
         
-        ![](R-guide_files/figure-gfm/unnamed-chunk-7-2.png)<!-- -->
+        ![](R-guide_files/figure-gfm/unnamed-chunk-10-2.png)<!-- -->
         
         With the ggplot2 package, you can get a similar result using
         qplot() (Figure 2-11), with geom=“boxplot”:
@@ -2814,7 +2892,7 @@ Bioconductor is a repository of R packages for bioinformatic analysis.
         qplot(ToothGrowth$supp, ToothGrowth$len, geom="boxplot")
         ```
         
-        ![](R-guide_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
+        ![](R-guide_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->
         
         If the two vectors are already in the same data frame, you can
         use the following syntax:
@@ -2823,7 +2901,7 @@ Bioconductor is a repository of R packages for bioinformatic analysis.
         qplot(supp, len, data=ToothGrowth, geom="boxplot")
         ```
         
-        ![](R-guide_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
+        ![](R-guide_files/figure-gfm/unnamed-chunk-12-1.png)<!-- -->
         
         This is equivalent to:
         
@@ -2831,7 +2909,7 @@ Bioconductor is a repository of R packages for bioinformatic analysis.
         ggplot(ToothGrowth, aes(x=supp, y=len)) + geom_boxplot()
         ```
         
-        ![](R-guide_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
+        ![](R-guide_files/figure-gfm/unnamed-chunk-13-1.png)<!-- -->
         
         It’s also possible to make box plots for multiple variables, by
         combining the variables with interaction(), as in Figure 2-11.
@@ -2843,7 +2921,7 @@ Bioconductor is a repository of R packages for bioinformatic analysis.
         qplot(interaction(ToothGrowth$supp, ToothGrowth$dose), ToothGrowth$len, geom="boxplot")
         ```
         
-        ![](R-guide_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->
+        ![](R-guide_files/figure-gfm/unnamed-chunk-14-1.png)<!-- -->
         
         Alternatively, get the columns from the data
         frame:
@@ -2852,7 +2930,7 @@ Bioconductor is a repository of R packages for bioinformatic analysis.
         qplot(interaction(supp, dose), len, data=ToothGrowth, geom="boxplot")
         ```
         
-        ![](R-guide_files/figure-gfm/unnamed-chunk-12-1.png)<!-- -->
+        ![](R-guide_files/figure-gfm/unnamed-chunk-15-1.png)<!-- -->
         
         This is equivalent
         to:
@@ -2861,7 +2939,7 @@ Bioconductor is a repository of R packages for bioinformatic analysis.
         ggplot(ToothGrowth, aes(x=interaction(supp, dose), y=len)) + geom_boxplot()
         ```
         
-        ![](R-guide_files/figure-gfm/unnamed-chunk-13-1.png)<!-- -->
+        ![](R-guide_files/figure-gfm/unnamed-chunk-16-1.png)<!-- -->
 
   - Dot plot
     
@@ -2878,7 +2956,7 @@ Bioconductor is a repository of R packages for bioinformatic analysis.
         axis:
         
         ``` r
-        hist(data_frame_name$variable_name,breaks=number,xlim=number or variable you created)
+        hist(df_name$var_name,breaks=number,xlim=number or variable you created)
         ```
 
   - Combined boxplot and histogram: `simple.hist.and.boxplot()`
@@ -3051,25 +3129,24 @@ of course R in Action, for thorough documentation.
           - Also see Figure 1 and associated code in Paul Murrell
             (2003), “Integrating grid Graphics Output with Base Graphics
             Output”, \*R News,- 3/2, 7–12.
-    
-    <!-- end list -->
-    
-    ``` r
-    # Increase bottom margin to make room for rotated labels
-    par(mar = c(7, 4, 4, 2) + 0.1)
-    # Create plot with no x axis and no x axis label
-    plot(1 : 8, xaxt = "n",  xlab = "")
-    # Set up x axis with tick marks alone
-    axis(1, labels = FALSE)
-    # Create some text labels
-    labels <- paste("Label", 1:8, sep = " ")
-    # Plot x axis labels at default tick marks
-    text(1:8, par("usr")[3] - 0.25, srt = 45, adj = 1,labels = labels, xpd = TRUE)
-    # Plot x axis label at line 6 (of 7)
-    mtext(1, text = "X Axis Label", line = 6)
-    ```
-    
-    ![](R-guide_files/figure-gfm/unnamed-chunk-14-1.png)<!-- -->
+        <!-- end list -->
+        ``` r
+        # Increase bottom margin to make room for rotated labels
+        par(mar = c(7, 4, 4, 2) + 0.1)
+        # Create plot with no x axis and no x axis label
+        plot(1 : 8, xaxt = "n",  xlab = "")
+        # Set up x axis with tick marks alone
+        axis(1, labels = FALSE)
+        # Create some text labels
+        labels <- paste("Label", 1:8, sep = " ")
+        # Plot x axis labels at default tick marks
+        text(1:8, par("usr")[3] - 0.25, 
+             srt = 45, adj = 1,labels = labels, xpd = TRUE
+             )
+        # Plot x axis label at line 6 (of 7)
+        mtext(1, text = "X Axis Label", line = 6)
+        ```
+        ![](R-guide_files/figure-gfm/unnamed-chunk-17-1.png)<!-- -->
 
   - Create **figure panels** with
     

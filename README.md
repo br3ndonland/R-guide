@@ -22,4 +22,8 @@ The statistical information assumes foundational statistical knowledge that I ga
 
 I would like to share this resource broadly, and have made an effort to respect copyright restrictions of the various sources from which I have drawn.
 
-**I have provided a [companion repository of sample code](https://github.com/br3ndonland/R-sample-code).**
+## Instructions
+
+- **Markdown files (.md) can be viewed on GitHub.**
+- **R Markdown files (.Rmd) can be run in RStudio.**
+- **I have provided a [companion repository of sample code](https://github.com/br3ndonland/R-sample-code).**
