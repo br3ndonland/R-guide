@@ -205,6 +205,7 @@ From the [R FAQ](http://cran.rstudio.com/faqs.html):
     
     ``` sh
     brew install r
+    brew cask install r-app
     brew cask install rstudio
     ```
 
@@ -753,7 +754,7 @@ Example from DataCamp Introduction to R course:
     
     ``` r
     positions <- order(planets_df$diameter, decreasing=TRUE)
-    # apparently this does not order the data yet, for some reason
+    # this does not order the data yet, for some reason
     largest_first_df <- planets_df[positions,]
     ```
 
@@ -829,15 +830,13 @@ Example from DataCamp Introduction to R course:
         9,100,101, since it first picks the second element of a, then
         the first and then the last.
 
-  - Example from my postdoc Nrf1 proteomics
-    experiments:
+  - Example from my postdoc Nrf1 proteomics experiments:
     
     ``` r
-    # Use this factor command to put the groups in my preferred order, instead of alphabetically.
+    # Put groups in my preferred order, instead of alphabetically.
     Orderedgroups=factor(group, levels = c("lacZ","Nrf1-HA chow","Nrf1-HA chol","Nrf1-HA bort"))
     # Verify desired order of groups
     summary(group)
-    #
     ```
     
       - Make sure you refer to the new sorted variable (`Orderedgroups`
@@ -875,7 +874,7 @@ Example from DataCamp Introduction to R course:
         ## 3 medium  3     24
     
     ``` r
-    # To actually change the `data` variable, you need to overwrite it with the new info:
+    # Overwrite data variable with new info:
     # data <- data[c(1,3,2)]
     ```
     
@@ -910,14 +909,16 @@ Example from DataCamp Introduction to R course:
         ## 3     24
     
     ``` r
-    # Matrix-style indexing of one column - drops dimension to become a vector
+    # Matrix-style indexing of one column
+    # drops dimension to become a vector
     data[,2]
     ```
     
         ## [1] 20 27 24
     
     ``` r
-    # Matrix-style indexing with drop=FALSE - preserves dimension to remain data frame
+    # Matrix-style indexing with drop=FALSE
+    # preserves dimension to remain data frame
     data[, 2, drop=FALSE]
     ```
     
@@ -1191,6 +1192,8 @@ attach(dataset_name, options)
 
 ### Helpful resources for statistical modeling
 
+  - **My [R-sample-code
+    repo](https://github.com/br3ndonland/R-sample-code).**
   - [R in
     Action](https://www.manning.com/books/r-in-action-second-edition)
   - [R Graphics
@@ -1244,20 +1247,6 @@ attach(dataset_name, options)
         ```
   - Median: `median()`
   - Variance: `variance()`
-      - Example: calculating variance manually
-        
-        ``` r
-        # The dataset `data_jordan` is already loaded
-        # Calculate the differences with respect to the mean
-        diff <- data_jordan$points-mean(data_jordan$points)
-        # Calculate the squared differences
-        squared_diff <- (data_jordan$points-mean(data_jordan$points))^2
-        # Combine all pieces of the puzzle in order to acquire the variance
-        variance <- sum(squared_diff)/(length(squared_diff)-1)
-        variance
-        # Compare your result to the correct solution. You can find the correct solution by calculating it with the `var()` function.
-        var(data_jordan$points)
-        ```
   - Absolute value: `abs(x)`
   - Square root: `sqrt(x)`
   - Log: `log(x)`
@@ -1339,10 +1328,10 @@ attach(dataset_name, options)
   - Sample code:
     
     ``` r
-    # Calculate the standard error:
+    # Calculate standard error
     se = sd(vector_name)/sqrt(# observations)
     
-    # Calculate the lower and upper bounds of your confidence interval and print them:
+    # Calculate lower and upper CI bounds
     lower = sample_mean - 1.96 - se
     upper = sample_mean + 1.96 - se
     c(lower, upper)
@@ -1584,7 +1573,9 @@ attach(dataset_name, options)
         
         ``` r
         # The 'nc' data frame is already loaded into the workspace
-        # The code: inference(y = nc$weight, x = nc$habit, est = "mean", type = "ci", null = 0, alternative = "twosided", method = "theoretical",order=c("smoker","nonsmoker"))
+        inference(y = nc$weight, x = nc$habit, est = "mean", type = "ci", null = 0, 
+          alternative = "twosided", method = "theoretical",order=c("smoker","nonsmoker")
+        )
         ```
     
       - > The first argument is y, which is the response variable that
@@ -1629,7 +1620,9 @@ attach(dataset_name, options)
     # Calculate the proportion of atheists from the 'spain' subset:
     proportion = nrow(subset(spain,response == 'atheist'))/nrow(spain)
     # Use the inference function:
-    inference(spain$response, spain$year, est = "proportion", type = "ci", method = "theoretical", success = "atheist")
+    inference(spain$response, spain$year, est = "proportion", type = "ci",
+      method = "theoretical", success = "atheist"
+    )
     ```
 
 ### Fisher’s exact test
@@ -1663,7 +1656,7 @@ attach(dataset_name, options)
         TRAMP model. *Cancer Prev. Res.* (2013). DOI:
         [10.1158/1940-6207.CAPR-12-0443](https://doi.org/10.1158/1940-6207.CAPR-12-0443)
       - Code located in
-        [R-sample-code/fishers-exact](https://github.com/br3ndonland/R-sample-code/fishers-exact).
+        [R-sample-code/fishers-exact](https://github.com/br3ndonland/R-sample-code).
 
 ### T-test
 
@@ -1740,36 +1733,8 @@ model.name <- lm(model, data, ...)
 
 See R in Action tables 8.2 and 8.3 for full syntax info.
 
-<html>
-
-<head>
-
-<style>
-table {
-  font-family: calibri;
-  border-collapse: collapse;
-  width: 100%;
-}
-
-td, th {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 10px;
-}
-
-tr:nth-child(even) {
-  background-color: #dddddd;
-}
-</style>
-
-<th>
-
-Linear regression formula symbols. Adapted from R in Action, HTML
-formatting by Brendon Smith.
-
-</head>
-
-<body>
+*Linear regression formula symbols. Adapted from R in Action, HTML
+formatting by Brendon Smith.*
 
 <table>
 
@@ -1937,40 +1902,8 @@ allows use of arithmetic within the parentheses.
 
 </table>
 
-</body>
-
-</html>
-
-<html>
-
-<head>
-
-<style>
-table {
-  font-family: calibri;
-  border-collapse: collapse;
-  width: 100%;
-}
-
-td, th {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 10px;
-}
-
-tr:nth-child(even) {
-  background-color: #dddddd;
-}
-</style>
-
-<th>
-
-Linear regression functions that can be used after specifying the model.
-Adapted from R in Action, HTML formatting by Brendon Smith.
-
-</head>
-
-<body>
+*Linear regression functions that can be used after specifying the
+model. Adapted from R in Action, HTML formatting by Brendon Smith.*
 
 <table>
 
@@ -2142,10 +2075,6 @@ Lists the covariance matrix for model parameters.
 </tr>
 
 </table>
-
-</body>
-
-</html>
 
 #### Selection of regression models
 
@@ -2521,7 +2450,8 @@ library(multcomp)
 library(RColorBrewer) # load RColorBrewer for additional color palettes.
 tuk <- glht(aov1, linfct=mcp(variable_name="Tukey"))
 cld(tuk)
-plot(cld(tuk, level=.05), col=brewer.pal(8,"Pastel1")) # "I'm a very vivacious man... Earth tones are so passe. I'm a pastel man."
+plot(cld(tuk, level=.05), col=brewer.pal(8,"Pastel1")) 
+# "I'm a very vivacious man... Earth tones are so passe. I'm a pastel man." Larry David
 ```
 
 ##### Specific pairwise comparisons with contrasts and estimates
@@ -2555,7 +2485,12 @@ plot(effect(factorial_term, model_name, xlevels), multiline=TRUE)
 ```
 
 ``` r
-library(gplots) plotmeans(y ~ interaction(variable1, variable2, sep=" "), connect=list(c(1,3,5),c(2,4,6)), col=c("red", "darkgreen"), main = "Interaction Plot with 95% CIs", xlab="Treatment and Dose Combination")
+library(gplots) plotmeans(y ~ interaction(variable1, variable2, sep=" "),
+  connect=list(c(1,3,5),c(2,4,6)),
+  col=c("red", "darkgreen"),
+  main = "Interaction Plot with 95% CIs",
+  xlab="Treatment and Dose Combination"
+)
 ```
 
 ``` r
@@ -2658,12 +2593,13 @@ pairwise.wilcox.test(y, x, p.adjust.method= “holm”)
 Nemenyi test
 
 ``` r
-library(PMCMR)
-posthoc.kruskal.nemenyi.test(y, x, method= c(“Tukey”, “Chisq”))
+library(PMCMRplus)
+kwAllPairsNemenyiTest(y, x, method= c(“Tukey”, “Chisq”))
 ```
 
-  - Requires the `pmcmr` package (Pairwise Multiple Comparisons of Mean
-    Rank Sums)
+  - Requires the `PMCMRplus` package (Pairwise Multiple Comparisons of
+    Mean Rank Sums). Note that the original `PMCMR` package has been
+    deprecated.
 
 `nparcomp`
 
@@ -2672,10 +2608,10 @@ library(nparcomp)
 nparcomp(y~a, data, type=)
 ```
 
-  - Requires the nparcomp package.
+  - Requires the `nparcomp` package.
 
 `npmc`: there used to be an npmc package that is referred to in some
-documentation. It is no longer maintained.
+documentation. It has been deprecated.
 
 #### Kruskal-Wallis Assumptions
 
@@ -2960,10 +2896,8 @@ Bioconductor is a repository of R packages for bioinformatic analysis.
     
       - [Volcano plot example using genetics
         data](http://www.gettinggeneticsdone.com/2014/05/r-volcano-plots-to-visualize-rnaseq-microarray.html)
-      - Volcano plot example with unpublished proteomics data from my
-        postdoc:
-        [Rmd](https://www.dropbox.com/s/xdvgjji6p9f9ic3/20160316%20TCMP%20Nrf1-HA%20mouse%20liver%20figures.Rmd?dl=1)
-        [HTML](https://www.dropbox.com/s/1ct8l5gtbnyl9qw/20160316_TCMP_Nrf1-HA_mouse_liver_figures.html?dl=0)
+      - [Volcano plot example with unpublished proteomics data from my
+        postdoc](https://github.com/br3ndonland/R-proteomics-Nrf1)
 
 #### Graphical parameters
 
