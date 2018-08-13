@@ -20,16 +20,15 @@ Brendon Smith
   - [RStudio Projects](#rstudio-projects)
   - [R packages](#r-packages)
   - [Git and GitHub](#git-and-github)
-  - [R packages](#r-packages-1)
   - [Coding practice](#coding-practice)
 - [Running code](#running-code)
 - [Basic syntax](#basic-syntax)
 - [Data structures](#data-structures)
-  - [Vectors](#vectors)
-  - [Matrices](#matrices)
-  - [Factors](#factors)
-  - [Data frames](#data-frames)
-  - [Lists](#lists)
+  - [Vector](#vector)
+  - [Matrix](#matrix)
+  - [Factor](#factor)
+  - [Data frame](#data-frame)
+  - [List](#list)
 - [Importing data into R](#importing-data-into-r)
   - [CSV file](#csv-file)
   - [Excel file](#excel-file)
@@ -44,15 +43,10 @@ Brendon Smith
   - [Helpful resources for statistical modeling](#helpful-resources-for-statistical-modeling)
   - [Types of variables](#types-of-variables)
   - [Basic statistics](#basic-statistics)
-  - [Fisher’s exact test](#fishers-exact-test)
   - [T-test](#t-test)
   - [Linear regression](#linear-regression)
   - [ANOVA](#anova)
-  - [Wilcoxon rank-sum](#wilcoxon-rank-sum)
-  - [Wilcoxon signed rank](#wilcoxon-signed-rank)
-  - [Kruskal-Wallis](#kruskal-wallis)
-  - [Friedman](#friedman)
-  - [Non-parametric factorial datasets](#non-parametric-factorial-datasets)
+  - [Non-parametric tests](#non-parametric-tests)
   - [Power analysis](#power-analysis)
   - [Principal Component Analysis](#principal-component-analysis)
   - [Bioconductor](#bioconductor)
@@ -61,6 +55,28 @@ Brendon Smith
   - [Base graphics](#base-graphics)
   - [ggplot2](#ggplot2)
   - [Other plotting programs](#other-plotting-programs)
+
+<!--
+title: 'R guide'
+subtitle: 'A quick reference guide to statistical programming in R'
+author: 'Brendon Smith<br>[br3ndonland](https://github.com/br3ndonland)<br>Source code on [GitHub](https://github.com/br3ndonland/R-guide)<br>Companion sample code on [GitHub](https://github.com/br3ndonland/R-sample-code)<br>[![license](https://img.shields.io/badge/license-MIT-blue.svg?longCache=true&style=for-the-badge)](https://choosealicense.com/)'
+output:
+  html_document:
+    fig_caption: true
+    fig_width: 5
+    highlight: pygments
+    theme: spacelab
+    toc: true
+    toc_float: true
+GitHub-Flavored Markdown option
+
+```yaml
+output:
+  github_document:
+    includes:
+      in_header: R-guide-header.md
+```
+-->
 
 ## Intro
 
@@ -95,14 +111,14 @@ From the [R FAQ](http://cran.rstudio.com/faqs.html):
 > models, time series analysis, classical parametric and nonparametric
 > tests, clustering and smoothing. There is also a large set of
 > functions which provide a flexible graphical environment for creating
-> various kinds of data presentations. Additional modules (“add-on
-> packages”) are available for a variety of specific purposes (see [R
+> various kinds of data presentations. Additional modules (‘add-on
+> packages’) are available for a variety of specific purposes (see [R
 > Add-On
 > Packages](http://cran.rstudio.com/doc/FAQ/R-FAQ.html#R-Add_002dOn-Packages)).
 > 
 > The name is partly based on the (first) names of the first two R
 > authors (Robert Gentleman and Ross Ihaka), and partly a play on the
-> name of the Bell Labs language ‘S’, which stood for System.”
+> name of the Bell Labs language ‘S’, which stood for System.’
 
 ## General R resources
 
@@ -131,8 +147,8 @@ From the [R FAQ](http://cran.rstudio.com/faqs.html):
   - [simpleR PDF by
     Verzani](https://cran.r-project.org/doc/contrib/Verzani-SimpleR.pdf).
     \*Copyright John Verzani, 2001-2. All rights reserved.- This book is
-    frequently referenced, but outdated (“Appendix: Teaching Tricks”
-    recommends distributing R code to students on “floppies.”)
+    frequently referenced, but outdated (‘Appendix: Teaching Tricks’
+    recommends distributing R code to students on ‘floppies.’)
   - [Linear models in
     R](https://www.amazon.com/Linear-Models-Chapman-Statistical-Science/dp/1439887330/ref=dp_ob_title_bk)
     by Faraway. *Copyright 2014 by Taylor & Francis Group, LLC.*
@@ -150,17 +166,60 @@ From the [R FAQ](http://cran.rstudio.com/faqs.html):
     a new R version can require reinstallation of packages. It’s
     difficult to manage.
 
-  - I previously used [Anaconda](https://www.anaconda.com/) to manage my
-    Python and R distributions, and now use Homebrew. I switched because
-    Anaconda is a very large installation, and not as flexible or
-    general as Homebrew. Conda and brew are sort of like competing
-    package managers.
-
   - Install [Homebrew](https://brew.sh/). Homebrew includes
     [Homebrew-Cask](https://caskroom.github.io/) to manage other macOS
     applications.
+    
+      - I previously used [Anaconda](https://www.anaconda.com/) to
+        manage my Python and R distributions, and now use Homebrew. I
+        switched because Anaconda is a very large installation, and not
+        as flexible or general as Homebrew. Conda and brew are sort of
+        like competing package managers.
+    
+      - 
+        
+        <details>
+        
+        <summary>*Click here for Anaconda info*</summary>
+        
+        #### Anaconda
+        
+          - I install Anaconda by [direct
+            download](https://www.anaconda.com/download/). I have also
+            tried installing via Homebrew Cask, but didn’t get the
+            correct command prompt or path.
+          - Anaconda contains the [Conda](https://conda.io/docs/) and
+            [PyPI](https://pypi.python.org/pypi) (pip) package managers.
+            Packages can be installed from `pip`, and will integrate
+            into the Anaconda environment.
+          - [Conda commands](https://conda.io/docs/commands):
+              - Check installed packages with `$ conda list` and `$ pip
+                list`.
+              - Find packages with `$ conda search`.
+              - Update conda with `$ conda update --prefix <PATH>
+                anaconda`
+              - Update packages with `$ conda update --all`
+        
+        ##### Additions to the standard Anaconda install
+        
+          - R and RStudio
+              - When I was working with R, I preferred to install R and
+                RStudio via Anaconda for easier version and package
+                management. Otherwise, [R](https://cran.rstudio.com/)
+                and [RStudio](https://www.rstudio.com) must be
+                downloaded and installed separately. R cannot be updated
+                from within RStudio, and installing a new R version can
+                require reinstallation of packages. It’s just too
+                difficult to manage.
+                
+                ``` sh
+                $ conda install -c r r-essentials
+                $ conda install rstudio
+                ```
+        
+        </details>
 
-  - Install R and RStudio
+  - Install R and RStudio via Homebrew
     
     ``` sh
     brew install r
@@ -174,54 +233,21 @@ From the [R FAQ](http://cran.rstudio.com/faqs.html):
 
   - See [docs](https://docs.brew.sh) for further info.
 
-  - 
-    
-    <details>
-    
-    <summary>Anaconda info</summary>
-    
-    #### Anaconda
-    
-      - I install Anaconda by [direct
-        download](https://www.anaconda.com/download/). I have also tried
-        installing via Homebrew Cask, but didn’t get the correct command
-        prompt or path.
-      - Anaconda contains the [Conda](https://conda.io/docs/) and
-        [PyPI](https://pypi.python.org/pypi) (pip) package managers.
-        Packages can be installed from `pip`, and will integrate into
-        the Anaconda environment.
-      - [Conda commands](https://conda.io/docs/commands):
-          - Check installed packages with `$ conda list` and `$ pip
-            list`.
-          - Find packages with `$ conda search`.
-          - Update conda with `$ conda update --prefix <PATH> anaconda`
-          - Update packages with `$ conda update --all`
-    
-    ##### Additions to the standard Anaconda install
-    
-      - R and RStudio
-          - When I was working with R, I preferred to install R and
-            RStudio via Anaconda for easier version and package
-            management. Otherwise, [R](https://cran.rstudio.com/) and
-            [RStudio](https://www.rstudio.com) must be downloaded and
-            installed separately. R cannot be updated from within
-            RStudio, and installing a new R version can require
-            reinstallation of packages. It’s just too difficult to
-            manage.
-            
-            ``` sh
-            $ conda install -c r r-essentials
-            $ conda install rstudio
-            ```
-    
-    </details>
-
 ### My RStudio setup
 
-  - Modern RStudio theme
-  - Material editor theme
-  - [Dank Mono](https://dank.sh) font
-  - In R Markdown options, check “Show document outline by default.”
+  - Preferences
+      - Appearance
+          - Modern RStudio theme
+          - Material editor theme
+          - [Dank Mono](https://dank.sh) font
+      - Code
+          - Editing
+              - Insert spaces for tab
+              - Tab width: 2
+          - Saving
+              - Strip trailing horizontal whitespace when saving
+      - R Markdown
+          - Show document outline by default
   - Information on other RStudio options can be found in the [RStudio
     documentation](https://support.rstudio.com/hc/en-us/articles/200549016-Customizing-RStudio).
 
@@ -258,7 +284,8 @@ and R Markdown are the most popular formats.
 ### R Markdown
 
   - **R Markdown is a document creation package based on Markdown, a
-    syntax for easy generation of HTML files.**
+    syntax for easy generation of HTML files, and Pandoc, a document
+    output and conversion system.**
   - Markdown resources
       - I have provided a guide to Markdown syntax on
         [GitHub](https://github.com/br3ndonland/udacity-google/blob/master/markdown-guide.md).
@@ -269,6 +296,8 @@ and R Markdown are the most popular formats.
       - [RStudio R Markdown page](http://rmarkdown.rstudio.com/)
       - [R Markdown: The Definitive Guide by Yihui
         Xie](https://bookdown.org/yihui/rmarkdown/)
+  - Pandoc resources
+      - [Pandoc user’s guide](https://pandoc.org/MANUAL.html)
   - To create an R Markdown document in RStudio, File -\> New File -\> R
     Markdown.
   - An RMarkdown file contains three types of data:
@@ -278,7 +307,9 @@ and R Markdown are the most popular formats.
       - Functional code chunks.
   - When you click the **Knit** button the code will run and the output
     will be created.
-  - **Unfortunately, RMarkdown does not allow use of HTML image tags.**
+  - R Markdown has started offering a Notebook output format that is
+    similar to the Jupyter Notebook. See the [output formats
+    section](#output-formats).
 
 #### YAML front matter header
 
@@ -299,7 +330,7 @@ and R Markdown are the most popular formats.
       - Functional R code is specified with `{r}` after the first set of
         backticks. R will run this code when knitting the RMarkdown
         document. If you want to include a standard Markdown code chunk
-        without running the code in R, leave out the `{r}`.
+        without running the code in R, leave out the curly braces.
       - Conclude the code chunk with another set of triple backticks.
   - See the [R Markdown code chunks
     page](http://rmarkdown.rstudio.com/lesson-3.html) for more info.
@@ -344,20 +375,11 @@ summary(cars)
     independently and interactively, rather than having to knit the
     entire workbook. I haven’t found it to be useful, and would prefer
     to use a Jupyter Notebook.
-  - I have had many issues with output formats:
-      - The `html_document` `toc_float: true` doesn’t work properly.
-    
-      - The `html_notebook` format doesn’t seem to be running code.
-        What’s the point of it if I already have the .Rmd?
-    
-      - The `md_document` doesn’t generate an HTML preview, doesn’t
-        output front matter, and uses four space indentations, Setext
-        headers, and indented code output instead of fenced. Adding
-        `variant: gfm` helps, but still doesn’t output front matter.
-    
-      - The Markdown output formats sometimes don’t output front matter
-        like headers and the table of contents. The solution is to
-        include a separate header.
+  - I have had some issues with output formats.
+      - At the time of this writing, the markdown output formats (either
+        `github_document` or `md_document: variant: gfm`) don’t seem to
+        be outputting a table of contents, even when `toc: true` is
+        included. The solution is to include a separate header file.
         
         ``` yaml
         output:
@@ -378,11 +400,13 @@ the project locally with Packrat is very helpful.
 
 ### R packages
 
+  - Packages are programs written for R that provide additional
+    functionality. **R is dependent on large numbers of packages.**
   - [Packrat](https://rstudio.github.io/packrat/) is a package
-    dependency management system for R projects.
-  - R is heavily dependent on its package ecosystem, and Packrat helps
-    avoid problems caused by different package versions and
-    installations.
+    dependency management system for R projects. Packrat helps avoid
+    problems caused by different package versions and installations.
+    Packrat is separate from the general package manager like Homebrew
+    used to install R and RStudio.
   - [Packrat works with
     RStudio](https://rstudio.github.io/packrat/rstudio.html) and gives
     each project its own private package library.
@@ -399,16 +423,6 @@ the project locally with Packrat is very helpful.
   - The directory where the files are located must be [formatted as an R
     Project](https://support.rstudio.com/hc/en-us/articles/200526207-Using-Projects).
 
-### R packages
-
-  - Packages are programs written for R that provide additional
-    functionality. **R is dependent on large numbers of packages. This
-    is a major limitation of R.**
-  - [Packrat](https://rstudio.github.io/packrat/) manages packages
-    locally for each R project.
-  - Packrat is separate from the general package manager like Homebrew
-    used to install R and RStudio.
-
 ### Coding practice
 
 **Hands-on coding practice is essential.**
@@ -416,9 +430,9 @@ the project locally with Packrat is very helpful.
   - Read [An Introduction to R](http://cran.rstudio.com/manuals.html)
     and complete the sample session in Appendix A.
   - [DataCamp](https://www.datacamp.com/courses/introduction-to-r) is
-    extremely helpful. I took the “Introduction to R,” “Data Analysis
-    and Statistical Inference,” and “A hands-on introduction to
-    statistics with R track-introductory” courses.
+    extremely helpful. I took the ‘Introduction to R,’ ‘Data Analysis
+    and Statistical Inference,’ and ‘A hands-on introduction to
+    statistics with R track-introductory’ courses.
 
 [back to top](#top)
 
@@ -476,9 +490,9 @@ the project locally with Packrat is very helpful.
     in other languages like Python). For example, `x <- 42` or `x = 42`
     set x equal to 42.
   - `~` is similar to `=` in Python or SAS or a normal written equation.
-    It means “versus” or “as a function of.”
+    It means ‘versus’ or ‘as a function of.’
   - Use quotation marks to enter non-numeric values, called
-    “**strings**.” Entering `"forty-two"` will treat forty-two as a
+    ‘**strings**.’ Entering `'forty-two'` will treat forty-two as a
     word. Both single and double quotes can be used, but double quotes
     are
     [preferred](http://stat.ethz.ch/R-manual/R-devel/library/base/html/Quotes.html).
@@ -522,7 +536,7 @@ R vs. SAS from [Quick-R](http://www.statmethods.net/input/index.html):
 
 See R in Action 2.2 for further info.
 
-### Vectors
+### Vector
 
   - The vector is a way to store data in R. Vectors are created with the
     combine function `c()`. Enter values or variable names separated by
@@ -536,7 +550,7 @@ See R in Action 2.2 for further info.
     with the vector names for ease of use.
     
     ``` r
-    names(vector_name) <- c(“name1”, “name2”)
+    names(vector_name) <- c('name1', 'name2')
     ```
 
   - Select parts of a vector with brackets. For example, to create a new
@@ -549,7 +563,7 @@ See R in Action 2.2 for further info.
   - R stores vectors as strings of data. To put the data in table
     format, use a **data frame** (see below).
 
-### Matrices
+### Matrix
 
 From DataCamp introduction to R course:
 
@@ -575,8 +589,8 @@ From DataCamp introduction to R course:
     example:
     
     ``` r
-    colnames(star_wars_matrix) <- c("US","non-US");
-    rownames(star_wars_matrix) <- c("A New Hope","The Empire Strikes Back","Return of the Jedi")
+    colnames(star_wars_matrix) <- c('US','non-US');
+    rownames(star_wars_matrix) <- c('A New Hope','The Empire Strikes Back','Return of the Jedi')
     ```
 
   - The `rowSums(matrix_name)` and `colSums(matrix_name)` functions will
@@ -605,7 +619,7 @@ From DataCamp introduction to R course:
     in an element-wise way on matrices in R. For example: `2*my_matrix`
     multiplies each element of `my_matrix` by two.
 
-### Factors
+### Factor
 
 **The factor is an R function used to store categorical variables.**
 
@@ -616,7 +630,7 @@ From DataCamp introduction to R course:
     representing deidentified study participants:
     
     ``` r
-    gender_vector = c("Male","Female","Female","Male","Male")
+    gender_vector = c('Male','Female','Female','Male','Male')
     participants_1 <- c(2,3,5,7,11,13,17)
     ```
 
@@ -626,14 +640,14 @@ From DataCamp introduction to R course:
     reasons. R allows you to do this with the function `levels()`:
     
     ``` r
-    levels(factor_vector) <- c("name1","name2",...)
+    levels(factor_vector) <- c('name1','name2',...)
     ```
 
   - To create an **ordered factor**, you have to add two additional
     arguments:
     
     ``` r
-    factor(some_vector,ordered=TRUE,levels=c("Level 1","Level 2"...))
+    factor(some_vector,ordered=TRUE,levels=c('Level 1','Level 2'...))
     ```
     
       - By setting the argument `ordered=TRUE` in the function
@@ -642,16 +656,21 @@ From DataCamp introduction to R course:
         correct order:
         
         ``` r
-        levels = c("Low","Medium","High")
+        levels = c('Low','Medium','High')
         ```
 
 Here’s an example within a functional R Markdown code block:
 
 ``` r
 # Create a vector of temperature observations
-temperature_vector <- c("High", "Low", "High", "Low", "Medium")
-# Specify that they are ordinal variables with the given levels
-factor_temperature_vector <- factor(temperature_vector, order = TRUE, levels = c("Low","Medium","High"))
+temperature_vector <- c('High', 'Low', 'High', 'Low', 'Medium')
+
+# Specify ordinal variables with given levels
+factor_temperature_vector <- factor(temperature_vector, 
+                                    order = TRUE, 
+                                    levels = c('Low','Medium','High')
+                                    )
+
 # Display the vector
 factor_temperature_vector
 ```
@@ -659,17 +678,20 @@ factor_temperature_vector
     ## [1] High   Low    High   Low    Medium
     ## Levels: Low < Medium < High
 
-### Data frames
-
-``` r
-data.frame()
-```
+### Data frame
 
   - **A data frame is a combination of vectors that functions like a
     spreadsheet within R.**
+    
+    ``` r
+    data.frame()
+    ```
+
   - Variables are columns, observations are rows.
+
   - Different types of vectors can be combined into a data frame, as
     long as the vectors have the same length.
+
   - This is also how datasets are organized in SAS.
 
 Example data frame
@@ -777,10 +799,10 @@ Example from DataCamp Introduction to R course:
         look up) the position of the variable `type`, which gets hard if
         you have a lot of variables.
       - It is often easier to just make use of the variable name, e.g.
-        `planets_df[1:3,"type"]`.
+        `planets_df[1:3,'type']`.
   - Selecting an entire data frame column:
       - If you want to select all elements of the variable `rings`, both
-        `planets_df[,5]` and `planets_df[,"rings"]` work.
+        `planets_df[,5]` and `planets_df[,'rings']` work.
       - Use the `$` sign to tell R that it only has to look up all the
         elements of the variable behind the sign: `df_name$var_name`.
         You can combine this with the element section above:
@@ -789,7 +811,7 @@ Example from DataCamp Introduction to R course:
   - Selecting parts of a data frame conditionally:
       - The `subset()` function selects a subset of a data frame
         according to conditions you specify. `subset(df_name,
-        some.condition== “condition”)`. The first argument of `subset()`
+        some.condition== 'condition')`. The first argument of `subset()`
         specifies the dataset for which you want a subset. By adding the
         second argument, you give R the necessary information and
         conditions to select the correct subset. Examples:
@@ -797,10 +819,10 @@ Example from DataCamp Introduction to R course:
         ``` r
         subset(planets_df, subset=(planets_df$rings == TRUE))
         subset(planets_df, subset=(planets_df$diameter<1))
-        very_good = subset(cdc,cdc$genhlth=="very good")
+        very_good = subset(cdc,cdc$genhlth=='very good')
         age_gt50 = subset(cdc,cdc$age>50)
-        red_wine <- subset(wine_data, wine_data[, 1]=="Red")
-        red_usa <- subset(red_wine_data, red_wine_data$condition == "USA")
+        red_wine <- subset(wine_data, wine_data[, 1]=='Red')
+        red_usa <- subset(red_wine_data, red_wine_data$condition == 'USA')
         ```
     
       - The second `subset=` inside the parentheses may not be
@@ -808,15 +830,15 @@ Example from DataCamp Introduction to R course:
     
       - Conditions can be used with logical operators `&` and `|`.
         
-          - The `&` is read “and” so that `subset(cdc, cdc$gender == "f"
+          - The `&` is read ‘and’ so that `subset(cdc, cdc$gender == 'f'
             & cdc$age > 30)` will give you the data for women over the
             age of 30. `under23_and_smoke = subset(cdc,cdc$age<23 &
             cdc$smoke100==T)` will select respondents who are under the
             age of 23 and have smoked \>100 cigarettes.
-          - The`|` character is read “or” so that `subset(cdc,
-            cdc$gender == "f" | cdc$age > 30)` will select people who
+          - The`|` character is read ‘or’ so that `subset(cdc,
+            cdc$gender == 'f' | cdc$age > 30)` will select people who
             are women or over the age of 30.
-          - In principle, you may use as many “and” and “or” clauses as
+          - In principle, you may use as many ‘and’ and ‘or’ clauses as
             you like in a subset.
 
 #### Sorting data frames
@@ -836,11 +858,30 @@ Example from DataCamp Introduction to R course:
     experiments](https://github.com/br3ndonland/R-proteomics-Nrf1):
     
     ``` r
-    # Put groups in my preferred order, instead of alphabetically.
-    Orderedgroups=factor(group, levels = c("lacZ","Nrf1-HA chow","Nrf1-HA chol","Nrf1-HA bort"))
-    # Verify desired order of groups
-    summary(group)
+    # Groups in alphabetical order
+    groups <- c('lacZ', 
+                'Nrf1-HA bort',
+                'Nrf1-HA chol',
+                'Nrf1-HA chow'
+                )
+    groups[order(groups)]
     ```
+    
+        ## [1] "lacZ"         "Nrf1-HA bort" "Nrf1-HA chol" "Nrf1-HA chow"
+    
+    ``` r
+    # Put groups in my preferred order
+    ordered=factor(groups, levels = c('lacZ',
+                                      'Nrf1-HA chow',
+                                      'Nrf1-HA chol',
+                                      'Nrf1-HA bort'
+                                      )
+                   )
+    # Verify desired order of groups
+    groups[order(ordered)]
+    ```
+    
+        ## [1] "lacZ"         "Nrf1-HA chow" "Nrf1-HA chol" "Nrf1-HA bort"
     
       - Make sure you refer to the new sorted variable (`Orderedgroups`
         in this case) in subsequent code.
@@ -868,7 +909,7 @@ Example from DataCamp Introduction to R course:
     
     ``` r
     # Reorder by column name
-    data[c("size", "id", "weight")]
+    data[c('size', 'id', 'weight')]
     ```
     
         ##     size id weight
@@ -936,10 +977,11 @@ Example from DataCamp Introduction to R course:
       - Create the data frame
         
         ``` r
-        dd <- data.frame(b = factor(c("Hi", "Med", "Hi", "Low"),
-                                    levels = c("Low", "Med", "Hi"), 
+        dd <- data.frame(b = factor(c('Hi', 'Med', 'Hi', 'Low'),
+                                    levels = c('Low', 'Med', 'Hi'),
                                     ordered = TRUE),
-                         x = c("A", "D", "A", "C"), y = c(8, 3, 9, 9),
+                         x = c('A', 'D', 'A', 'C'), 
+                         y = c(8, 3, 9, 9),
                          z = c(1, 1, 1, 2)
                          )
         dd
@@ -986,9 +1028,9 @@ Example from DataCamp Introduction to R course:
         
         ``` r
         # merge two data frames by ID
-        total <- merge(data frameA,data frameB,by="ID")
+        total <- merge(data frameA,data frameB,by='ID')
         # merge two data frames by ID and Country
-        total <- merge(data frameA,data frameB,by=c("ID","Country"))
+        total <- merge(data frameA,data frameB,by=c('ID','Country'))
         ```
   - Adding rows
       - To join two data frames (datasets) vertically, use the `rbind`
@@ -1025,10 +1067,10 @@ Example from DataCamp Introduction to R course:
     ```
     
       - General boxplots are made with
-        `boxplot(independent_variable~dependent_variable)`. See the
-        [Plots section](#plots).
+        `boxplot(independent_var~dependent_var)`. See the [Plots
+        section](#plots).
 
-### Lists
+### List
 
   - A list in R gathers a variety of objects under one name (that is,
     the name of the list) in an ordered way. These objects can be
@@ -1065,7 +1107,7 @@ Example from DataCamp Introduction to R course:
     
     ``` r
     shining_list$reviews
-    shining_list[["reviews"]]
+    shining_list[['reviews']]
     ```
 
 #### Adding elements to a list
@@ -1087,10 +1129,10 @@ pane.
 
 This is one of the best ways to read in a dataset. Note that the file
 path should be in UNIX format. UNIX file paths have forward slashes,
-Windows file paths have backslashes (“whacks”).
+Windows file paths have backslashes (‘whacks’).
 
 ``` r
-mydata <- read.table("c:/mydata.csv", header=TRUE, sep=",")
+mydata <- read.table('c:/mydata.csv', header=TRUE, sep=',')
 ```
 
   - First row contains variable names, comma is separator
@@ -1108,29 +1150,29 @@ xlsx package:
 # read in the first worksheet from the workbook myexcel.xlsx
 # first row contains variable names
 library(xlsx)
-mydata <- read.xlsx("c:/myexcel.xlsx", 1)
+mydata <- read.xlsx('c:/myexcel.xlsx', 1)
 
 # read in the worksheet named mysheet
-mydata <- read.xlsx("c:/myexcel.xlsx", sheetName = "mysheet")
+mydata <- read.xlsx('c:/myexcel.xlsx', sheetName = 'mysheet')
 ```
 
 ### Website
 
 ``` r
-load(url(“dataset_url”))
+load(url('dataset_url'))
 # or
-Dataset_name=read.table(“dataset_url”)
+Dataset_name=read.table('dataset_url')
 ```
 
 URL must be enclosed in quotes to make it a string.
 
 ### APIs
 
-R is less flexible than Python. Accessing Application Programming
-Interfaces (APIs) is one example of this.
-[ProgrammableWeb](https://www.programmableweb.com) shared a helpful
-[guide](https://www.programmableweb.com/news/how-to-access-any-restful-api-using-r-language/how-to/2017/07/21)
-to accessing APIs with R.
+  - R is less flexible than Python. Accessing Application Programming
+    Interfaces (APIs) is one example of this.
+  - [ProgrammableWeb](https://www.programmableweb.com) shared a helpful
+    [guide](https://www.programmableweb.com/news/how-to-access-any-restful-api-using-r-language/how-to/2017/07/21)
+    to accessing APIs with R.
 
 ### Manually
 
@@ -1153,7 +1195,7 @@ to accessing APIs with R.
     dplyr and
     Pandas](https://gist.github.com/TomAugspurger/6e052140eaa5fdb6e8c0).
   - `na.omit(dataset_name$optional_var_name)` will omit any missing
-    values (usually labeled “NA”)
+    values (usually labeled ‘NA’)
 
 ### Attaching data
 
@@ -1169,34 +1211,34 @@ attach(dataset_name, options)
     name.
   - You can also detach() the dataset when you are done. Empty
     parentheses detach all variables in the workspace.
-  - From R help (article: “Attach Set of R Objects to Search Path”): “By
+  - From R help (article: ‘Attach Set of R Objects to Search Path’): ‘By
     attaching a data frame (or list) to the search path it is possible
     to refer to the variables in the data frame by their names alone,
     rather than as components of the data frame (e.g., in the example
-    below, height rather than women$height).”
+    below, height rather than women$height).’
 
 ### Exporting data frames
 
   - Exporting to a delimited text file:
     
     ``` r
-    write.table(x, outfile, sep=delimiter, quote=TRUE, na="NA")
+    write.table(x, outfile, sep=delimiter, quote=TRUE, na='NA')
     ```
     
       - Where `x` is the object and `outfile` is the target file. For
-        example, the statement `write.table(mydata, "mydata.txt",
-        sep=",")` would save the dataset `mydata` to a comma-delimited
+        example, the statement `write.table(mydata, 'mydata.txt',
+        sep=',')` would save the dataset `mydata` to a comma-delimited
         file named mydata.txt in the current working directory. Include
-        a path (for example, `"c:/myprojects/mydata. txt"`) to save the
-        output file elsewhere. Replacing`sep=","` with `sep="\t"` would
+        a path (for example, `'c:/myprojects/mydata. txt'`) to save the
+        output file elsewhere. Replacing`sep=','` with `sep='\t'` would
         save the data in a tab-delimited file. By default, strings are
-        enclosed in quotes ("") and missing values are written as `NA`.
+        enclosed in quotes (’’) and missing values are written as `NA`.
 
   - Exporting to an Excel workbook using the xlsx
     package:
     
     ``` r
-    library(xlsx) write.xlsx(x, outfile, col.Names=TRUE, row.names=TRUE, sheetName="Sheet 1", append=FALSE)
+    library(xlsx) write.xlsx(x, outfile, col.Names=TRUE, row.names=TRUE, sheetName='Sheet 1', append=FALSE)
     ```
 
 [back to top](#top)
@@ -1340,7 +1382,7 @@ attach(dataset_name, options)
         ``` r
         # The 'atheism' data frame has already been loaded
         # Your code to create the 'us12' subset:
-        us12 = subset(atheism, atheism$nationality == "United States" & atheism$year =="2012")
+        us12 = subset(atheism, atheism$nationality == 'United States' & atheism$year =='2012')
         # Calculate the proportion of atheist responses:
         proportion = nrow(subset(us12,response == 'atheist'))/nrow(us12)
         ```
@@ -1408,14 +1450,14 @@ attach(dataset_name, options)
     plot(me ~ p)
     ```
     
-    ![](R-guide_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
+    ![](R-guide_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
 
 #### Probability
 
   - Simulating a coin flip with `sample()`:
     
     ``` r
-    outcomes = c("heads", "tails")
+    outcomes = c('heads', 'tails')
     sample(vector_name, size=100, replace=TRUE)
     ```
     
@@ -1432,7 +1474,7 @@ attach(dataset_name, options)
 
 #### For loops, bootstrapping, and inference
 
-> "The **for loop** is a cornerstone of computer programming. The idea
+> The **for loop** is a cornerstone of computer programming. The idea
 > behind the for loop is **iteration**: it allows you to execute code as
 > many times as you want without having to type out every iteration.
 
@@ -1482,8 +1524,8 @@ attach(dataset_name, options)
     > for missing data in R.
     > 
     > The second line calls the for loop itself. The syntax can be
-    > loosely read as, “for every element `i` from 1 to 5000, run the
-    > following lines of code”. You can think of `i` as the counter that
+    > loosely read as, ‘for every element `i` from 1 to 5000, run the
+    > following lines of code’. You can think of `i` as the counter that
     > keeps track of which loop you’re on. Therefore, more precisely,
     > the loop will run once when `i`=1, then once when `i`=2, and so on
     > up to `i`=5000.
@@ -1529,7 +1571,7 @@ attach(dataset_name, options)
     > in use, the old object will get replaced with the new one, i.e. R
     > will write over the existing object with the new one, which is
     > something you want to be careful about if you don’t intend to do
-    > so."
+    > so.’
     > 
     > Another example: Obtain a random sample, calculate the sample’s
     > mean and standard deviation, use these statistics to calculate a
@@ -1602,15 +1644,17 @@ attach(dataset_name, options)
     ``` r
     # The 'nc' data frame is already loaded into the workspace
     # Load the 'inference' function:
-    load(url("http://s3.amazonaws.com/assets.datacamp.com/course/dasi/inference.Rdata"))
+    load(url('http://s3.amazonaws.com/assets.datacamp.com/course/dasi/inference.Rdata'))
     
     # Run the inference function:
-    inference(nc$gained, type="ci", method="simulation", conflevel=0.9, est="mean", boot_method="perc")
+    inference(nc$gained, type='ci', method='simulation',
+              conflevel=0.9, est='mean', boot_method='perc'
+              )
     ```
     
-      - `method=“se”` will perform the method based on the standard
+      - `method='se'` will perform the method based on the standard
         error
-      - `est=“median”` will create an interval for the median instead of
+      - `est='median'` will create an interval for the median instead of
         the mean
 
   - Example *(Datacamp data analysis and statistical inference course
@@ -1623,9 +1667,9 @@ attach(dataset_name, options)
     ``` r
     # The 'nc' data frame is already loaded into the workspace
     inference(y = nc$weight, x = nc$habit,
-              est = "mean", type = "ci", null = 0,
-              alternative = "twosided", method = "theoretical",
-              order=c("smoker","nonsmoker")
+              est = 'mean', type = 'ci', null = 0,
+              alternative = 'twosided', method = 'theoretical',
+              order=c('smoker','nonsmoker')
               )
     ```
     
@@ -1638,19 +1682,19 @@ attach(dataset_name, options)
     > response variable, smokers and non-smokers: `nc$habit`.
     > 
     > The third argument `est` is the parameter we’re interested in:
-    > “mean” (other options are “median”, or “proportion”.)
+    > ‘mean’ (other options are ‘median’, or ‘proportion’.)
     > 
     > Next we decide on the type of inference we want: a hypothesis test
-    > (“ht”) or a confidence interval(“ci”).
+    > (‘ht’) or a confidence interval(‘ci’).
     > 
     > When performing a hypothesis test, we also need to supply the null
     > value, which in this case is 0, since the null hypothesis sets the
     > two population means equal to each other.
     > 
-    > The alternative hypothesis can be “less”, “greater”, or
-    > “twosided”.
+    > The alternative hypothesis can be ‘less’, ‘greater’, or
+    > ‘twosided’.
     > 
-    > The method of inference can be “theoretical” or “simulation”
+    > The method of inference can be ‘theoretical’ or ‘simulation’
     > based.
     > 
     > The order function changes the order of the variable levels.
@@ -1668,57 +1712,29 @@ attach(dataset_name, options)
     
     ``` r
     # Take the 'spain' subset:
-    spain = subset(atheism, atheism$nationality == "Spain")
+    spain = subset(atheism, atheism$nationality == 'Spain')
     # Calculate the proportion of atheists from the 'spain' subset:
     proportion = nrow(subset(spain,response == 'atheist'))/nrow(spain)
     # Use the inference function:
-    inference(spain$response, spain$year, est = "proportion",
-      type = "ci", method = "theoretical", success = "atheist"
-    )
+    inference(spain$response, spain$year, est = 'proportion',
+      type = 'ci', method = 'theoretical', success = 'atheist'
+      )
     ```
-
-### Fisher’s exact test
-
-  - Useful when both dependent and independent variables are
-    categorical, or when dependent variable is a count.
-
-  - It evaluates the association, or contingency, between two kinds of
-    classifications.
-
-  - Data must first be put into a contingency table:
-    
-    ``` r
-    table_name <- xtabs(formula, data=df_name)
-    ```
-
-  - Next, run the test and reference the table
-    
-    ``` r
-    fisher.test(mytable)
-    ```
-
-  - See R in action ch. 7.2, Crawley The R Book ch. 14-15, [UCSC R
-    tips](http://www.pmc.ucsc.edu/~mclapham/Rtips/categorical.htm).
-
-  - Example from my grad school lab: Prostate cancer incidence data from
-    TRAMP Tomato Soy paper
-    
-      - Zuniga KE, Clinton SK, Erdman JW. The interactions of dietary
-        tomato powder and soy germ on prostate carcinogenesis in the
-        TRAMP model. *Cancer Prev. Res.* (2013). DOI:
-        [10.1158/1940-6207.CAPR-12-0443](https://doi.org/10.1158/1940-6207.CAPR-12-0443)
-      - Code located in
-        [R-sample-code/fishers-exact](https://github.com/br3ndonland/R-sample-code).
 
 ### T-test
 
 ``` r
 t.test(y~x, var.equal = TRUE)
-t.test(y1,y2, var.equal = TRUE) # when both variables are numeric
-t.test(y,mu=2, var.equal = TRUE) # one-sample t-test, with null hypothesis mean mu=3.
-t.test(y~x, paired=TRUE, var.equal = TRUE) # paired t-test
-t.test(y~x, alternative = "less", var.equal = TRUE) # one-tailed t-test
-t.test(y~x, alternative = "greater", var.equal = TRUE) # one-tailed t-test
+# when both variables are numeric
+t.test(y1,y2, var.equal = TRUE)
+# one-sample t-test, with null hypothesis mean mu=3.
+t.test(y,mu=2, var.equal = TRUE)
+# paired t-test
+t.test(y~x, paired=TRUE, var.equal = TRUE) 
+# one-tailed t-test
+t.test(y~x, alternative = 'less', var.equal = TRUE) 
+# one-tailed t-test
+t.test(y~x, alternative = 'greater', var.equal = TRUE) 
 ```
 
   - Default t-test assumes heterogeneity of variance and applies a
@@ -1739,38 +1755,32 @@ t.test(y~x, alternative = "greater", var.equal = TRUE) # one-tailed t-test
         notes](https://drive.google.com/file/d/1WE_3hGmhhHN5Z1lXFat6YcRE7dZajJ7O/view?usp=sharing)
         p.5
 
-#### Assumptions
+#### T-test assumptions
 
-1.  **Normality**
-
-<!-- end list -->
+##### Normality
 
   - Shapiro-Wilk W test (W\>0.9 desired, see flowchart from [PATH 591
     lecture 03](https://drive.google.com/file/d/1V4F1T1M3RrQu3CutBPPxVvKhRvA9ZUn5/view?usp=sharing)
     p.11 in [linear regression section](#linear-regression)):
     
     ``` r
-    shapiro.test(dependent_var_name, options)
+    shapiro.test(dependent_var, options)
     ```
 
   - Normal quantile-quantile plot
     
     ``` r
-    qqnorm(dependent_var_name, options)
-    qqline(dependent_var_name, options)
+    qqnorm(dependent_var, options)
+    qqline(dependent_var, options)
     ```
     
       - Note that ggplot2 does not have features for easy creation of
         q-q plots.
 
-<!-- end list -->
-
-2.  **Equality of variances**
-
-<!-- end list -->
+##### Equality of variances
 
 ``` r
-var.test(dependent_variable~independent_variable)
+var.test(dependent_var~independent_var)
 ```
 
   - This is identical to the method used in SAS proc ttest, and simply
@@ -1790,348 +1800,53 @@ model.name <- lm(model, data, ...)
 
 See R in Action tables 8.2 and 8.3 for full syntax info.
 
-*Linear regression formula symbols. Adapted from R in Action, HTML
-formatting by Brendon Smith.*
-
-<table>
-
-<tr>
-
-<th>
-
-Symbol
-
-</th>
-
-<th>
-
-Function
-
-</th>
-
-</tr>
-
-<tr>
-
-<th>
-
-~
-
-</th>
-
-<th>
-
-dependent variable on left, independent variables on right, like `y~a+b`
-
-</th>
-
-</tr>
-
-<tr>
-
-<th>
-
-\+
-
-</th>
-
-<th>
-
-separates independent variables.
-
-</th>
-
-</tr>
-
-<tr>
-
-<th>
-
-:
-
-</th>
-
-<th>
-
-interaction, such as `y~a:b`, meaning interaction of independent
-variables a and b.
-
-</th>
-
-</tr>
-
-<tr>
-
-<th>
-
-\*
-
-</th>
-
-<th>
-
-all possible combinations of the variables.
-
-</th>
-
-</tr>
-
-<tr>
-
-<th>
-
-^
-
-</th>
-
-<th>
-
-restricts interactions to a certain degree. The formula `y ~ (a + b +
-c)^2` would be read by R as y ~ a + b + c + a:b + a:c + b:c.
-
-</th>
-
-</tr>
-
-<tr>
-
-<th>
-
-.
-
-</th>
-
-<th>
-
-references all independent variables in the data frame.
-
-</th>
-
-</tr>
-
-<tr>
-
-<th>
-
-\-
-
-</th>
-
-<th>
-
-subtracts a variable from the model.
-
-</th>
-
-</tr>
-
-<tr>
-
-<th>
-
-\-1
-
-</th>
-
-<th>
-
-Suppresses the intercept.
-
-</th>
-
-</tr>
-
-<tr>
-
-<th>
-
-I()
-
-</th>
-
-<th>
-
-allows use of arithmetic within the parentheses.
-
-</th>
-
-</tr>
-
-</table>
+*Linear regression formula symbols. Adapted from R in Action.*
+
+  - `~`: dependent variable on left, independent variables on right,
+    like `y~a+b`. -`+`: Separates independent variables.
+  - `:` Interaction, such as `y~a:b`, meaning interaction of independent
+    variables a and b.
+  - `*`: All possible combinations of the variables.
+  - `^`: Restricts interactions to a certain degree. The formula `y ~ (a
+    + b + c)^2` would be read by R as y ~ a + b + c + a:b + a:c + b:c.
+  - `.`: References all independent variables in the data frame.
+  - `-`: Subtracts a variable from the model.
+  - `-1`: Suppresses the intercept.
+  - `I()`: Allows use of arithmetic within the parentheses.
 
 *Linear regression functions that can be used after specifying the
-model. Adapted from R in Action, HTML formatting by Brendon Smith.*
-
-<table>
-
-<tr>
-
-<th>
-
-Function
-
-</th>
-
-<th>
-
-Action
-
-</th>
-
-</tr>
-
-<th>
-
-`aic()` or `bic()`
-
-</th>
-
-<th>
-
-Prints Aikake’s or Bayes’ Information Criterion.
-
-</th>
-
-</tr>
-
-<tr>
-
-<th>
-
-`anova()`
-
-</th>
-
-<th>
-
-anova table
-
-</th>
-
-</tr>
-
-<tr>
-
-<th>
-
-`coefficients()`
-
-</th>
-
-<th>
-
-Shows intercept and slopes for the regression model.
-
-</th>
-
-</tr>
-
-<tr>
-
-<th>
-
-`confint()`
-
-</th>
-
-<th>
-
-Confidence intervals (95 percent by default).
-
-</th>
-
-</tr>
-
-<tr>
-
-<th>
-
-`fitted()`
-
-</th>
-
-<th>
-
-Lists predicted values.
-
-</th>
-
-</tr>
-
-<tr>
-
-<th>
-
-`plot()`
-
-</th>
-
-<th>
-
-plots for evaluating model fit. *To select specific plots, add
-“which=”.*
-
-</th>
-
-</tr>
-
-<tr>
-
-<th>
-
-`residuals()`
-
-</th>
-
-<th>
-
-Residuals are basically the deviation from the model fit. See
-<a href="https://drive.google.com/file/d/1V4F1T1M3RrQu3CutBPPxVvKhRvA9ZUn5/view?usp=sharing">PATH
-591 lecture 03</a> for a clear visual explanation of residuals. Use
-`rstandard()` for standardized residuals (divided by standard deviation,
-fitted including the current data point), `rstudent()` for studentized
-residuals (divided by standard deviation, but fitted ignoring the
-current data point). `Stdres()` and `studres()` can also be used but
-require the MASS package (Modern Applied Statistics with S).\*
-
-</th>
-
-</tr>
-
-<tr>
-
-<th>
-
-`summary()`
-
-</th>
-
-<th>
-
-Summary of the regression model. *To view a specific part, such as just
-the R<sup>2</sup>, add `$r.squared` or `$adj.r.squared`*
-
-</th>
-
-</tr>
-
-<tr>
-
-<th>
-
-`vcov()`
-
-</th>
-
-<th>
-
-Lists the covariance matrix for model parameters.
-
-</th>
-
-</tr>
-
-</table>
+model. Adapted from R in Action.*
+
+  - `aic()` or `bic()`: Prints Aikake’s or Bayes’ Information Criterion.
+  - `anova()`: ANOVA table.
+  - `coefficients()`: Shows intercept and slopes for the regression
+    model.
+  - `confint()`: Confidence intervals (95 percent by default).
+  - `fitted()`: Lists predicted values.
+  - `plot()`: Plots for evaluating model fit. *To select specific plots,
+    add ‘which=’.*
+  - `residuals()`: Residuals are basically the deviation from the model
+    fit.
+      - `rstandard()` for standardized residuals (divided by standard
+        deviation, fitted including the current data point).
+    
+      - `rstudent()` for studentized residuals (divided by standard
+        deviation, but fitted ignoring the current data point).
+    
+      - `Stdres()` and `studres()` can also be used but require the MASS
+        package (Modern Applied Statistics with S).
+    
+      - See [PATH 591
+        lecture 03](https://drive.google.com/file/d/1V4F1T1M3RrQu3CutBPPxVvKhRvA9ZUn5/view?usp=sharing)
+        for a clear visual explanation of residuals.
+        
+        ![Visual explanation of residuals from [PATH 591
+        lecture 03](https://drive.google.com/file/d/1V4F1T1M3RrQu3CutBPPxVvKhRvA9ZUn5/view?usp=sharing)
+        p.1](img/residuals.png "Visual explanation of residuals")
+  - `summary()`: Summary of the regression model. *To view a specific
+    part, such as just the R<sup>2</sup>, add `$r.squared` or
+    `$adj.r.squared`*
+  - `vcov()`: Lists the covariance matrix for model parameters.
 
 #### Selection of regression models
 
@@ -2153,108 +1868,96 @@ Lists the covariance matrix for model parameters.
 
 #### Linear regression assumptions
 
-1.  **Normality of residuals**
-
-<!-- end list -->
+##### Normality of residuals
 
   - Shapiro-Wilk W statistic: based on mathematics of normal probability
     plots. Compares variance of distribution to variance expected under
     normal distribution. Shapiro-Wilk W statistic trumps p value.
-      - Normality testing workflow from [PATH 591
-        lecture 03](https://drive.google.com/file/d/1V4F1T1M3RrQu3CutBPPxVvKhRvA9ZUn5/view?usp=sharing)
-        p.11:
-        
-        ![Normality testing workflow from PATH 591 lecture 03
-        p.11](img/normality-testing-workflow.png
-        "Normality testing workflow")
-        
-          - **Make sure you are testing residuals and not raw data.** It
-            is acceptable to test normality using **studentized
-            residuals**.
-          - See SAS for mixed models section 10.2.3 p.418, and “Linear
-            Mixed Models: A Practical Guide Using Statistical Software”
-            by West Welch and Galecki p.105.
+    Normality testing workflow from [PATH 591
+    lecture 03](https://drive.google.com/file/d/1V4F1T1M3RrQu3CutBPPxVvKhRvA9ZUn5/view?usp=sharing)
+    p.11:
     
-      - Graphical evaluation by normal quantile-quantile plot
+    ![Normality testing workflow from [PATH 591
+    lecture 03](https://drive.google.com/file/d/1V4F1T1M3RrQu3CutBPPxVvKhRvA9ZUn5/view?usp=sharing)
+    p.11](img/normality-testing-workflow.png
+    "Normality testing workflow")
     
-      - Skewness: measure of asymmetry in distribution. A perfect normal
-        distribution has skewness=0. Positively skewed
-        distributions=tail to the right, negatively skewed=tail to the
-        left.
-    
-      - Kurtosis: another measure of asymmetry in distribution.
-        Leptokurtic distributions (kurtosis\<0) will have more
-        observations at the center, platykurtic distributions
-        (kurtosis\>0) are spread evenly.
+      - **Make sure you are testing residuals and not raw data. It is
+        acceptable to test normality using studentized residuals**.
+      - See SAS for mixed models section 10.2.3 p.418, and ‘Linear Mixed
+        Models: A Practical Guide Using Statistical Software’ by West
+        Welch and Galecki p.105.
 
-<!-- end list -->
+  - Graphical evaluation by normal quantile-quantile plot
 
-2.  **Independence of residuals**
+  - Skewness: measure of asymmetry in distribution. A perfect normal
+    distribution has skewness=0. Positively skewed distributions=tail to
+    the right, negatively skewed=tail to the left.
 
-<!-- end list -->
+  - Kurtosis: another measure of asymmetry in distribution. Leptokurtic
+    distributions (kurtosis\<0) will have more observations at the
+    center, platykurtic distributions (kurtosis\>0) are spread evenly.
 
-  - Serial correlation: Durbin-Watson D. Found in the `car` and `lmtest`
-    packages. Use `acf(lm_name$residuals)`, `acf(rstudent(lm_name))`, or
-    `acf(studres(lm_name))`. `studres` (in the MASS package) will
-    produce an autocorrelation plot. The dashed lines indicate the 95%
-    confidence interval, and correlations ideally lie within the lines.
+##### Independence of residuals
 
-<!-- end list -->
+  - Serial correlation: Durbin-Watson D.
+      - Found in the `car` and `lmtest` packages.
+      - Use `acf(lm_name$residuals)`, `acf(rstudent(lm_name))`, or
+        `acf(studres(lm_name))`.
+      - `studres` (in the MASS package) will produce an autocorrelation
+        plot. The dashed lines indicate the 95% confidence interval, and
+        correlations ideally lie within the lines.
 
-3.  **Homogeneity of residual variances**
-
-<!-- end list -->
+##### Homogeneity of residual variances
 
   - Plots of residuals vs. fitted/predicted values, residuals vs. any
     independent variable (dot or box plots); absolute value or square
-    root of absolute value of residuals vs. fitted values. Plots of
-    residuals vs predicted values in datasets with HOV would look like a
-    cloud/ball with no correlation. If the plot looks like a megaphone,
-    it suggests a missing term in the model (see “strategies to address
-    model violations” below), or the need to use an unstructured
-    covariance model.
-      - Residuals should also sum to zero
-      - Spearman rank order correlation between the absolute values of
-        the residuals and the predicted values
-      - See below under “Variance assessment for multivariate,
-        factorial, and repeated measures designs” for information on how
-        to assess HOV in complex designs using fit statistics like aic()
-        and bic().
+    root of absolute value of residuals vs. fitted values.
+  - Plots of residuals vs predicted values in datasets with HOV would
+    look like a cloud/ball with no correlation. If the plot looks like a
+    megaphone, it suggests a missing term in the model (see ‘strategies
+    to address model violations’ below), or the need to use an
+    unstructured covariance model.
+  - Residuals should also sum to zero
+  - Spearman rank order correlation between the absolute values of the
+    residuals and the predicted values
+  - See below under ‘Variance assessment for multivariate, factorial,
+    and repeated measures designs’ for information on how to assess HOV
+    in complex designs using fit statistics like aic() and bic().
 
-<!-- end list -->
+##### Linearity and additivity
 
-4.  **Linearity and additivity** of the relationship between dependent
-    and independent variables. Assessed with graphical evaluation by
-    plot of residuals vs predicted values.
+  - Linearity and additivity of the relationship between dependent and
+    independent variables.
+  - Assessed with graphical evaluation by plot of residuals vs predicted
+    values.
 
-5.  **Influential observations**
-
-<!-- end list -->
+##### Lack of influential observations
 
   - Cook’s D is a distance statistic that measures change in regression
     parameter estimates when an observation is deleted.
+    
       - Cook’s D values are sometimes compared with a critical F value
         F<sub>0.50</sub>(k,n-k-1) (see [PATH 591
         lecture 03](https://drive.google.com/file/d/1V4F1T1M3RrQu3CutBPPxVvKhRvA9ZUn5/view?usp=sharing)
         p.15).
-    
       - According to R in Action 8.4.3, Cook’s D values greater than
         4/(n-k-1), where n is the sample size and k is the number of
         predictor variables, indicate influential observations, but 1
         can also be an appropriate cutoff.
+
+  - A Bonferroni outlier test can also be performed with the
+    `outlierTest()` function in the `car` package.
+
+  - Plots of Cook’s D values and residuals vs leverage allow graphical
+    assessment of influential observations. Add a critical line to the
+    Cook’s Distance plot with:
     
-      - A Bonferroni outlier test can also be performed with the
-        `outlierTest()` function in the `car` package.
-    
-      - Plots of Cook’s D values and residuals vs leverage allow
-        graphical assessment of influential observations. Add a critical
-        line to the Cook’s Distance plot with:
-        
-        ``` r
-        cookscritical <- 4/(nrow(dataframe)-length(lm1$coefficients)-2)
-        plot(lmlog, which=4, cook.levels=cookscritical)
-        abline(h=cookscritical, lty=2, col="red")
-        ```
+    ``` r
+    cookscritical <- 4/(nrow(dataframe)-length(lm1$coefficients)-2)
+    plot(lmlog, which=4, cook.levels=cookscritical)
+    abline(h=cookscritical, lty=2, col='red')
+    ```
 
 #### Global validation of linear model assumptions with the `gvlma` package
 
@@ -2278,7 +1981,7 @@ Lists the covariance matrix for model parameters.
     3.  Kurtosis
     4.  Link Function: the link function is a feature of all linear
         models that links the linear model to the mean of the response
-        variable. “Identity” is the link function for a normal
+        variable. ‘Identity’ is the link function for a normal
         distribution. A misspecified link function, meaning that the
         link function does not match the distribution of the data, will
         result in a large and significant value for this statistic.
@@ -2295,6 +1998,8 @@ Lists the covariance matrix for model parameters.
 
 #### Strategies for addressing model violations
 
+  - **It is not appropriate to simply throw out influential data points
+    unless they are due to measurement error or some other problem.**
   - Addition of variables to the model to account for residual variance
   - Transformation of independent or dependent variable
       - Normalizing transformations (+1 used to avoid undefined values
@@ -2329,13 +2034,11 @@ Lists the covariance matrix for model parameters.
     violated.
   - Curvilinearity in a plot of resids vs. preds can be addressed by
     fitting a polynomial regression function.
-  - **It is not appropriate to simply throw out influential data points
-    unless they are due to measurement error or some other problem.**
   - Weighted least squares regression can be used to address serial
     correlation or influential observations. See [PATH 591
     lecture 03](https://drive.google.com/file/d/1V4F1T1M3RrQu3CutBPPxVvKhRvA9ZUn5/view?usp=sharing)
     p.14. It allows influential observations to be re-weighted to
-    minimize interference with the model. SAS provides a “reweight”
+    minimize interference with the model. SAS provides a ‘reweight’
     statement for this purpose.
   - Link function violations: as with violations of other assumptions,
     transformation of the data set, addition of variables to the model,
@@ -2346,9 +2049,7 @@ Lists the covariance matrix for model parameters.
 
 #### Reporting regression results
 
-``` text
-F~0.05~(k, n-1 df)=, r^2^, p<
-```
+*F<sub>0.05</sub>(k, n-1 df)=, r<sup>2</sup>, p\<*
 
 This information is usually adequate for publication purposes. See
 [PATH 591 lecture 04
@@ -2399,143 +2100,136 @@ on ANOVA.
   - If the model contains categorical variables with \>2 levels, R
     creates ‘indicator’ or dummy variables for each level.
 
-#### ANOVA Assumptions
+#### ANOVA assumptions
 
-1.  **Normality of residuals**
-
-<!-- end list -->
+##### Normality of residuals
 
   - Shapiro-Wilk W test (W\>0.9 desired, see flowchart from [PATH 591
     lecture 03](https://drive.google.com/file/d/1V4F1T1M3RrQu3CutBPPxVvKhRvA9ZUn5/view?usp=sharing)
     p.11 in [linear regression section](#linear-regression)):
     
     ``` r
-    shapiro.test(dependent_var_name, options)
+    shapiro.test(dependent_var, options)
     ```
+
+  - Normal quantile-quantile plot
     
-      - Normal quantile-quantile plot
-        
-        ``` r
-        qqnorm(dependent_var_name, options)
-        qqline(dependent_var_name, options)
-        ```
+    ``` r
+    qqnorm(dependent_var, options)
+    qqline(dependent_var, options)
+    ```
 
-<!-- end list -->
-
-2.  **Homogeneity of residual variances**
-
-<!-- end list -->
+##### Homogeneity of residual variances
 
   - Bartlett test: `bartlett.test()`. Bartlett test is sensitive to
     deviations from normality.
-      - Levene test
-        
-        ``` r
-        # Download and install the car package first
-        library(car)
-        leveneTest(y~a, location= “mean”)
-        ```
-    
-      - Brown-Forsythe test
-        
-        ``` r
-        # Download and install the car package first
-        library(car)
-        leveneTest(y~a)
-        ```
-        
-          - The Brown-Forsythe test evaluates deviations from group
-            medians, and thus is robust to violations of normality.
-    
-      - **These HOV tests are only appropriate for one-way designs. A
-        different approach is required for more complex designs.**
-    
-      - **Factorial designs** can be converted to one-way by splitting
-        each treatment combination into a separate group and identifying
-        it as a single level in one independent variable, calling the
-        one new independent variable “treatment,” and then performing
-        the Brown-Forsythe test. This does not work for repeated
-        measures data because values for each group at one timepoint are
-        correlated to values at other timepoints.
-    
-      - **Variance assessment for multivariate, factorial, and repeated
-        measures designs**
-        
-          - Graphical assessment as described for linear regression
-            above:
-              - Plot of residuals vs predicted values
-              - Plot of residuals vs independent variables (dot or box
-                plots)
-          - Numerical assessment using fit statistics
-              - *I am more familiar with this in SAS. Explanation
-                below.*
-            
-              - In general, you want to use the simplest model possible
-                that minimizes AIC, AICC, and BIC while still meeting
-                the assumptions of the model. Mind the assumptions of
-                each covariance structure. See [CPSC 542
-                Lecture 10](https://drive.google.com/open?id=1aJ7Hu5GUyndYHAPNrlL-jAM-yEItXn-8)
-                pp. 4-7.
-            
-              - Donald Bullock (Illinois CPSC statistics professor):
-                
-                > You select an error structure with heterogeneous
-                > variances \[like unstructured\] and compare that to a
-                > model with everything the same with the exception of
-                > homogeneous variances \[like compound symmetry\]. The
-                > differences in the log likelihoods will be a
-                > chi-square with degrees of freedom equal to the
-                > differences in the number of estimates in the two
-                > models.
-            
-              - This is also described in the Littell “SAS for mixed
-                models” text p. 172.
-            
-              - In other words, run the code using the unstructured
-                model, and copy/paste the “Fit Statistics” table and the
-                number of covariance parameter estimates into Excel. The
-                number of estimates (also called covariance parameters)
-                is given under “Dimensions” in the output. Also look at
-                the “-2 Res Log Likelihood” number under “Fit
-                Statistics” in the output.
-            
-              - Then run the code several more times, using different
-                covariance structures each time (cs, ar(1), arh(1),
-                toep, and toeph), and paste the fit statistics and
-                estimates into excel also. Then, for each test other
-                than unstructured, type =chidist(x, df), using the
-                difference between the “-2 Res Log Likelihood” for
-                unstructured and the other test as the “x” or chi
-                square, and the difference in \#parameters between
-                unstructured and the other test as the df.
-            
-              - The answer will be a p value. A significant p indicates
-                that the unstructured model provides superior fit.
 
-<!-- end list -->
+  - Levene test
+    
+    ``` r
+    # Download and install the car package first
+    library(car)
+    leveneTest(y~a, location= 'mean')
+    ```
 
-3.  **Independence of residuals** is required. Any pairing in the data,
-    such as in repeated measures designs, must be appropriately
-    specified in the model.
+  - Brown-Forsythe test
+    
+    ``` r
+    # Download and install the car package first
+    library(car)
+    leveneTest(y~a)
+    ```
+    
+      - The Brown-Forsythe test evaluates deviations from group medians,
+        and thus is robust to violations of normality.
 
-#### ANOVA Multiple comparisons
+  - **These HOV tests are only appropriate for one-way designs. A
+    different approach is required for more complex designs.**
+
+  - **Factorial designs** can be converted to one-way by splitting each
+    treatment combination into a separate group and identifying it as a
+    single level in one independent variable, calling the one new
+    independent variable ‘treatment,’ and then performing the
+    Brown-Forsythe test. This does not work for repeated measures data
+    because values for each group at one timepoint are correlated to
+    values at other timepoints.
+
+  - **Variance assessment for multivariate, factorial, and repeated
+    measures designs**
+    
+      - Graphical assessment as described for linear regression above:
+          - Plot of residuals vs predicted values
+          - Plot of residuals vs independent variables (dot or box
+            plots)
+      - Numerical assessment using fit statistics
+          - *I am more familiar with this in SAS. Explanation below.*
+        
+          - In general, you want to use the simplest model possible that
+            minimizes AIC, AICC, and BIC while still meeting the
+            assumptions of the model. Mind the assumptions of each
+            covariance structure. See [CPSC 542
+            Lecture 10](https://drive.google.com/open?id=1aJ7Hu5GUyndYHAPNrlL-jAM-yEItXn-8)
+            pp. 4-7.
+        
+          - Donald Bullock (Illinois CPSC statistics professor):
+            
+            > You select an error structure with heterogeneous variances
+            > \[like unstructured\] and compare that to a model with
+            > everything the same with the exception of homogeneous
+            > variances \[like compound symmetry\]. The differences in
+            > the log likelihoods will be a chi-square with degrees of
+            > freedom equal to the differences in the number of
+            > estimates in the two models.
+        
+          - This is also described in the Littell ‘SAS for mixed models’
+            text p. 172.
+        
+          - In other words, run the code using the unstructured model,
+            and copy/paste the ‘Fit Statistics’ table and the number of
+            covariance parameter estimates into Excel. The number of
+            estimates (also called covariance parameters) is given under
+            ‘Dimensions’ in the output. Also look at the ‘-2 Res Log
+            Likelihood’ number under ‘Fit Statistics’ in the output.
+        
+          - Then run the code several more times, using different
+            covariance structures each time (cs, ar(1), arh(1), toep,
+            and toeph), and paste the fit statistics and estimates into
+            excel also. Then, for each test other than unstructured,
+            type =chidist(x, df), using the difference between the ‘-2
+            Res Log Likelihood’ for unstructured and the other test as
+            the ‘x’ or chi square, and the difference in \#parameters
+            between unstructured and the other test as the df.
+        
+          - The answer will be a p value. A significant p indicates that
+            the unstructured model provides superior fit.
+
+##### Independence of residuals
+
+Independence of residuals is required. Any pairing in the data, such as
+in repeated measures designs, must be appropriately specified in the
+model.
+
+#### ANOVA multiple comparisons
 
 ##### All pairwise comparisons
 
 ``` r
+# note that this is adjusted for multiple comparisons
 TukeyHSD(model)
-pairwise.t.test(y, a) # note that this is adjusted for multiple comparisons
+pairwise.t.test(y, a)
 ```
 
 or
 
 ``` r
 library(multcomp)
-library(RColorBrewer) # load RColorBrewer for additional color palettes.
-tuk <- glht(aov1, linfct=mcp(var_name="Tukey"))
+# load RColorBrewer for additional color palettes.
+library(RColorBrewer) 
+tuk <- glht(aov1, linfct=mcp(var_name='Tukey'))
 cld(tuk)
-plot(cld(tuk, level=.05), col=brewer.pal(8,"Pastel1")) 
-# "I'm a very vivacious man... Earth tones are so passe. I'm a pastel man." Larry David
+plot(cld(tuk, level=.05), col=brewer.pal(8,'Pastel1')) 
+# 'I'm a very vivacious man... Earth tones are so passe. 
+# I'm a pastel man.' Larry David
 ```
 
 ##### Specific pairwise comparisons with contrasts and estimates
@@ -2547,11 +2241,13 @@ plot(cld(tuk, level=.05), col=brewer.pal(8,"Pastel1"))
       - First, print the covariance matrix with
         `model.matrix(model_name)` to identify coefficients for
         contrasts.
+    
+      - Next, use the numbers from error matrix to indicate group
+        comparisons of interest.
         
         ``` r
         library(multcomp)
-        contrast <- rbind("contrast name" = c(3, -1, -1, -1))
-        # numbers from error matrix to indicate group comparisons
+        contrast <- rbind('contrast name' = c(3, -1, -1, -1))
         summary(glht(model_name, linfct=mcp(x=contrast)))
         ```
 
@@ -2565,16 +2261,19 @@ interaction.plot(variable1, variable2, options)
 
 ``` r
 library(effects)
-plot(effect(factorial_term, model_name, xlevels), multiline=TRUE)
+plot(effect(factorial_term, model_name, xlevels),
+     multiline=TRUE
+     )
 ```
 
 ``` r
-library(gplots) plotmeans(y ~ interaction(variable1, variable2, sep=" "),
-  connect=list(c(1,3,5),c(2,4,6)),
-  col=c("red", "darkgreen"),
-  main = "Interaction Plot with 95% CIs",
-  xlab="Treatment and Dose Combination"
-)
+library(gplots) 
+plotmeans(y ~ interaction(variable1, variable2, sep=' '),
+          connect=list(c(1,3,5),c(2,4,6)),
+          col=c('red', 'darkgreen'),
+          main = 'Interaction Plot with 95% CIs',
+          xlab='Treatment and Dose Combination'
+          )
 ```
 
 ``` r
@@ -2613,12 +2312,47 @@ ANOVA](https://drive.google.com/file/d/1taEWV9VHuVb9NzO8Ej02raaWt1iA5HA9/view?us
 
 **The covariance structure must be appropriately specified.** Fit
 statistics and information criteria can be used to identify an
-appropriate covariance structure: `AIC(model)`. See “Selection of
-regression models” in the Linear regression section, and “Variance
-assessment for multivariate, factorial, and repeated measures designs”
+appropriate covariance structure: `AIC(model)`. See ‘Selection of
+regression models’ in the Linear regression section, and ‘Variance
+assessment for multivariate, factorial, and repeated measures designs’
 in the ANOVA section above.
 
-### Wilcoxon rank-sum
+### Non-parametric tests
+
+#### Fisher’s exact test
+
+  - Useful when both dependent and independent variables are
+    categorical, or when dependent variable is a count.
+
+  - It evaluates the association, or contingency, between two kinds of
+    classifications.
+
+  - Data must first be put into a contingency table:
+    
+    ``` r
+    table_name <- xtabs(formula, data=df_name)
+    ```
+
+  - Next, run the test and reference the table
+    
+    ``` r
+    fisher.test(mytable)
+    ```
+
+  - See R in action ch. 7.2, Crawley The R Book ch. 14-15, [UCSC R
+    tips](http://www.pmc.ucsc.edu/~mclapham/Rtips/categorical.htm).
+
+  - Example from my grad school lab: Prostate cancer incidence data from
+    TRAMP Tomato Soy paper
+    
+      - Zuniga KE, Clinton SK, Erdman JW. The interactions of dietary
+        tomato powder and soy germ on prostate carcinogenesis in the
+        TRAMP model. *Cancer Prev. Res.* (2013). DOI:
+        [10.1158/1940-6207.CAPR-12-0443](https://doi.org/10.1158/1940-6207.CAPR-12-0443)
+      - Code located in
+        [R-sample-code/fishers-exact](https://github.com/br3ndonland/R-sample-code).
+
+#### Wilcoxon rank-sum
 
 ``` r
 wilcox.test(y~x, data)
@@ -2631,7 +2365,7 @@ wilcox.test(y~x, data)
     of random samples.
   - See R in Action 7.5
 
-### Wilcoxon signed rank
+#### Wilcoxon signed rank
 
 ``` r
 wilcox.test(y~x, data, paired=TRUE)
@@ -2640,7 +2374,7 @@ wilcox.test(y~x, data, paired=TRUE)
   - Used to compare two non-parametric paired samples
   - See R in Action 7.5, Verzani simpleR p.67
 
-### Kruskal-Wallis
+#### Kruskal-Wallis
 
 ``` r
 kruskal_test(y~a, data)
@@ -2649,18 +2383,34 @@ kruskal_test(y~a, data)
 Non-parametric one-way ANOVA, where `y` is a dependent variable and `a`
 is a categorical independent variable with ≥2 levels.
 
-#### Multiple comparisons after Kruskal-Wallis testing
+##### Kruskal-Wallis assumptions
 
-Pairwise Wilcoxon testing:
+###### Non-normality
+
+A non-parametric Kruskal-Wallis test is used when data fail the
+assumption of normality, and are not amenable to transformation. It is
+still worthwhile to perform the usual normality testing to demonstrate
+this.
+
+###### Homogeneity of variances
+
+HOV is still required. Use a test that is not affected by non-normality,
+such as Brown-Forsythe.
+
+##### Kruskal-Wallis multiple comparisons post-hoc tests
+
+###### Pairwise Wilcoxon testing
 
 ``` r
-pairwise.wilcox.test(y, x, p.adjust.method= “holm”)
+pairwise.wilcox.test(y, x, p.adjust.method= 'holm')
 ```
 
   - This function allows control of the experiment-wide error rate and
     is the best non-parametric multiple comparisons method available in
     R.
+
   - Adjustment options:
+    
       - `holm`
       - `hochberg`
       - `hommel`
@@ -2669,44 +2419,38 @@ pairwise.wilcox.test(y, x, p.adjust.method= “holm”)
       - `BY`
       - `fdr`
       - `none`
-  - From R Documentation: \> The first four methods are designed to give
-    strong control of the family-wise error rate. There seems no reason
-    to use the unmodified Bonferroni correction because it is dominated
-    by Holm’s method, which is also valid under arbitrary assumptions.”
 
-Nemenyi test
+  - From R Documentation:
+    
+    > The first four methods are designed to give strong control of the
+    > family-wise error rate. There seems no reason to use the
+    > unmodified Bonferroni correction because it is dominated by Holm’s
+    > method, which is also valid under arbitrary assumptions.
+
+###### Nemenyi test
 
 ``` r
 library(PMCMRplus)
-kwAllPairsNemenyiTest(y, x, method= c(“Tukey”, “Chisq”))
+kwAllPairsNemenyiTest(y, x, method= c('Tukey', 'Chisq'))
 ```
 
   - Requires the `PMCMRplus` package (Pairwise Multiple Comparisons of
     Mean Rank Sums). Note that the original `PMCMR` package has been
     deprecated.
 
-`nparcomp`
+###### `nparcomp` package
 
 ``` r
 library(nparcomp)
 nparcomp(y~a, data, type=)
 ```
 
-  - Requires the `nparcomp` package.
+###### `npmc` package
 
-`npmc`: there used to be an npmc package that is referred to in some
+There used to be an npmc package that is referred to in some
 documentation. It has been deprecated.
 
-#### Kruskal-Wallis Assumptions
-
-1.  **Normality**: These data fail the assumption of normality, and are
-    not amenable to transformation, hence the use of non-parametric
-    testing. It is still worthwhile to perform the usual normality
-    testing to demonstrate this.
-2.  **Homogeneity of variances**: use a test that is not affected by
-    non-normality, such as Brown-Forsythe.
-
-### Friedman
+#### Friedman
 
 ``` r
 friedman.test(y~a | b, data)
@@ -2717,12 +2461,12 @@ friedman.test(y~a | b, data)
     observations. In both cases, `data` is an option argument specifying
     a matrix or data frame containing the variables.
   - Useful for non-parametric non-independent data with ≥2 groups (such
-    as repeated measures designs). May only be valid with balanced
-    designs.
+    as repeated measures designs).
+  - May only be valid with balanced designs.
 
-### Non-parametric factorial datasets
+##### Non-parametric factorial datasets
 
-Try the nlme, MultNonParam, npmlreg or nparLD packages
+Try the `nlme`, `MultNonParam`, `npmlreg`, or `nparLD` packages.
 
 ### Power analysis
 
@@ -2742,14 +2486,14 @@ Bioconductor is a repository of R packages for bioinformatic analysis.
     commands can also be used to update packages.
     
     ``` r
-    source("http://bioconductor.org/biocLite.R")
+    source('http://bioconductor.org/biocLite.R')
     biocLite()
     ```
 
   - Install specific packages:
     
     ``` r
-    biocLite(c("GenomicFeatures", "AnnotationDbi"))
+    biocLite(c('GenomicFeatures', 'AnnotationDbi'))
     ```
 
   - Troubleshoot installations to flag packages that are either
@@ -2769,8 +2513,8 @@ Bioconductor is a repository of R packages for bioinformatic analysis.
     calculations on qPCR data. Install with
     
     ``` r
-    source("http://bioconductor.org/biocLite.R")
-    biocLite(“ddCt”)
+    source('http://bioconductor.org/biocLite.R')
+    biocLite('ddCt')
     ```
 
   - It seems to require a very specific format for the files output from
@@ -2784,8 +2528,8 @@ Bioconductor is a repository of R packages for bioinformatic analysis.
 
 #### Proteomics
 
-  - I walked through the [“Mass spectrometry and proteomics data
-    analysis”](https://master.bioconductor.org/packages/release/workflows/html/proteomics.html)
+  - I walked through the [‘Mass spectrometry and proteomics data
+    analysis’](https://master.bioconductor.org/packages/release/workflows/html/proteomics.html)
     workflow in 2014. Running the code (at least all at once) was only
     partially successful.
 
@@ -2795,7 +2539,7 @@ Bioconductor is a repository of R packages for bioinformatic analysis.
 
 ### Helpful resources for plotting
 
-  - **R in Action, of course\!**
+  - **R in Action**
   - [R Graphics
     Cookbook](http://proquest.safaribooksonline.com/book/programming/r/9781449363086)
     by Winston Chang (mostly for ggplot2). *CC0 1.0 license (public
@@ -2813,7 +2557,7 @@ Bioconductor is a repository of R packages for bioinformatic analysis.
   - To select specific variables from a data frame to display on the
     graph, use `plot(x=data.frame$variable, y= data.frame$variable)`
 
-  - Line chart: `plot(x,y,type=”l”)`
+  - Line chart: `plot(x,y,type='l')`
 
   - Plotting \>2 variables: `plot(data.frame[rows,columns])`
 
@@ -2852,7 +2596,7 @@ Bioconductor is a repository of R packages for bioinformatic analysis.
           - Next, create a separate `points()` function:
             
             ``` r
-            points(means$dependent_var_name, cex=2, pch=23, bg=0, lwd=4)
+            points(means$dependent_var, cex=2, pch=23, bg=0, lwd=4)
             ```
         
           - **Note that, as with other functions in R, variables will be
@@ -2863,8 +2607,8 @@ Bioconductor is a repository of R packages for bioinformatic analysis.
     
       - Plotting factorial datasets
         
-          - Sample code from the R Graphics Cookbook ch.2 “Creating a
-            box plot”:
+          - Sample code from the R Graphics Cookbook ch.2 ‘Creating a
+            box plot’:
           - *TODO: break up this code chunk, reformat code to be more
             PEP 8-like*
         
@@ -2875,33 +2619,33 @@ Bioconductor is a repository of R packages for bioinformatic analysis.
         boxplot(len ~ supp, data = ToothGrowth)
         ```
         
-        ![](R-guide_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
+        ![](R-guide_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->
         
         ``` r
         # Put interaction of two variables on x-axis
         boxplot(len ~ supp + dose, data = ToothGrowth)
         ```
         
-        ![](R-guide_files/figure-gfm/unnamed-chunk-10-2.png)<!-- -->
+        ![](R-guide_files/figure-gfm/unnamed-chunk-11-2.png)<!-- -->
         
         With the ggplot2 package, you can get a similar result using
-        qplot() (Figure 2-11), with geom=“boxplot”:
+        qplot() (Figure 2-11), with geom=‘boxplot’:
         
         ``` r
         library(ggplot2)
-        qplot(ToothGrowth$supp, ToothGrowth$len, geom="boxplot")
+        qplot(ToothGrowth$supp, ToothGrowth$len, geom='boxplot')
         ```
         
-        ![](R-guide_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->
+        ![](R-guide_files/figure-gfm/unnamed-chunk-12-1.png)<!-- -->
         
         If the two vectors are already in the same data frame, you can
         use the following syntax:
         
         ``` r
-        qplot(supp, len, data=ToothGrowth, geom="boxplot")
+        qplot(supp, len, data=ToothGrowth, geom='boxplot')
         ```
         
-        ![](R-guide_files/figure-gfm/unnamed-chunk-12-1.png)<!-- -->
+        ![](R-guide_files/figure-gfm/unnamed-chunk-13-1.png)<!-- -->
         
         This is equivalent to:
         
@@ -2909,7 +2653,7 @@ Bioconductor is a repository of R packages for bioinformatic analysis.
         ggplot(ToothGrowth, aes(x=supp, y=len)) + geom_boxplot()
         ```
         
-        ![](R-guide_files/figure-gfm/unnamed-chunk-13-1.png)<!-- -->
+        ![](R-guide_files/figure-gfm/unnamed-chunk-14-1.png)<!-- -->
         
         It’s also possible to make box plots for multiple variables, by
         combining the variables with interaction(), as in Figure 2-11.
@@ -2918,19 +2662,19 @@ Bioconductor is a repository of R packages for bioinformatic analysis.
         
         ``` r
         # Using three separate vectors
-        qplot(interaction(ToothGrowth$supp, ToothGrowth$dose), ToothGrowth$len, geom="boxplot")
+        qplot(interaction(ToothGrowth$supp, ToothGrowth$dose), ToothGrowth$len, geom='boxplot')
         ```
         
-        ![](R-guide_files/figure-gfm/unnamed-chunk-14-1.png)<!-- -->
+        ![](R-guide_files/figure-gfm/unnamed-chunk-15-1.png)<!-- -->
         
         Alternatively, get the columns from the data
         frame:
         
         ``` r
-        qplot(interaction(supp, dose), len, data=ToothGrowth, geom="boxplot")
+        qplot(interaction(supp, dose), len, data=ToothGrowth, geom='boxplot')
         ```
         
-        ![](R-guide_files/figure-gfm/unnamed-chunk-15-1.png)<!-- -->
+        ![](R-guide_files/figure-gfm/unnamed-chunk-16-1.png)<!-- -->
         
         This is equivalent
         to:
@@ -2939,7 +2683,7 @@ Bioconductor is a repository of R packages for bioinformatic analysis.
         ggplot(ToothGrowth, aes(x=interaction(supp, dose), y=len)) + geom_boxplot()
         ```
         
-        ![](R-guide_files/figure-gfm/unnamed-chunk-16-1.png)<!-- -->
+        ![](R-guide_files/figure-gfm/unnamed-chunk-17-1.png)<!-- -->
 
   - Dot plot
     
@@ -3019,7 +2763,7 @@ of course R in Action, for thorough documentation.
         for more info.
         
           - To make palettes available in R: `palette.name <-
-            brewer.pal(n, “name”)`. Next, when selecting a color palette
+            brewer.pal(n, 'name')`. Next, when selecting a color palette
             for a chart, use the vector name (`palette.name` in this
             example).
         
@@ -3055,7 +2799,7 @@ of course R in Action, for thorough documentation.
             plot:
             
             ``` r
-            display.brewer.all(n=NULL, type="all", select=NULL, exact.n=TRUE, colorblindFriendly=FALSE)
+            display.brewer.all(n=NULL, type='all', select=NULL, exact.n=TRUE, colorblindFriendly=FALSE)
             ```
         
           - Use bracketed numbers to select specific colors or a range
@@ -3072,7 +2816,7 @@ of course R in Action, for thorough documentation.
             
             ``` r
             DF <- data.frame(x=1:10, y=rnorm(10)+5, z=sample(letters[1:3], 10, replace=TRUE))
-            attach(DF); plot(x, y, col=c("red","blue","green")[z]); detach(DF)
+            attach(DF); plot(x, y, col=c('red','blue','green')[z]); detach(DF)
             ```
             
               - The method for this may vary depending on what is being
@@ -3104,22 +2848,22 @@ of course R in Action, for thorough documentation.
             or thickness, for both the axis line and the tick marks.
           - This will only create partial axes that encompass the data.
             To make the axes meet at 0, also create a box around the
-            graph with `box(which = "plot", bty = "l")`
+            graph with `box(which = 'plot', bty = 'l')`
           - The default axes will usually detect categorical data and
             label axes accordingly, but categories will need to be
             specified for axes created separately.
           - See info from Quick-R and R in Action Ch. 3.4 for more info.
       - Adding symbols to axis titles (such as mu): `plot([options],
-        ylab=expression(bold(paste("Thickness, ",mu, "m"))))`
+        ylab=expression(bold(paste('Thickness, ',mu, 'm'))))`
       - Axis labels: `xlab=, ylab=`
       - If a custom axis is created, the automatically generated axis
-        should be suppressed. `xaxt="n"` suppresses the x axis,
-        `yaxt="n"` suppresses the y axis, and `axes=FALSE` suppresses
+        should be suppressed. `xaxt='n'` suppresses the x axis,
+        `yaxt='n'` suppresses the y axis, and `axes=FALSE` suppresses
         both x and y axes.
       - Rotated axis labels in base graphics
           - To rotate axis labels (using base graphics), you need to use
             `text()`, rather than `mtext()`, as the latter does not
-            support `par("srt")`.
+            support `par('srt')`.
           - When plotting the x axis labels, we use `srt = 45` for text
             rotation angle, `adj = 1` to place the right end of text at
             the tick marks, and `xpd = TRUE` to allow for text outside
@@ -3127,26 +2871,26 @@ of course R in Action, for thorough documentation.
             `0.25offset` as required to move the axis labels up or down
             relative to the x axis. See `?par` for more information.
           - Also see Figure 1 and associated code in Paul Murrell
-            (2003), “Integrating grid Graphics Output with Base Graphics
-            Output”, \*R News,- 3/2, 7–12.
+            (2003), ‘Integrating grid Graphics Output with Base Graphics
+            Output’, \*R News,- 3/2, 7–12.
         <!-- end list -->
         ``` r
         # Increase bottom margin to make room for rotated labels
         par(mar = c(7, 4, 4, 2) + 0.1)
         # Create plot with no x axis and no x axis label
-        plot(1 : 8, xaxt = "n",  xlab = "")
+        plot(1 : 8, xaxt = 'n',  xlab = '')
         # Set up x axis with tick marks alone
         axis(1, labels = FALSE)
         # Create some text labels
-        labels <- paste("Label", 1:8, sep = " ")
+        labels <- paste('Label', 1:8, sep = ' ')
         # Plot x axis labels at default tick marks
-        text(1:8, par("usr")[3] - 0.25, 
+        text(1:8, par('usr')[3] - 0.25, 
              srt = 45, adj = 1,labels = labels, xpd = TRUE
              )
         # Plot x axis label at line 6 (of 7)
-        mtext(1, text = "X Axis Label", line = 6)
+        mtext(1, text = 'X Axis Label', line = 6)
         ```
-        ![](R-guide_files/figure-gfm/unnamed-chunk-17-1.png)<!-- -->
+        ![](R-guide_files/figure-gfm/unnamed-chunk-18-1.png)<!-- -->
 
   - Create **figure panels** with
     
