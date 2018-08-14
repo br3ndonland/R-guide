@@ -1,10 +1,14 @@
+name: "/R-guide"
 navbar:
   title: "R guide"
+  type: inverse
   left:
     - text: "Guide"
-      href: /
+      href: /R-guide/
     - text: "Sample code"
-      href: /code
+      href: /R-guide/code
+    - text: "GitHub"
+      href: https://github.com/br3ndonland/R-guide
 output_dir: "docs"
 output:
   html_document:
