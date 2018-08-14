@@ -1,11 +1,10 @@
-name: "R guide"
 navbar:
   title: "R guide"
   left:
     - text: "Guide"
-      href: index.html
+      href: /
     - text: "Sample code"
-      href: code.html
+      href: /code
 output_dir: "docs"
 output:
   html_document:

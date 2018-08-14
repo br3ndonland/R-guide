@@ -687,7 +687,7 @@ attach(dataset_name, options)
 
 ### Helpful resources for statistical modeling
 
-- **The [R-sample-code page](https://github.com/br3ndonland/R-guide/code.html).**
+- **The [R sample code page](https://br3ndonland.github.io/R-guide/code).**
 - [R in Action](https://www.manning.com/books/r-in-action-second-edition)
 - [R Graphics Cookbook](http://proquest.safaribooksonline.com/book/programming/r/9781449363086) by Winston Chang (from Cookbook for R creator)
 - [R-bloggers R tutorial series](https://www.r-bloggers.com/tag/r-tutorial-series/)

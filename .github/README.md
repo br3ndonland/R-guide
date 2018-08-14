@@ -25,6 +25,6 @@ I would like to share this resource broadly, and have made an effort to respect 
 
 ## Instructions
 
-- **Webpages (.html) can be viewed on the [GitHub Pages site](https://br3ndonland.github.io/r-guide) for this repository.**
+- **Webpages (.html) can be viewed on the [GitHub Pages site](https://br3ndonland.github.io/R-guide) for this repository.**
 - **Markdown files (.md) can be viewed on GitHub.**
 - **R Markdown files (.Rmd) can be run in RStudio.**
