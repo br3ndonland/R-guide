@@ -18,13 +18,13 @@ The statistical information assumes foundational statistical knowledge that I ga
 
 - Integration and referencing of free resources
 - Advanced information on linear models for experimental statistics
+- Code examples
 - R Markdown formatted document
 
 I would like to share this resource broadly, and have made an effort to respect copyright restrictions of the various sources from which I have drawn.
 
 ## Instructions
 
-- **The HTML webpage can be viewed on the [GitHub Pages site](https://br3ndonland.github.io/r-guide) for this repository.**
+- **Webpages (.html) can be viewed on the [GitHub Pages site](https://br3ndonland.github.io/r-guide) for this repository.**
 - **Markdown files (.md) can be viewed on GitHub.**
 - **R Markdown files (.Rmd) can be run in RStudio.**
-- **I have provided a [companion repository of sample code](https://github.com/br3ndonland/R-sample-code) with a [GitHub Pages site](https://br3ndonland.github.io/r-sample-code).**

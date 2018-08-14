@@ -1,0 +1,16 @@
+name: "R guide"
+navbar:
+  title: "R guide"
+  left:
+    - text: "Guide"
+      href: index.html
+    - text: "Sample code"
+      href: code.html
+output_dir: "docs"
+output:
+  html_document:
+    fig_caption: true
+    highlight: pygments
+    theme: spacelab
+    toc: true
+    toc_float: true
