@@ -82,7 +82,7 @@ names(jfr2013_atheroma)
 t.test(jfr2013_atheroma$thickness~jfr2013_atheroma$diet,
        paired=FALSE, alternative='two.sided', var.equal=TRUE,
        conf.level=0.95
-       ) 
+       )
 ```
 
 ##### Test assumptions
@@ -100,8 +100,8 @@ shapiro.test(thickness)
 
 # Normal Quantile-Quantile Plot
 # Set graphical parameters
-par(cex = 1, cex.main = 3, cex.lab = 2, font.lab = 2, 
-    cex.axis = 1.5, lwd = 5, lend = 0, ljoin = 0, tcl = -0.5, 
+par(cex = 1, cex.main = 3, cex.lab = 2, font.lab = 2,
+    cex.axis = 1.5, lwd = 5, lend = 0, ljoin = 0, tcl = -0.5,
     pch = 1, mar = c(5,5,3,5)
     )
 
@@ -113,8 +113,8 @@ set1 <- brewer.pal(8, 'Set1')
 categories <- factor(jfr2013_atheroma$diet)
 
 # Create plot
-qqnorm(jfr2013_atheroma$thickness, 
-       ylab=expression(bold(paste('Thickness, ',mu, 'm'))), 
+qqnorm(jfr2013_atheroma$thickness,
+       ylab=expression(bold(paste('Thickness, ',mu, 'm'))),
        axes = FALSE, col=set1[categories], lwd=4, cex=2
        )
 # Add normal line
@@ -124,7 +124,7 @@ box(which = 'plot', bty = 'o', lwd=5)
 axis(1, lwd = 5, tcl = -0.5) # x axis
 axis(2, lwd = 5, tcl = -0.5) # y axis
 # Add legend
-legend('topleft', legend=levels(categories), 
+legend('topleft', legend=levels(categories),
        box.lwd=3, pch=1.5, cex=1.75, pt.cex=2, pt.lwd=4, col=set1
        )
 ```
@@ -143,15 +143,15 @@ var.test(jfr2013_atheroma$thickness~jfr2013_atheroma$diet)
 
 ```{r}
 # Set graphical parameters
-par(cex = 1, cex.main = 3, cex.lab = 2, font.lab = 2, 
-    cex.axis = 1.5, lwd = 5, lend = 0, ljoin = 0, tcl = -0.5, 
+par(cex = 1, cex.main = 3, cex.lab = 2, font.lab = 2,
+    cex.axis = 1.5, lwd = 5, lend = 0, ljoin = 0, tcl = -0.5,
     pch = 1, mar = c(5,5,3,5)
     )
 
 # Create boxplot
 boxplot(jfr2013_atheroma$thickness~jfr2013_atheroma$diet,
         main='Atheroma Thickness', xlab='Diet',
-        ylab=expression(bold(paste('Thickness, ',mu, 'm'))), 
+        ylab=expression(bold(paste('Thickness, ',mu, 'm'))),
         axes = FALSE, lwd=4, medlwd=7, outlwd=4, cex=2, col=set1
         )
 
@@ -190,10 +190,10 @@ names(AortaHsp70)
 - var.equal = TRUE is used to specify equal variances and a pooled variance estimate.
 
 ```{r}
-t.test(AortaHsp70$Hsp70~AortaHsp70$exposure, 
+t.test(AortaHsp70$Hsp70~AortaHsp70$exposure,
        paired=FALSE, alternative='two.sided',
        var.equal=TRUE, conf.level=0.95
-       ) 
+       )
 ```
 
 ##### Test assumptions
@@ -225,7 +225,7 @@ categories <- factor(AortaHsp70$exposure)
 
 # Create plot
 qqnorm(Hsp70,
-       ylab=expression(bold(paste('Hsp70/',beta, '-actin'))), 
+       ylab=expression(bold(paste('Hsp70/',beta, '-actin'))),
        axes = FALSE, col=set1[categories], lwd=4, cex=2
        )
 # Add normal line
@@ -255,7 +255,7 @@ var.test(AortaHsp70$Hsp70~AortaHsp70$exposure)
 ```{r}
 # Set graphical parameters
 par(cex = 1, cex.main = 3, cex.lab = 2, font.lab = 2,
-    cex.axis = 1.5, lwd = 5, lend = 0, ljoin = 0, tcl = -0.5, 
+    cex.axis = 1.5, lwd = 5, lend = 0, ljoin = 0, tcl = -0.5,
     pch = 1, mar = c(5,5,3,5)
     )
 
@@ -288,7 +288,7 @@ axis(2, lwd = 5, tcl = -0.5)
 
 ##### Intro
 
-> These data are from an in-vitro study of the effect of AZT dose on DNA replication (CPM) for FeLV (feline leukemia virus). (The experimental unit is the cell culture sample). For the linear regression analysis, the dependent variable is CPM (counts per minute, indicating quantity of Feline Leukemia Virus DNA in a cell culture) and the independent (predictor) variable is DOSE (dose of AZT). 
+> These data are from an in-vitro study of the effect of AZT dose on DNA replication (CPM) for FeLV (feline leukemia virus). (The experimental unit is the cell culture sample). For the linear regression analysis, the dependent variable is CPM (counts per minute, indicating quantity of Feline Leukemia Virus DNA in a cell culture) and the independent (predictor) variable is DOSE (dose of AZT).
 
 ##### Import dataset
 
@@ -419,7 +419,7 @@ cor.test(feedtc$tc, feedtc$feed, method='spearman')
 
 #### Multiple linear regression and ANOVA example
 
-This dataset from Doug Simpson at University of Illinois contains information on the number of calories in various beers, along with their percent alcohol and brewery. 
+This dataset from Doug Simpson at University of Illinois contains information on the number of calories in various beers, along with their percent alcohol and brewery.
 
 `PercentAlcohol` is a quantitative continuous independent variable and Brewery is a categorical independent variable.
 
@@ -490,7 +490,7 @@ summary(adiposeaov1)
 
 ##### Perform multiple comparisons
 
-- The RColorBrewer package is loaded for additional colors, and a palette is added to R. Use brackets after vector name for specific colors when creating plots (for example: `col=set1[4:14]`). 
+- The RColorBrewer package is loaded for additional colors, and a palette is added to R. Use brackets after vector name for specific colors when creating plots (for example: `col=set1[4:14]`).
 - I chose the `Pastel1` palette. 'I'm a very vivacious man... Earth tones are so passe. I'm a pastel man.' Larry David
 
 ```{r}
@@ -590,7 +590,7 @@ outlierTest(fit)
 ```{r}
 plot(gvlmafit, onepage=FALSE)
 plot(fit, which=3:5)
-interaction.plot(dose, supp, len, type='b', col=c('red','blue'), pch=c(16, 18), 
+interaction.plot(dose, supp, len, type='b', col=c('red','blue'), pch=c(16, 18),
                  main = 'Interaction between Dose and Supplement Type'
                  )
 ```
@@ -634,8 +634,8 @@ outlierTest(thick_fit)
 ```{r}
 plot(gvlmathick_fit, onepage=FALSE)
 plot(thick_fit, which=3:5)
-interaction.plot(uca, mpa, thickness, data=fall2009thickness, 
-                 type='b', col=c('red','blue'), pch=c(16, 18), 
+interaction.plot(uca, mpa, thickness, data=fall2009thickness,
+                 type='b', col=c('red','blue'), pch=c(16, 18),
                  main = 'Interaction between contrast agent and pressure level'
                  )
 ```
@@ -654,8 +654,8 @@ library(gvlma)
 gvlma_log_thick_fit <- gvlma(log_thick_fit)
 summary(gvlma_log_thick_fit)
 shapiro.test(rstandard(log_thick_fit))
-cor.test(fitted(log_thick_fit), 
-         abs(rstandard(log_thick_fit)), 
+cor.test(fitted(log_thick_fit),
+         abs(rstandard(log_thick_fit)),
          method='spearman')
 library(car)
 durbinWatsonTest(log_thick_fit)
@@ -668,7 +668,7 @@ outlierTest(log_thick_fit)
 plot(gvlma_log_thick_fit, onepage=FALSE)
 plot(log_thick_fit, which=3:5)
 interaction.plot(uca, mpa, thickness, data=fall2009thickness,
-                 type='b', col=c('red','blue'), pch=c(16, 18), 
+                 type='b', col=c('red','blue'), pch=c(16, 18),
                  main = 'Interaction between contrast agent and pressure level'
                  )
 ```
@@ -788,7 +788,7 @@ summary(glht(litter_fit, linfct=mcp(dose=litter_contrast)))
 ##### Assumptions
 
 ```{r}
-# global validation of linear model assumptions 
+# global validation of linear model assumptions
 library(gvlma)
 gvlmalitter <- gvlma(lm(weight~gesttime+dose, data=litter))
 summary(gvlmalitter)
@@ -866,7 +866,7 @@ fisher.test(arthritis_table)
 
 #### Fisher's exact test prostate cancer example
 
-Prostate cancer incidence data from TRAMP Tomato Soy paper 
+Prostate cancer incidence data from TRAMP Tomato Soy paper
 
 Zuniga KE, Clinton SK, Erdman JW. The interactions of dietary tomato powder and soy germ on prostate carcinogenesis in the TRAMP model. Cancer Prev. Res. (2013). DOI: [10.1158/1940-6207.CAPR-12-0443](https://doi.org/10.1158/1940-6207.CAPR-12-0443)
 
@@ -916,9 +916,9 @@ with(UScrime, by(Prob, So, median))
 
 ```{r}
 wilcox.test(Prob~So, data=UScrime, paired=FALSE,
-            alternative='two.sided', 
+            alternative='two.sided',
             var.equal=TRUE, conf.level=0.95
-            ) 
+            )
 ```
 
 ##### Test assumptions
@@ -952,7 +952,7 @@ attach(cardiacMg)
 ##### Perform Kruskal-Wallis test
 
 ```{r}
-kruskal.test(mg~diet, data = cardiacMg) 
+kruskal.test(mg~diet, data = cardiacMg)
 ```
 
 ###### Multiple comparisons
@@ -971,7 +971,7 @@ kwAllPairsNemenyiTest(cardiacMg$mg, cardiacMg$diet, method='Tukey')
 
 # Dunnett
 library(nparcomp)
-nparcomp(mg~diet, data = cardiacMg, type='Dunnett', control='chow') 
+nparcomp(mg~diet, data = cardiacMg, type='Dunnett', control='chow')
 ```
 
 ##### Test assumptions
@@ -988,7 +988,7 @@ shapiro.test(cardiacMg$mg)
 
 # Normal Quantile-Quantile Plot
 # Set graphical parameters
-par(cex = 1, cex.main = 3, cex.lab = 2, font.lab = 2, cex.axis = 1.5, 
+par(cex = 1, cex.main = 3, cex.lab = 2, font.lab = 2, cex.axis = 1.5,
     lwd = 5, lend = 0, ljoin = 0, tcl = -0.5, pch = 1, mar = c(5,5,3,5)
     )
 
@@ -1008,14 +1008,14 @@ box(which = 'plot', bty = 'o', lwd=5)
 axis(1, lwd = 5, tcl = -0.5)  # x axis
 axis(2, lwd = 5, tcl = -0.5)  # y axis
 # Add legend
-legend('topleft', legend=levels(categories), 
+legend('topleft', legend=levels(categories),
        box.lwd=3, pch=1.5, cex=1.75, pt.cex=2, pt.lwd=4, col=set1
        )
 ```
 
 ###### Equality of variances
 
-- This is a brown-forsythe test that evaluates deviations from group medians, and thus is robust to violations of normality. 
+- This is a brown-forsythe test that evaluates deviations from group medians, and thus is robust to violations of normality.
 - Fligner test included for comparison.
 
 ```{r}
@@ -1034,8 +1034,8 @@ fligner.test(cardiacMg$mg~cardiacMg$diet)
 
 ```{r}
 # Set graphical parameters
-par(cex = 1, cex.main = 3, cex.lab = 2, font.lab = 2, cex.axis = 1.5, 
-    lwd = 5, lend = 0, ljoin = 0, tcl = -0.5, pch = 1, 
+par(cex = 1, cex.main = 3, cex.lab = 2, font.lab = 2, cex.axis = 1.5,
+    lwd = 5, lend = 0, ljoin = 0, tcl = -0.5, pch = 1,
     mar = c(5,5,3,5)
     )
 
@@ -1053,7 +1053,7 @@ means <- aggregate(mg~diet, data=cardiacMg, mean)
 points(means$mg, cex=2, pch=23, bg=0, lwd=4)
 
 # X axis
-axis(1, lwd = 5, tcl = -0.5, 
+axis(1, lwd = 5, tcl = -0.5,
      labels=levels(categories), at=c(1:3)
      )
 
@@ -1173,8 +1173,8 @@ head(res)
 The `-log10(pvalue)` is used so p values can be plotted as whole numbers. Note that I was not able to separate each section into different R markdown code chunks. I needed the generation of points to be continuous with generation of the original plot.
 
 ```{r}
-with(res, 
-     plot(log2FoldChange, -log10(pvalue), pch=20, 
+with(res,
+     plot(log2FoldChange, -log10(pvalue), pch=20,
           main='Volcano plot', xlim=c(-2.5,2)
           )
      )
@@ -1183,15 +1183,15 @@ with(res,
 # orange if log2FC>1
 # green if both
 with(subset(res, padj<.05 ),
-     points(log2FoldChange, -log10(pvalue), 
+     points(log2FoldChange, -log10(pvalue),
             pch=20, col='red')
      )
-with(subset(res, abs(log2FoldChange)>1), 
-     points(log2FoldChange, -log10(pvalue), 
+with(subset(res, abs(log2FoldChange)>1),
+     points(log2FoldChange, -log10(pvalue),
             pch=20, col='orange')
      )
 with(subset(res, padj<.05 & abs(log2FoldChange)>1),
-     points(log2FoldChange, -log10(pvalue), 
+     points(log2FoldChange, -log10(pvalue),
             pch=20, col='green')
      )
 
@@ -1247,7 +1247,7 @@ with(proteomics_data,
        )
      )
 
-# Add colored points: 
+# Add colored points:
 # red if pvalue<0.05, orange if [log2FC]>1, green if both)
 with(subset(proteomics_data, pvalue<.05),
      points(
@@ -1292,7 +1292,7 @@ with(subset(proteomics_data, pvalue<.05 & abs(log2_FC_HAchol_HAchow)>1),
 
 ###### HA Bortezomib plot
 
-Bortezomib treatment alters the proteome. 
+Bortezomib treatment alters the proteome.
 
 ```{r}
 # bold axis titles

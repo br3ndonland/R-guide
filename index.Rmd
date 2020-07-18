@@ -42,7 +42,7 @@ From the [R FAQ](http://cran.rstudio.com/faqs.html):
   - <details><summary>*Click here for Anaconda info*</summary>
 
     #### Anaconda
-    
+
     - I install Anaconda by [direct download](https://www.anaconda.com/download/). I have also tried installing via Homebrew Cask, but didn't get the correct command prompt or path.
     - Anaconda contains the [Conda](https://conda.io/docs/) and [PyPI](https://pypi.python.org/pypi) (pip) package managers. Packages can be installed from `pip`, and will integrate into the Anaconda environment.
     - [Conda commands](https://conda.io/docs/commands):
@@ -50,17 +50,17 @@ From the [R FAQ](http://cran.rstudio.com/faqs.html):
       - Find packages with `$ conda search`.
       - Update conda with `$ conda update --prefix <PATH> anaconda`
       - Update packages with `$ conda update --all`
-    
+
     ##### Additions to the standard Anaconda install
-    
+
     - R and RStudio
       - When I was working with R, I preferred to install R and RStudio via Anaconda for easier version and package management. Otherwise, [R](https://cran.rstudio.com/) and [RStudio](https://www.rstudio.com) must be downloaded and installed separately. R cannot be updated from within RStudio, and installing a new R version can require reinstallation of packages. It's just too difficult to manage.
-    
+
         ```sh
         $ conda install -c r r-essentials
         $ conda install rstudio
         ```
-    
+
     </details>
 - Install R and RStudio via Homebrew
 
@@ -104,7 +104,7 @@ I highly recommend working with a notebook file format. Jupyter Notebook and R M
   - JupyterLab is a development environment produced by [Project Jupyter](http://jupyter.org/).
   - JupyterLab can run Jupyter Notebooks, R Markdown, Markdown, and many other file formats.
   - Install Jupyter with Homebrew or the Python `pip` module manager. I previously used [Anaconda](https://www.anaconda.com/) to manage my Python and R distributions, and now use Homebrew. I switched because Anaconda is a very large installation, and not as flexible or general as Homebrew.
-  - Launch from the command line with `jupyter notebook` or 
+  - Launch from the command line with `jupyter notebook` or
 - Google provides a cloud-based Jupyter Notebook environment called [Colaboratory](https://colab.research.google.com). At the time of this writing, it only supports Python.
 
 ### R Markdown
@@ -187,7 +187,7 @@ summary(cars)
 
 - Packages are programs written for R that provide additional functionality. **R is dependent on large numbers of packages.**
 - [Packrat](https://rstudio.github.io/packrat/) is a package dependency management system for R projects. Packrat helps avoid problems caused by different package versions and installations. Packrat is separate from the general package manager like Homebrew used to install R and RStudio.
-- [Packrat works with RStudio](https://rstudio.github.io/packrat/rstudio.html) and gives each project its own private package library. 
+- [Packrat works with RStudio](https://rstudio.github.io/packrat/rstudio.html) and gives each project its own private package library.
 
 ### Git and GitHub
 
@@ -339,8 +339,8 @@ Here's an example within a functional R Markdown code block:
 temperature_vector <- c('High', 'Low', 'High', 'Low', 'Medium')
 
 # Specify ordinal variables with given levels
-factor_temperature_vector <- factor(temperature_vector, 
-                                    order = TRUE, 
+factor_temperature_vector <- factor(temperature_vector,
+                                    order = TRUE,
                                     levels = c('Low','Medium','High')
                                     )
 
@@ -431,7 +431,7 @@ Example from DataCamp Introduction to R course:
 
     ```{r}
     # Groups in alphabetical order
-    groups <- c('lacZ', 
+    groups <- c('lacZ',
                 'Nrf1-HA bort',
                 'Nrf1-HA chol',
                 'Nrf1-HA chow'
@@ -459,13 +459,13 @@ Example from DataCamp Introduction to R course:
       2   27  large
       3   24 medium
     ')
-  
+
     # Reorder by column number
     data[c(1,3,2)]
-  
+
     # Reorder by column name
     data[c('size', 'id', 'weight')]
-  
+
     # Overwrite data variable with new info:
     # data <- data[c(1,3,2)]
     ```
@@ -498,7 +498,7 @@ Example from DataCamp Introduction to R course:
     dd <- data.frame(b = factor(c('Hi', 'Med', 'Hi', 'Low'),
                                 levels = c('Low', 'Med', 'Hi'),
                                 ordered = TRUE),
-                     x = c('A', 'D', 'A', 'C'), 
+                     x = c('A', 'D', 'A', 'C'),
                      y = c(8, 3, 9, 9),
                      z = c(1, 1, 1, 2)
                      )
@@ -740,7 +740,7 @@ attach(dataset_name, options)
     table(smokes,amount)
     ```
 
-- Relative frequency table: 
+- Relative frequency table:
 
   ```r
   table(df_name$var_name1)/number_observations
@@ -804,7 +804,7 @@ attach(dataset_name, options)
 
 - Calculating the critical value for a confidence interval: `qnorm(0.95)`
 - Margin of error:
-  
+
   > Imagine you've set out to survey 1000 people on two questions: are you female? and are you left-handed? Since both of these sample proportions were calculated from the same sample size, they should have the same margin of error, right? Wrong! While the margin of error does change with sample size, it is also affected by the proportion.
   >
   > The first step is to make a vector `p` that is a sequence from 0 to 1 with each number separated by 0.01:
@@ -819,7 +819,7 @@ attach(dataset_name, options)
     ```{r}
     me = 1.96 - sqrt(p - (1 - p)/n)
     ```
-    
+
   > Finally, plot the two vectors against each other to reveal their relationship:
 
     ```{r}
@@ -849,7 +849,7 @@ attach(dataset_name, options)
 > The **for loop** is a cornerstone of computer programming. The idea behind the for loop is **iteration**: it allows you to execute code as many times as you want without having to type out every iteration.
 
 - Example for loop (from DataCamp data analysis and statistical inference course, also see Verzani simpleR p.48):
-  
+
   > In this example, we want to iterate the two lines of code inside the curly braces that take a random sample of size 50 from area then save the mean of that sample into the sample means50 vector. Without the for loop, this would be painful:
 
     ```r
@@ -929,7 +929,7 @@ attach(dataset_name, options)
 - For loops can also be used for **bootstrapping**.
   - Bootstrapping is a way of amplifying your data for estimation.
   - Definition (from Google):
-    
+
     > a technique of loading a program into a computer by means of a few initial instructions that enable the introduction of the rest of the program from an input device.
 
   - There is also a `boot` package available for R
@@ -972,7 +972,7 @@ attach(dataset_name, options)
   - `est='median'` will create an interval for the median instead of the mean
 
 - Example *(Datacamp data analysis and statistical inference course lab 4)*:
-  
+
   > use the inference function for evaluating whether there is a difference between the average birth weights of babies born to smoker and non-smoker mothers:
 
     ```r
@@ -983,7 +983,7 @@ attach(dataset_name, options)
               order=c('smoker','nonsmoker')
               )
     ```
-  
+
   > The first argument is y, which is the response variable that we are interested in: `nc$weight`.
   >
   > The second argument is the grouping variable `x`, which is the explanatory variable multiplied by the grouping variable across the levels of which we’re comparing the average value for the response variable, smokers and non-smokers: `nc$habit`.
@@ -1026,11 +1026,11 @@ t.test(y1,y2, var.equal = TRUE)
 # one-sample t-test, with null hypothesis mean mu=3.
 t.test(y,mu=2, var.equal = TRUE)
 # paired t-test
-t.test(y~x, paired=TRUE, var.equal = TRUE) 
+t.test(y~x, paired=TRUE, var.equal = TRUE)
 # one-tailed t-test
-t.test(y~x, alternative = 'less', var.equal = TRUE) 
+t.test(y~x, alternative = 'less', var.equal = TRUE)
 # one-tailed t-test
-t.test(y~x, alternative = 'greater', var.equal = TRUE) 
+t.test(y~x, alternative = 'greater', var.equal = TRUE)
 ```
 
 - Default t-test assumes heterogeneity of variance and applies a Welch/Satterthwaite df modification. Include `var.equal = TRUE` to indicate homogeneity of variance.
@@ -1047,7 +1047,7 @@ t.test(y~x, alternative = 'greater', var.equal = TRUE)
 ##### Normality
 
 - Shapiro-Wilk W test (W>0.9 desired, see flowchart from [PATH 591 lecture 03](https://drive.google.com/file/d/1V4F1T1M3RrQu3CutBPPxVvKhRvA9ZUn5/view?usp=sharing) p.11 in [linear regression section](#linear-regression)):
-  
+
   ```r
   shapiro.test(dependent_var, options)
   ```
@@ -1102,9 +1102,9 @@ See R in Action tables 8.2 and 8.3 for full syntax info.
 - `confint()`: Confidence intervals (95 percent by default).
 - `fitted()`: Lists predicted values.
 - `plot()`: Plots for evaluating model fit. *To select specific plots, add 'which='.*
-- `residuals()`: Residuals are basically the deviation from the model fit. 
+- `residuals()`: Residuals are basically the deviation from the model fit.
   - `rstandard()` for standardized residuals (divided by standard deviation, fitted including the current data point).
-  - `rstudent()` for studentized residuals (divided by standard deviation, but fitted ignoring the current data point). 
+  - `rstudent()` for studentized residuals (divided by standard deviation, but fitted ignoring the current data point).
   - `Stdres()` and `studres()` can also be used but require the MASS package (Modern Applied Statistics with S).
   - See [PATH 591 lecture 03](https://drive.google.com/file/d/1V4F1T1M3RrQu3CutBPPxVvKhRvA9ZUn5/view?usp=sharing) for a clear visual explanation of residuals.
 
@@ -1128,7 +1128,7 @@ See R in Action tables 8.2 and 8.3 for full syntax info.
 ##### Normality of residuals
 
 - Shapiro-Wilk W statistic: based on mathematics of normal probability plots. Compares variance of distribution to variance expected under normal distribution. Shapiro-Wilk W statistic trumps p value. Normality testing workflow from [PATH 591 lecture 03](https://drive.google.com/file/d/1V4F1T1M3RrQu3CutBPPxVvKhRvA9ZUn5/view?usp=sharing) p.11:
-  
+
   ![Normality testing workflow from [PATH 591 lecture 03](https://drive.google.com/file/d/1V4F1T1M3RrQu3CutBPPxVvKhRvA9ZUn5/view?usp=sharing) p.11](img/normality-testing-workflow.png 'Normality testing workflow')
 
   - **Make sure you are testing residuals and not raw data. It is acceptable to test normality using studentized residuals**.
@@ -1139,9 +1139,9 @@ See R in Action tables 8.2 and 8.3 for full syntax info.
 
 ##### Independence of residuals
 
-- Serial correlation: Durbin-Watson D. 
-  - Found in the `car` and `lmtest` packages. 
-  - Use `acf(lm_name$residuals)`, `acf(rstudent(lm_name))`, or `acf(studres(lm_name))`. 
+- Serial correlation: Durbin-Watson D.
+  - Found in the `car` and `lmtest` packages.
+  - Use `acf(lm_name$residuals)`, `acf(rstudent(lm_name))`, or `acf(studres(lm_name))`.
   - `studres` (in the MASS package) will produce an autocorrelation plot. The dashed lines indicate the 95% confidence interval, and correlations ideally lie within the lines.
 
 ##### Homogeneity of residual variances
@@ -1152,9 +1152,9 @@ See R in Action tables 8.2 and 8.3 for full syntax info.
 - Spearman rank order correlation between the absolute values of the residuals and the predicted values
 - See below under 'Variance assessment for multivariate, factorial, and repeated measures designs' for information on how to assess HOV in complex designs using fit statistics like aic() and bic().
 
-##### Linearity and additivity 
+##### Linearity and additivity
 
-- Linearity and additivity of the relationship between dependent and independent variables. 
+- Linearity and additivity of the relationship between dependent and independent variables.
 - Assessed with graphical evaluation by plot of residuals vs predicted values.
 
 ##### Lack of influential observations
@@ -1258,7 +1258,7 @@ This information is usually adequate for publication purposes. See [PATH 591 lec
   qqnorm(dependent_var, options)
   qqline(dependent_var, options)
   ```
-  
+
 ##### Homogeneity of residual variances
 
 - Bartlett test: `bartlett.test()`. Bartlett test is sensitive to deviations from normality.
@@ -1290,15 +1290,15 @@ This information is usually adequate for publication purposes. See [PATH 591 lec
     - *I am more familiar with this in SAS. Explanation below.*
     - In general, you want to use the simplest model possible that minimizes AIC, AICC, and BIC while still meeting the assumptions of the model. Mind the assumptions of each covariance structure. See [CPSC 542 Lecture 10](https://drive.google.com/open?id=1aJ7Hu5GUyndYHAPNrlL-jAM-yEItXn-8) pp. 4-7.
     - Donald Bullock (Illinois CPSC statistics professor):
-      
+
       > You select an error structure with heterogeneous variances [like unstructured] and compare that to a model with everything the same with the exception of homogeneous variances [like compound symmetry]. The differences in the log likelihoods will be a chi-square with degrees of freedom equal to the differences in the number of estimates in the two models.
 
     - This is also described in the Littell 'SAS for mixed models' text p. 172.
-    - In other words, run the code using the unstructured model, and copy/paste the 'Fit Statistics' table and the number of covariance parameter estimates into Excel. The number of estimates (also called covariance parameters) is given under 'Dimensions' in the output. Also look at the '-2 Res Log Likelihood' number under 'Fit Statistics' in the output. 
-    - Then run the code several more times, using different covariance structures each time (cs, ar(1), arh(1), toep, and toeph), and paste the fit statistics and estimates into excel also. Then, for each test other than unstructured, type =chidist(x, df), using the difference between the '-2 Res Log Likelihood' for unstructured and the other test as the 'x' or chi square, and the difference in #parameters between unstructured and the other test as the df. 
+    - In other words, run the code using the unstructured model, and copy/paste the 'Fit Statistics' table and the number of covariance parameter estimates into Excel. The number of estimates (also called covariance parameters) is given under 'Dimensions' in the output. Also look at the '-2 Res Log Likelihood' number under 'Fit Statistics' in the output.
+    - Then run the code several more times, using different covariance structures each time (cs, ar(1), arh(1), toep, and toeph), and paste the fit statistics and estimates into excel also. Then, for each test other than unstructured, type =chidist(x, df), using the difference between the '-2 Res Log Likelihood' for unstructured and the other test as the 'x' or chi square, and the difference in #parameters between unstructured and the other test as the df.
     - The answer will be a p value. A significant p indicates that the unstructured model provides superior fit.
 
-##### Independence of residuals 
+##### Independence of residuals
 
 Independence of residuals is required. Any pairing in the data, such as in repeated measures designs, must be appropriately specified in the model.
 
@@ -1317,11 +1317,11 @@ or
 ```r
 library(multcomp)
 # load RColorBrewer for additional color palettes.
-library(RColorBrewer) 
+library(RColorBrewer)
 tuk <- glht(aov1, linfct=mcp(var_name='Tukey'))
 cld(tuk)
-plot(cld(tuk, level=.05), col=brewer.pal(8,'Pastel1')) 
-# 'I'm a very vivacious man... Earth tones are so passe. 
+plot(cld(tuk, level=.05), col=brewer.pal(8,'Pastel1'))
+# 'I'm a very vivacious man... Earth tones are so passe.
 # I'm a pastel man.' Larry David
 ```
 
@@ -1354,7 +1354,7 @@ plot(effect(factorial_term, model_name, xlevels),
 ```
 
 ```r
-library(gplots) 
+library(gplots)
 plotmeans(y ~ interaction(variable1, variable2, sep=' '),
           connect=list(c(1,3,5),c(2,4,6)),
           col=c('red', 'darkgreen'),
@@ -1462,7 +1462,7 @@ pairwise.wilcox.test(y, x, p.adjust.method= 'holm')
   - `fdr`
   - `none`
 - From R Documentation:
-  
+
   > The first four methods are designed to give strong control of the family-wise error rate. There seems no reason to use the unmodified Bonferroni correction because it is dominated by Holm's method, which is also valid under arbitrary assumptions.
 
 ###### Nemenyi test
@@ -1492,7 +1492,7 @@ friedman.test(y~a | b, data)
 ```
 
 - where `y` is the numeric outcome variable, `A` is a grouping variable, and `B` is a blocking variable that identifies matched observations. In both cases, `data` is an option argument specifying a matrix or data frame containing the variables.
-- Useful for non-parametric non-independent data with ≥2 groups (such as repeated measures designs). 
+- Useful for non-parametric non-independent data with ≥2 groups (such as repeated measures designs).
 - May only be valid with balanced designs.
 
 ##### Non-parametric factorial datasets
@@ -1726,7 +1726,7 @@ See [Quick-R](http://www.statmethods.net/advgraphs/parameters.html), and of cour
     - To rotate axis labels (using base graphics), you need to use `text()`, rather than `mtext()`, as the latter does not support `par('srt')`.
     - When plotting the x axis labels, we use `srt = 45` for text rotation angle, `adj = 1` to place the right end of text at the tick marks, and `xpd = TRUE` to allow for text outside the plot region. You can adjust the value of the `0.25offset` as required to move the axis labels up or down relative to the x axis. See `?par` for more information.
     - Also see Figure 1 and associated code in Paul Murrell (2003), 'Integrating grid Graphics Output with Base Graphics Output', *R News,- 3/2, 7–12.
-    
+
     ```{r}
     # Increase bottom margin to make room for rotated labels
     par(mar = c(7, 4, 4, 2) + 0.1)
@@ -1737,7 +1737,7 @@ See [Quick-R](http://www.statmethods.net/advgraphs/parameters.html), and of cour
     # Create some text labels
     labels <- paste('Label', 1:8, sep = ' ')
     # Plot x axis labels at default tick marks
-    text(1:8, par('usr')[3] - 0.25, 
+    text(1:8, par('usr')[3] - 0.25,
          srt = 45, adj = 1,labels = labels, xpd = TRUE
          )
     # Plot x axis label at line 6 (of 7)
