@@ -28,3 +28,14 @@ I would like to share this resource broadly, and have made an effort to respect 
 - **Webpages (.html) can be viewed on the [GitHub Pages site](https://br3ndonland.github.io/R-guide) for this repository.**
 - **Markdown files (.md) can be viewed on GitHub.**
 - **R Markdown files (.Rmd) can be run in RStudio.**
+
+## Building the site locally
+
+The website was generated with the [R Markdown static site builder](https://bookdown.org/yihui/rmarkdown/rmarkdown-site.html).
+
+- Clone the Git repo: `git clone https://github.com/br3ndonland/R-guide.git ~/dev`
+- Open the project in RStudio: File -> Open Project
+  - Build settings are located in Tools -> Project Options -> Build Tools
+  - Site settings are in [\_site.yml](../_site.yml).
+- In the Build pane, click "Build Website." The site will output to the docs directory.
+- [GitHub Pages](https://pages.github.com/) builds the site from the docs directory.
