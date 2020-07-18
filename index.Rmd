@@ -181,13 +181,15 @@ summary(cars)
 
 ### RStudio Projects
 
-[RStudio Projects](https://support.rstudio.com/hc/en-us/articles/200526207-Using-Projects) are the best way to manage code in RStudio. RStudio projects make it straightforward to divide your work into multiple contexts, each with their own working directory, workspace, history, and source documents. Projects allow use of version control with Git. Installing packages into the project locally with Packrat is very helpful.
+[RStudio Projects](https://support.rstudio.com/hc/en-us/articles/200526207-Using-Projects) are the best way to manage code in RStudio. RStudio projects make it straightforward to divide your work into multiple contexts, each with their own working directory, workspace, history, and source documents. Projects allow use of version control with Git. Installing packages into the project locally with `renv` is very helpful.
 
 ### R packages
 
 - Packages are programs written for R that provide additional functionality. **R is dependent on large numbers of packages.**
-- [Packrat](https://rstudio.github.io/packrat/) is a package dependency management system for R projects. Packrat helps avoid problems caused by different package versions and installations. Packrat is separate from the general package manager like Homebrew used to install R and RStudio.
-- [Packrat works with RStudio](https://rstudio.github.io/packrat/rstudio.html) and gives each project its own private package library.
+- [`renv`](https://rstudio.github.io/renv/index.html) is a package dependency management system for R projects. It helps avoid problems caused by different package versions and installations by giving each project its own isolated package library. `renv` is separate from general package managers like Homebrew used to install R and RStudio.
+- This project previously used [Packrat](https://github.com/rstudio/packrat), a predecessor to `renv` that is now "soft-deprecated."
+  - Migration from Packrat to `renv` is simple. Run the following command in the console: `renv::migrate("~/path/to/repo")`.
+  - Then if packages aren't already installed, run `renv::restore()`, or in the Packages pane, navigate to `renv` -> Restore Library.
 
 ### Git and GitHub
 
