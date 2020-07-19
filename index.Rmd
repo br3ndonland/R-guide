@@ -143,7 +143,7 @@ I highly recommend working with a notebook file format. Jupyter Notebook and R M
 
 Example:
 
-```{r cars}
+```{r index-rmarkdown-intro-cars-summary}
 summary(cars)
 ```
 
@@ -155,7 +155,7 @@ summary(cars)
 
 - Prevent printing of code in HTML output: `echo=FALSE`
 
-    ```{r pressure, echo=FALSE}
+    ```{r index-rmarkdown-intro-pressure-plot, echo=FALSE}
     plot(pressure)
     ```
 
@@ -338,15 +338,14 @@ From DataCamp introduction to R course:
 
 Here's an example within a functional R Markdown code block:
 
-```{r}
+```{r index-datastructures-vector-temperature}
 # Create a vector of temperature observations
 temperature_vector <- c('High', 'Low', 'High', 'Low', 'Medium')
 
 # Specify ordinal variables with given levels
 factor_temperature_vector <- factor(temperature_vector,
                                     order = TRUE,
-                                    levels = c('Low','Medium','High')
-                                    )
+                                    levels = c('Low', 'Medium', 'High'))
 
 # Display the vector
 factor_temperature_vector
@@ -364,7 +363,7 @@ factor_temperature_vector
 
 Example data frame `mtcars`:
 
-```{r}
+```{r index-datastructures-dataframe-mtcars}
 names(mtcars) # names of columns
 head(mtcars)  # first observations
 tail(mtcars)  # last observations
@@ -433,31 +432,32 @@ Example from DataCamp Introduction to R course:
   - Subsequently, `a[order(a)]` will give you the ordered vector 9,100,101, since it first picks the second element of a, then the first and then the last.
 - Example from my [postdoc Nrf1 proteomics experiments](https://github.com/br3ndonland/R-proteomics-Nrf1):
 
-    ```{r}
-    # Groups in alphabetical order
-    groups <- c('lacZ',
-                'Nrf1-HA bort',
-                'Nrf1-HA chol',
-                'Nrf1-HA chow'
-                )
-    groups[order(groups)]
-    # Put groups in my preferred order
-    ordered=factor(groups, levels = c('lacZ',
-                                      'Nrf1-HA chow',
-                                      'Nrf1-HA chol',
-                                      'Nrf1-HA bort'
-                                      )
-                   )
-    # Verify desired order of groups
-    groups[order(ordered)]
+    ```{r index-datastructures-dataframe-nrf1}
+        # Groups in alphabetical order
+        groups <- c('lacZ',
+                    'Nrf1-HA bort',
+                    'Nrf1-HA chol',
+                    'Nrf1-HA chow'
+                    )
+        groups[order(groups)]
+        # Put groups in my preferred order
+        ordered=factor(groups, levels = c('lacZ',
+                                          'Nrf1-HA chow',
+                                          'Nrf1-HA chol',
+                                          'Nrf1-HA bort'
+                                          )
+                       )
+        # Verify desired order of groups
+        groups[order(ordered)]
     ```
 
   - Make sure you refer to the new sorted variable (`Orderedgroups` in this case) in subsequent code.
 - Example: [Reordering columns in a data frame from Cookbook for R](http://www.cookbook-r.com/Manipulating_data/Reordering_the_columns_in_a_data_frame/):
 
-    ```{r}
+    ```{r index-datastructures-dataframe-sample-01}
     # A sample data frame
-    data <- read.table(header=TRUE, text='
+    data <- read.table(header = TRUE,
+                       text = '
       id weight   size
       1   20  small
       2   27  large
@@ -465,7 +465,7 @@ Example from DataCamp Introduction to R course:
     ')
 
     # Reorder by column number
-    data[c(1,3,2)]
+    data[c(1, 3, 2)]
 
     # Reorder by column name
     data[c('size', 'id', 'weight')]
@@ -476,36 +476,39 @@ Example from DataCamp Introduction to R course:
 
   > The above examples index into the data frame by treating it as a list (a data frame is essentially a list of vectors). You can also use matrix-style indexing, as in data[row, col], where row is left blank.
 
-  ```{r}
-  data[, c(1,3,2)]
-  ```
+    ```{r index-datastructures-dataframe-sample-02}
+    data[, c(1,3,2)]
+    ```
 
   > The drawback to matrix indexing is that it gives different results when you specify just one column. In these cases, the returned object is a vector, not a data frame. Because the returned data type isn’t always consistent with matrix indexing, it’s generally safer to use list-style indexing, or the drop=FALSE option:
 
-  ```{r}
-  # List-style indexing of one column
-  data[2]
-
-  # Matrix-style indexing of one column
-  # drops dimension to become a vector
-  data[,2]
-
-  # Matrix-style indexing with drop=FALSE
-  # preserves dimension to remain data frame
-  data[, 2, drop=FALSE]
-  ```
+    ```{r index-datastructures-dataframe-sample-03}
+    # List-style indexing of one column
+    data[2]
+  
+    # Matrix-style indexing of one column
+    # drops dimension to become a vector
+    data[,2]
+  
+    # Matrix-style indexing with drop=FALSE
+    # preserves dimension to remain data frame
+    data[, 2, drop=FALSE]
+    ```
 
 - [Another example from Stack Overflow](https://stackoverflow.com/questions/1296646/how-to-sort-a-dataframe-by-columns)
   - Create the data frame
 
-    ```{r}
-    dd <- data.frame(b = factor(c('Hi', 'Med', 'Hi', 'Low'),
-                                levels = c('Low', 'Med', 'Hi'),
-                                ordered = TRUE),
-                     x = c('A', 'D', 'A', 'C'),
-                     y = c(8, 3, 9, 9),
-                     z = c(1, 1, 1, 2)
-                     )
+    ```{r index-datastructures-dataframe-so}
+    dd <- data.frame(
+      b = factor(
+        c('Hi', 'Med', 'Hi', 'Low'),
+        levels = c('Low', 'Med', 'Hi'),
+        ordered = TRUE
+      ),
+      x = c('A', 'D', 'A', 'C'),
+      y = c(8, 3, 9, 9),
+      z = c(1, 1, 1, 2)
+    )
     dd
     ```
 
@@ -813,20 +816,20 @@ attach(dataset_name, options)
   >
   > The first step is to make a vector `p` that is a sequence from 0 to 1 with each number separated by 0.01:
 
-    ```{r}
+    ```{r index-stats-confidence-intervals-01}
     n = 1000
     p = seq(0, 1, 0.01)
     ```
 
   > We then create a vector of the margin of error (`me`) associated with each of these values of `p` using the familiar approximate formula (ME = 2 X SE):
 
-    ```{r}
+    ```{r index-stats-confidence-intervals-02}
     me = 1.96 - sqrt(p - (1 - p)/n)
     ```
 
   > Finally, plot the two vectors against each other to reveal their relationship:
 
-    ```{r}
+    ```{r index-stats-confidence-intervals-03}
     plot(me ~ p)
     ```
 
@@ -1600,11 +1603,9 @@ Bioconductor is a repository of R packages for bioinformatic analysis.
       ```
 
     - **Note that, as with other functions in R, variables will be sorted alphabetically or numerically. To change the order, you must create a separate vector and use `order()` or `factor()` to specify the order. See the section on data frames above, and previous code.**
-  - Plotting factorial datasets
-    - Sample code from the R Graphics Cookbook ch.2 'Creating a box plot':
-    - *TODO: break up this code chunk, reformat code to be more PEP 8-like*
+  - Plotting factorial datasets: Sample code from the R Graphics Cookbook ch.2 'Creating a box plot'.
 
-    ```{r}
+    ```{r index-plots-boxplot-01}
     # Formula syntax
     boxplot(len ~ supp, data = ToothGrowth)
     # Put interaction of two variables on x-axis
@@ -1613,39 +1614,39 @@ Bioconductor is a repository of R packages for bioinformatic analysis.
 
     With the ggplot2 package, you can get a similar result using qplot() (Figure 2-11), with geom='boxplot':
 
-    ```{r}
+    ```{r index-plots-ggplot2-01}
     library(ggplot2)
     qplot(ToothGrowth$supp, ToothGrowth$len, geom='boxplot')
     ```
 
     If the two vectors are already in the same data frame, you can use the following syntax:
 
-    ```{r}
+    ```{r index-plots-qplot-01}
     qplot(supp, len, data=ToothGrowth, geom='boxplot')
     ```
 
     This is equivalent to:
 
-    ```{r}
+    ```{r index-plots-ggplot2-02}
     ggplot(ToothGrowth, aes(x=supp, y=len)) + geom_boxplot()
     ```
 
     It’s also possible to make box plots for multiple variables, by combining the variables with interaction(), as in Figure 2-11. In this case, the dose variable is numeric, so we must convert it to a factor to use it as a grouping variable:
 
-    ```{r}
+    ```{r index-plots-qplot-02}
     # Using three separate vectors
     qplot(interaction(ToothGrowth$supp, ToothGrowth$dose), ToothGrowth$len, geom='boxplot')
     ```
 
     Alternatively, get the columns from the data frame:
 
-    ```{r}
+    ```{r index-plots-qplot-03}
     qplot(interaction(supp, dose), len, data=ToothGrowth, geom='boxplot')
     ```
 
     This is equivalent to:
 
-    ```{r}
+    ```{r index-plots-ggplot2-03}
     ggplot(ToothGrowth, aes(x=interaction(supp, dose), y=len)) + geom_boxplot()
     ```
 
@@ -1731,7 +1732,7 @@ See [Quick-R](http://www.statmethods.net/advgraphs/parameters.html), and of cour
     - When plotting the x axis labels, we use `srt = 45` for text rotation angle, `adj = 1` to place the right end of text at the tick marks, and `xpd = TRUE` to allow for text outside the plot region. You can adjust the value of the `0.25offset` as required to move the axis labels up or down relative to the x axis. See `?par` for more information.
     - Also see Figure 1 and associated code in Paul Murrell (2003), 'Integrating grid Graphics Output with Base Graphics Output', *R News,- 3/2, 7–12.
 
-    ```{r}
+    ```{r index-plots-params-01}
     # Increase bottom margin to make room for rotated labels
     par(mar = c(7, 4, 4, 2) + 0.1)
     # Create plot with no x axis and no x axis label
