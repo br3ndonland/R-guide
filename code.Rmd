@@ -80,7 +80,7 @@ Atheroma thickness data from Smith BW J Food Res 2013 (doi: [10.5539/jfr.v2n1p16
 
 ##### Import dataset
 
-```{r code-ttest-atheroma-01-import}
+```{r code-ttest-atheroma-01-import, message=FALSE}
 jfr2013_atheroma <- read.table('data/t_test_jfr2013_atheroma.csv',
                                header = TRUE,
                                sep = ',')
@@ -246,7 +246,7 @@ Aorta Hsp70 data from Smith BW J Ultrasound Med 2015 (doi: [10.7863/ultra.34.7.1
 
 ##### Import dataset
 
-```{r code-ttest-hsp70-01-import}
+```{r code-ttest-hsp70-01-import, message=FALSE}
 AortaHsp70 <- read.table('data/t_test_jum2015_hsp70.csv',
                          header = TRUE,
                          sep = ',')
@@ -418,7 +418,7 @@ axis(2, lwd = 5, tcl = -0.5)
 
 ##### Import dataset
 
-```{r code-lm-simple-aztcpm-01-import}
+```{r code-lm-simple-aztcpm-01-import, message=FALSE}
 aztcpm <- read.table('data/lm_aztcpm.csv', header = TRUE, sep = ',')
 attach(aztcpm)
 names(aztcpm)
@@ -486,7 +486,7 @@ Feed intake vs total cholesterol data from Smith BW J Food Sci 2015 (doi: [10.11
 
 ##### Import dataset
 
-```{r code-lm-simple-jfs-feedtc-01-import}
+```{r code-lm-simple-jfs-feedtc-01-import, message=FALSE}
 feedtc <- read.table('data/lm_jfs2015_feed_vs_tc.csv',
                      header = TRUE,
                      sep = ',')
@@ -551,7 +551,7 @@ This dataset from Doug Simpson at University of Illinois contains information on
 
 ##### Import dataset
 
-```{r code-lm-simple-beer-01-import}
+```{r code-lm-simple-beer-01-import, message=FALSE}
 beer <- read.table('data/anova_mlr_beer.csv', header = TRUE, sep = ',')
 attach(beer)
 ```
@@ -599,7 +599,7 @@ Gonadal adipose weights from Smith BW J Food Sci 2015 (doi: [10.1111/1750-3841.1
 
 ##### Import dataset
 
-```{r code-anova-adipose-weights-01-import}
+```{r code-anova-adipose-weights-01-import, message=FALSE}
 adipose_weights <-
   read.table('data/anova_one_way_jfs2015_adipose.csv',
              header = TRUE,
@@ -623,7 +623,7 @@ summary(adiposeaov1)
 - The RColorBrewer package is loaded for additional colors, and a palette is added to R. Use brackets after vector name for specific colors when creating plots (for example: `col=set1[4:14]`).
 - I chose the `Pastel1` palette. "I'm a very vivacious man... Earth tones are so passe. I'm a pastel man." Larry David, _Curb Your Enthusiasm_ S01E05 "Interior Decorator"
 
-```{r code-anova-adipose-weights-02-run-multcomp}
+```{r code-anova-adipose-weights-02-run-multcomp, message=FALSE}
 # Standard Tukey Honest Significant Differences
 TukeyHSD(adiposeaov1)
 par(las = 2, mar = c(5, 8, 4, 2))
@@ -737,7 +737,7 @@ Atheroma thickness data from Smith BW et al, J Ultrasound Med 2012 (doi: [10.786
 
 ##### Import dataset
 
-```{r code-anova-2way-fall2009thickness-01-load}
+```{r code-anova-2way-fall2009thickness-01-load, message=FALSE}
 fall2009thickness <-
   read.table(
     'data/anova_factorial_jum2012_atheroma_thickness.csv',
@@ -910,7 +910,7 @@ R in Action 9.4, litter dataset from multcomp package
 
 ##### Load dataset
 
-```{r code-ancova-litter-01-load}
+```{r code-ancova-litter-01-load, message=FALSE}
 library(multcomp)
 attach(litter)
 table(dose)
@@ -985,7 +985,7 @@ Ultrasound data
 ##### Import dataset
 
 
-```{r code-manova-hr-01-read}
+```{r code-manova-hr-01-read, message=FALSE}
 hr <- read.table('data/manova_hr.csv', header = TRUE, sep = ',')
 attach(hr)
 names(hr)
@@ -1106,7 +1106,7 @@ Cardiac magnesium levels from Smith BW J Food Res 2013 (doi: [10.5539/jfr.v2n1p1
 - In RStudio, tools->import dataset can also be used.
 - Dataset is attached so variables can be named without reference to the original dataset.
 
-```{r code-kruskal-cardiacmg-01-load}
+```{r code-kruskal-cardiacmg-01-load, message=FALSE}
 cardiacMg <- read.table('data/kruskal_wallis_jfr2013_mg_cardiac.csv',
                         header = TRUE,
                         sep = ',')
@@ -1212,7 +1212,7 @@ legend(
 - This is a brown-forsythe test that evaluates deviations from group medians, and thus is robust to violations of normality.
 - Fligner test included for comparison.
 
-```{r code-kruskal-cardiacmg-03-assumptions-hov}
+```{r code-kruskal-cardiacmg-03-assumptions-hov, message=FALSE}
 library(lawstat)
 levene.test(cardiacMg$mg, cardiacMg$diet)
 
@@ -1394,7 +1394,7 @@ Volcano plot example from [Getting Genetics Done](http://www.gettinggeneticsdone
 
 ##### Import dataset from GitHub
 
-```{r code-plot-volcano-ggd-01-load}
+```{r code-plot-volcano-ggd-01-load, message=FALSE}
 res <- read.table('data/volcano_ggd_data.txt', header = TRUE)
 head(res)
 ```
@@ -1455,7 +1455,7 @@ Experimental data example from [Nrf1 proteomics project](https://github.com/br3n
 
 ##### Import data
 
-```{r code-plot-volcano-nrf1-01-import}
+```{r code-plot-volcano-nrf1-01-import, message=FALSE}
 proteomics_data <-
   read.table(
     'https://raw.githubusercontent.com/br3ndonland/R-proteomics-Nrf1/master/data/R-proteomics-Nrf1.csv',

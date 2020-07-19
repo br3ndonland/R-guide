@@ -452,7 +452,7 @@ Example from DataCamp Introduction to R course:
   - Make sure you refer to the new sorted variable (`Orderedgroups` in this case) in subsequent code.
 - Example: [Reordering columns in a data frame from Cookbook for R](http://www.cookbook-r.com/Manipulating_data/Reordering_the_columns_in_a_data_frame/):
 
-    ```{r index-datastructures-dataframe-sample-01}
+    ```{r index-datastructures-dataframe-sample-01, message=FALSE}
     # A sample data frame
     data <- read.table(header = TRUE,
                        text = '
@@ -461,13 +461,13 @@ Example from DataCamp Introduction to R course:
       2   27  large
       3   24 medium
     ')
-    
+
     # Reorder by column number
     data[c(1, 3, 2)]
-    
+
     # Reorder by column name
     data[c('size', 'id', 'weight')]
-    
+
     # Overwrite data variable with new info:
     # data <- data[c(1,3,2)]
     ```
@@ -483,11 +483,11 @@ Example from DataCamp Introduction to R course:
     ```{r index-datastructures-dataframe-sample-03}
     # List-style indexing of one column
     data[2]
-    
+
     # Matrix-style indexing of one column
     # drops dimension to become a vector
     data[, 2]
-    
+
     # Matrix-style indexing with drop=FALSE
     # preserves dimension to remain data frame
     data[, 2, drop = FALSE]
