@@ -27,7 +27,7 @@ From the [R FAQ](http://cran.rstudio.com/faqs.html):
 - [Cookbook for R](http://www.cookbook-r.com/) by Winston Chang. *CC BY-SA 3.0 license (freely shared and adaptable)*
 - [R Graphics Cookbook](http://proquest.safaribooksonline.com/book/programming/r/9781449363086) by Winston Chang (mostly for ggplot2). *CC0 1.0 license (public domain dedication, no copyright).*
 - [The R book](https://www.amazon.com/R-Book-Michael-J-Crawley/dp/0470973927) by Crawley
-- [simpleR PDF by Verzani](https://cran.r-project.org/doc/contrib/Verzani-SimpleR.pdf). *Copyright John Verzani, 2001-2. All rights reserved.- This book is frequently referenced, but outdated ('Appendix: Teaching Tricks' recommends distributing R code to students on 'floppies.')
+- [simpleR PDF by Verzani](https://cran.r-project.org/doc/contrib/Verzani-SimpleR.pdf). *Copyright John Verzani, 2001-2. All rights reserved.* This book is frequently referenced, but outdated ('Appendix: Teaching Tricks' recommends distributing R code to students on 'floppies.')
 - [Linear models in R](https://www.amazon.com/Linear-Models-Chapman-Statistical-Science/dp/1439887330/ref=dp_ob_title_bk) by Faraway. *Copyright 2014 by Taylor & Francis Group, LLC.*
 
 [back to top](#top)
@@ -105,7 +105,8 @@ I highly recommend working with a notebook file format. Jupyter Notebook and R M
   - JupyterLab can run Jupyter Notebooks, R Markdown, Markdown, and many other file formats.
   - Install Jupyter with Homebrew or the Python `pip` module manager. I previously used [Anaconda](https://www.anaconda.com/) to manage my Python and R distributions, and now use Homebrew. I switched because Anaconda is a very large installation, and not as flexible or general as Homebrew.
   - Launch from the command line with `jupyter notebook` or
-- Google provides a cloud-based Jupyter Notebook environment called [Colaboratory](https://colab.research.google.com). At the time of this writing, it only supports Python.
+- Google provides a cloud-based Jupyter Notebook environment called [Colaboratory](https://colab.research.google.com).
+- See my [R-proteomics-Nrf1 repo](https://github.com/br3ndonland/R-proteomics-Nrf1) for an example of notebook formats.
 
 ### R Markdown
 
@@ -177,7 +178,7 @@ summary(cars)
 - R Markdown can build [websites](https://bookdown.org/yihui/rmarkdown/websites.html).
   - This website was generated with the simple [R Markdown static site builder](https://bookdown.org/yihui/rmarkdown/rmarkdown-site.html).
   - The `blogdown` package is used to build the site within RStudio.
-  - The _site.yml file specifies the website build parameters. The website builds into the *docs* directory for compatibility with [GitHub Pages](https://bookdown.org/yihui/rmarkdown/rmarkdown-site.html).
+  - The [\_site.yml](_site.yml) file specifies the website build parameters. The website builds into the *docs* directory for compatibility with [GitHub Pages](https://bookdown.org/yihui/rmarkdown/rmarkdown-site.html).
 
 ### RStudio Projects
 
@@ -710,12 +711,12 @@ attach(dataset_name, options)
   - Nominal: also called categorical. Variable with discrete names for levels (color, diet group)
   - Ordinal: variable with names ranked and organized into levels (low/medium/high)
 - Also see
-  - Stevens SS *Science* 1946, DOI: [10.1126/science.103.2684.677](http://science.sciencemag.org/content/103/2684/677)
+  - Stevens SS *Science* 1946, DOI: [10.1126/science.103.2684.677](https://doi.org/10.1126/science.103.2684.677)
   - DataCamp introduction to statistics course lesson 1 video
   - My course notes
-    - [CPSC 440 Lecture Notes Chapter 01-03](https://drive.google.com/file/d/1teW1dNHHdUq0x5cCtwYopqDb5WdN20Dn/view?usp=sharing) p.5
-    - [CPSC 440 lab 1](https://drive.google.com/file/d/1l6x5kEsasEDSofTqOy0wC9R6ImKa0NYT/view?usp=sharing) slide 9
-    - [PATH 591 Lecture 05 A](https://drive.google.com/file/d/1sqkJ8w_nUOiAKgTSFUrnRauv4gRChUV6/view?usp=sharing)
+    - [CPSC 440 Lecture Notes Chapter 01-03](https://github.com/br3ndonland/R-guide/tree/master/lfs/CPSC440-Lecture-Ch01-annotated.pdf) slide 5
+    - [CPSC 440 lab 1](https://github.com/br3ndonland/R-guide/tree/master/lfs/CPSC440-Lab-01-slides-annotated.pdf) slide 9
+    - [PATH 591 Lecture 05 A](https://github.com/br3ndonland/R-guide/tree/master/lfs/PATH591-Lecture-05A-annotated.pdf)
 
 ### Basic statistics
 
@@ -1041,14 +1042,14 @@ t.test(y~x, alternative = 'greater', var.equal = TRUE)
   - [Quick-R](http://www.statmethods.net/stats/ttest.html)
   - Verzani simpleR p.63
   - [T-tests Columbia](http://www.stat.columbia.edu/~martin/W2024/R2.pdf)
-  - [CPSC 440 Lecture Notes Chapter 06 ](https://drive.google.com/file/d/15i91VfeZOoq6VcDpJhBblMiQOrKVVB79/view?usp=sharing) p.16
-  - [CPSC 440 lab 07 notes](https://drive.google.com/file/d/1WE_3hGmhhHN5Z1lXFat6YcRE7dZajJ7O/view?usp=sharing) p.5
+  - [CPSC 440 Lecture Notes Chapter 06 ](https://github.com/br3ndonland/R-guide/tree/master/lfs/CPSC440-Lecture-Ch06-annotated.pdf) p.16
+  - [CPSC 440 lab 07 notes](https://github.com/br3ndonland/R-guide/tree/master/lfs/CPSC440-Lab-07-handout-annotated.pdf) p.5
 
 #### T-test assumptions
 
 ##### Normality
 
-- Shapiro-Wilk W test (W>0.9 desired, see flowchart from [PATH 591 lecture 03](https://drive.google.com/file/d/1V4F1T1M3RrQu3CutBPPxVvKhRvA9ZUn5/view?usp=sharing) p.11 in [linear regression section](#linear-regression)):
+- Shapiro-Wilk W test (W>0.9 desired, see flowchart from [PATH 591 lecture 03](https://github.com/br3ndonland/R-guide/tree/master/lfs/PATH591-Lecture-03-annotated.pdf) p.11 in [linear regression section](#linear-regression)):
 
   ```r
   shapiro.test(dependent_var, options)
@@ -1108,9 +1109,9 @@ See R in Action tables 8.2 and 8.3 for full syntax info.
   - `rstandard()` for standardized residuals (divided by standard deviation, fitted including the current data point).
   - `rstudent()` for studentized residuals (divided by standard deviation, but fitted ignoring the current data point).
   - `Stdres()` and `studres()` can also be used but require the MASS package (Modern Applied Statistics with S).
-  - See [PATH 591 lecture 03](https://drive.google.com/file/d/1V4F1T1M3RrQu3CutBPPxVvKhRvA9ZUn5/view?usp=sharing) for a clear visual explanation of residuals.
+  - See [PATH 591 lecture 03](https://github.com/br3ndonland/R-guide/tree/master/lfs/PATH591-Lecture-03-annotated.pdf) for a clear visual explanation of residuals.
 
-    ![Visual explanation of residuals from [PATH 591 lecture 03](https://drive.google.com/file/d/1V4F1T1M3RrQu3CutBPPxVvKhRvA9ZUn5/view?usp=sharing) p.1](img/residuals.png 'Visual explanation of residuals')
+    ![Visual explanation of residuals from [PATH 591 lecture 03](https://github.com/br3ndonland/R-guide/tree/master/lfs/PATH591-Lecture-03-annotated.pdf) p.1](img/residuals.png 'Visual explanation of residuals')
 
 - `summary()`: Summary of the regression model. *To view a specific part, such as just the R<sup>2</sup>, add `$r.squared` or `$adj.r.squared`*
 - `vcov()`: Lists the covariance matrix for model parameters.
@@ -1123,15 +1124,15 @@ See R in Action tables 8.2 and 8.3 for full syntax info.
 - Further information:
   - R in Action 8.6
   - Linear Models with R 8.3
-  - [CPSC 542 Lecture 10](https://drive.google.com/file/d/1aJ7Hu5GUyndYHAPNrlL-jAM-yEItXn-8/view?usp=sharing) pp. 4-7
+  - [CPSC 542 Lecture 10](https://github.com/br3ndonland/R-guide/tree/master/lfs/CPSC542-Lecture-10-annotated.pdf) pp. 4-7
 
 #### Linear regression assumptions
 
 ##### Normality of residuals
 
-- Shapiro-Wilk W statistic: based on mathematics of normal probability plots. Compares variance of distribution to variance expected under normal distribution. Shapiro-Wilk W statistic trumps p value. Normality testing workflow from [PATH 591 lecture 03](https://drive.google.com/file/d/1V4F1T1M3RrQu3CutBPPxVvKhRvA9ZUn5/view?usp=sharing) p.11:
+- Shapiro-Wilk W statistic: based on mathematics of normal probability plots. Compares variance of distribution to variance expected under normal distribution. Shapiro-Wilk W statistic trumps p value. Normality testing workflow from [PATH 591 lecture 03](https://github.com/br3ndonland/R-guide/tree/master/lfs/PATH591-Lecture-03-annotated.pdf) p.11:
 
-  ![Normality testing workflow from [PATH 591 lecture 03](https://drive.google.com/file/d/1V4F1T1M3RrQu3CutBPPxVvKhRvA9ZUn5/view?usp=sharing) p.11](img/normality-testing-workflow.png 'Normality testing workflow')
+  ![Normality testing workflow from [PATH 591 lecture 03](https://github.com/br3ndonland/R-guide/tree/master/lfs/PATH591-Lecture-03-annotated.pdf) p.11](img/normality-testing-workflow.png 'Normality testing workflow')
 
   - **Make sure you are testing residuals and not raw data. It is acceptable to test normality using studentized residuals**.
   - See SAS for mixed models section 10.2.3 p.418, and 'Linear Mixed Models: A Practical Guide Using Statistical Software' by West Welch and Galecki p.105.
@@ -1162,7 +1163,7 @@ See R in Action tables 8.2 and 8.3 for full syntax info.
 ##### Lack of influential observations
 
 - Cook’s D is a distance statistic that measures change in regression parameter estimates when an observation is deleted.
-  - Cook’s D values are sometimes compared with a critical F value F~0.50~(k,n-k-1) (see [PATH 591 lecture 03](https://drive.google.com/file/d/1V4F1T1M3RrQu3CutBPPxVvKhRvA9ZUn5/view?usp=sharing) p.15).
+  - Cook’s D values are sometimes compared with a critical F value F~0.50~(k,n-k-1) (see [PATH 591 lecture 03](https://github.com/br3ndonland/R-guide/tree/master/lfs/PATH591-Lecture-03-annotated.pdf) p.15).
   - According to R in Action 8.4.3, Cook’s D values greater than 4/(n-k-1), where n is the sample size and k is the number of predictor variables, indicate influential observations, but 1 can also be an appropriate cutoff.
 - A Bonferroni outlier test can also be performed with the `outlierTest()` function in the `car` package.
 - Plots of Cook’s D values and residuals vs leverage allow graphical assessment of influential observations. Add a critical line to the Cook’s Distance plot with:
@@ -1188,7 +1189,7 @@ See R in Action tables 8.2 and 8.3 for full syntax info.
 - Further information:
   - Peña EA, Slate EH. Global Validation of Linear Model Assumptions. *J. Am. Stat. Assoc.* 101:341 (2006). doi: [10.1198/016214505000000637](https://dx.doi.org/10.1198/016214505000000637).
   - R in Action 8.3, 13, and [Quick-R regression diagnostics](http://www.statmethods.net/stats/rdiagnostics.html).
-  - [PATH 591 lecture 03](https://drive.google.com/file/d/1V4F1T1M3RrQu3CutBPPxVvKhRvA9ZUn5/view?usp=sharing)
+  - [PATH 591 lecture 03](https://github.com/br3ndonland/R-guide/tree/master/lfs/PATH591-Lecture-03-annotated.pdf)
 
 #### Strategies for addressing model violations
 
@@ -1199,26 +1200,26 @@ See R in Action tables 8.2 and 8.3 for full syntax info.
     - Log: log(y+1) (usually log10 but can also be log2 or loge/ln)
     - Square root:
     - Reciprocal: 1/(y+1) (particularly effective at reducing skewness)
-    - See [PATH 591 lecture 03](https://drive.google.com/file/d/1V4F1T1M3RrQu3CutBPPxVvKhRvA9ZUn5/view?usp=sharing) pp.11-15.
+    - See [PATH 591 lecture 03](https://github.com/br3ndonland/R-guide/tree/master/lfs/PATH591-Lecture-03-annotated.pdf) pp.11-15.
   - Variance-stabilizing transformations
     - Square root, log, reciprocal (in order of increasing heterogeneity of variance)
   - Linearizing transformations for curvilinear relationships
     - Exponential function: linearized by log transformation of y
     - Logarithmic function: linearized by log transformation of x
     - Power function: linearized by log transformation of both x and y
-    - See [PATH 591 lecture 04 C](https://drive.google.com/file/d/1c5jasrjRjqI9rYIB3M4WMK6J4Kx-dPor/view?usp=sharing)
-  - Arcsin(y) can correct non-normality or heteroscedasticity for variables that are proportions (1-100%). See [PATH 591 problem set 4](https://drive.google.com/file/d/12E078z9PyUuqgMJjulgVNhWTEZPDautM/view?usp=sharing).
+    - See [PATH 591 lecture 04 C](https://github.com/br3ndonland/R-guide/tree/master/lfs/PATH591-Lecture-04C-annotated.pdf)
+  - Arcsin(y) can correct non-normality or heteroscedasticity for variables that are proportions (1-100%). See [PATH 591 problem set 4](https://github.com/br3ndonland/R-guide/tree/master/lfs/PATH591-ProblemSet-04.pdf).
   - The independent variable can also be transformed if it is continuous. Categorical independent variables should not be transformed.
 - The Spearman rank order correlation between the independent and dependent variable is another type of correlation that is more widely valid, especially in situations where F test assumptions are violated.
 - Curvilinearity in a plot of resids vs. preds can be addressed by fitting a polynomial regression function.
-- Weighted least squares regression can be used to address serial correlation or influential observations. See [PATH 591 lecture 03](https://drive.google.com/file/d/1V4F1T1M3RrQu3CutBPPxVvKhRvA9ZUn5/view?usp=sharing) p.14. It allows influential observations to be re-weighted to minimize interference with the model. SAS provides a 'reweight' statement for this purpose.
+- Weighted least squares regression can be used to address serial correlation or influential observations. See [PATH 591 lecture 03](https://github.com/br3ndonland/R-guide/tree/master/lfs/PATH591-Lecture-03-annotated.pdf) p.14. It allows influential observations to be re-weighted to minimize interference with the model. SAS provides a 'reweight' statement for this purpose.
 - Link function violations: as with violations of other assumptions, transformation of the data set, addition of variables to the model, or use of a different model may be necessary. Different link functions, such as binomial or Poisson, can usually be specified with a generalized linear mixed models approach. If a simple correlation is desired, the Spearman test can be used instead.
 
 #### Reporting regression results
 
 *F<sub>0.05</sub>(k, n-1 df)=, r<sup>2</sup>, p<*
 
-This information is usually adequate for publication purposes. See [PATH 591 lecture 04 A](https://drive.google.com/file/d/1BLG5s81lyWEMBlzlYFpSQRKwK9jZOX08/view?usp=sharing) p.8.
+This information is usually adequate for publication purposes. See [PATH 591 lecture 04 A](https://github.com/br3ndonland/R-guide/tree/master/lfs/PATH591-Lecture-04A-annotated.pdf) p.8.
 
 ### ANOVA
 
@@ -1248,7 +1249,7 @@ This information is usually adequate for publication purposes. See [PATH 591 lec
 
 ##### Normality of residuals
 
-- Shapiro-Wilk W test (W>0.9 desired, see flowchart from [PATH 591 lecture 03](https://drive.google.com/file/d/1V4F1T1M3RrQu3CutBPPxVvKhRvA9ZUn5/view?usp=sharing) p.11 in [linear regression section](#linear-regression)):
+- Shapiro-Wilk W test (W>0.9 desired, see flowchart from [PATH 591 lecture 03](https://github.com/br3ndonland/R-guide/tree/master/lfs/PATH591-Lecture-03-annotated.pdf) p.11 in [linear regression section](#linear-regression)):
 
   ```r
   shapiro.test(dependent_var, options)
@@ -1290,7 +1291,7 @@ This information is usually adequate for publication purposes. See [PATH 591 lec
     - Plot of residuals vs independent variables (dot or box plots)
   - Numerical assessment using fit statistics
     - *I am more familiar with this in SAS. Explanation below.*
-    - In general, you want to use the simplest model possible that minimizes AIC, AICC, and BIC while still meeting the assumptions of the model. Mind the assumptions of each covariance structure. See [CPSC 542 Lecture 10](https://drive.google.com/open?id=1aJ7Hu5GUyndYHAPNrlL-jAM-yEItXn-8) pp. 4-7.
+    - In general, you want to use the simplest model possible that minimizes AIC, AICC, and BIC while still meeting the assumptions of the model. Mind the assumptions of each covariance structure. See [CPSC 542 Lecture 10](https://github.com/br3ndonland/R-guide/tree/master/lfs/CPSC542-Lecture-10-annotated.pdf) pp. 4-7.
     - Donald Bullock (Illinois CPSC statistics professor):
 
       > You select an error structure with heterogeneous variances [like unstructured] and compare that to a model with everything the same with the exception of homogeneous variances [like compound symmetry]. The differences in the log likelihoods will be a chi-square with degrees of freedom equal to the differences in the number of estimates in the two models.
@@ -1380,7 +1381,7 @@ A few options:
 - `lmer()` in the `lme4` package. See [CRAN 7.35](https://stat.ethz.ch/pipermail/r-help/2006-May/094765.html) for discussion of p values in this function.
 - `lme()` or `gls()` in the `nlme` package
 
-**Analysis of covariance includes both fixed effects (independent variables) and random effects (covariates included to model random variation). If the effect can be reproduced, it's fixed.** With fixed effects you are interested in the means, but with random effects you are interested in variances. Blocks could be either fixed or random; for example, if you are doing a test on trees and you want to block for forest, setting blocks as random would indicate that you want to block for just all forests everywhere in general and these forests are representative of all forests, whereas setting blocks as fixed would indicate that you want to block for these specific forests you’re evaluating. See [CPSC 440 Lecture Notes Chapter 08 ANOVA](https://drive.google.com/file/d/1taEWV9VHuVb9NzO8Ej02raaWt1iA5HA9/view?usp=sharing).
+**Analysis of covariance includes both fixed effects (independent variables) and random effects (covariates included to model random variation). If the effect can be reproduced, it's fixed.** With fixed effects you are interested in the means, but with random effects you are interested in variances. Blocks could be either fixed or random; for example, if you are doing a test on trees and you want to block for forest, setting blocks as random would indicate that you want to block for just all forests everywhere in general and these forests are representative of all forests, whereas setting blocks as fixed would indicate that you want to block for these specific forests you’re evaluating. See [CPSC 440 Lecture Notes Chapter 08 ANOVA](https://github.com/br3ndonland/R-guide/tree/master/lfs/CPSC440-Lecture-Ch08-annotated.pdf).
 
 **The covariance structure must be appropriately specified.** Fit statistics and information criteria can be used to identify an appropriate covariance structure: `AIC(model)`. See 'Selection of regression models' in the Linear regression section, and 'Variance assessment for multivariate, factorial, and repeated measures designs' in the ANOVA section above.
 
