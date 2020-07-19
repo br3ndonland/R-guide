@@ -23,15 +23,16 @@ The statistical information assumes foundational statistical knowledge that I ga
 
 I would like to share this resource broadly, and have made an effort to respect copyright restrictions of the various sources from which I have drawn.
 
-## Instructions
+## Repository files
 
 - **Webpages (.html) can be viewed on the [GitHub Pages site](https://br3ndonland.github.io/R-guide) for this repository.**
 - **Markdown files (.md) can be viewed on GitHub.**
 - **R Markdown files (.Rmd) can be run in RStudio.**
+- PDFs in the _lfs/_ directory are managed with [Git LFS](https://git-lfs.github.com/). See the [GitHub docs](https://docs.github.com/en/github/managing-large-files/versioning-large-files) for information on how Git LFS integrates with GitHub.
 
 ## Building the site locally
 
-The website was generated with the [R Markdown static site builder](https://bookdown.org/yihui/rmarkdown/rmarkdown-site.html).
+The website was generated with the [R Markdown static site builder](https://bookdown.org/yihui/rmarkdown/rmarkdown-site.html). The static site builder uses [Bootstrap](https://getbootstrap.com/), and themes come from [Bootswatch](https://bootswatch.com/3/). For more info on themes and options, see the [R Markdown HTML document docs](https://bookdown.org/yihui/rmarkdown/html-document.html) or run `?rmarkdown::html_document`.
 
 - Clone the Git repo: `git clone https://github.com/br3ndonland/R-guide.git ~/dev`
 - Open the project in RStudio: File -> Open Project

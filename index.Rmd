@@ -179,6 +179,7 @@ summary(cars)
   - This website was generated with the simple [R Markdown static site builder](https://bookdown.org/yihui/rmarkdown/rmarkdown-site.html).
   - The `blogdown` package is used to build the site within RStudio.
   - The [\_site.yml](_site.yml) file specifies the website build parameters. The website builds into the *docs* directory for compatibility with [GitHub Pages](https://bookdown.org/yihui/rmarkdown/rmarkdown-site.html).
+  - The static site builder uses [Bootstrap](https://getbootstrap.com/), and themes come from [Bootswatch](https://bootswatch.com/3/). For more info on themes and options, see the [R Markdown HTML document docs](https://bookdown.org/yihui/rmarkdown/html-document.html) or run `?rmarkdown::html_document`.
 
 ### RStudio Projects
 
