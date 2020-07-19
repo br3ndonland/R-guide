@@ -14,6 +14,6 @@ output:
   html_document:
     fig_caption: true
     highlight: pygments
-    theme: spacelab
+    theme: cosmo
     toc: true
     toc_float: true
