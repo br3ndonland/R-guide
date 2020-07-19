@@ -484,6 +484,9 @@ names(adipose_weights)
 ##### Perform ANOVA in aov
 
 ```{r code-anova-adipose-weights-02-run}
+# Convert independent variable to a factor for use later by glht()
+adipose_weights$diet <- as.factor(adipose_weights$diet)
+# Perform ANOVA
 adiposeaov1 <- aov(adipose~diet, data=adipose_weights)
 summary(adiposeaov1)
 ```
@@ -491,7 +494,7 @@ summary(adiposeaov1)
 ##### Perform multiple comparisons
 
 - The RColorBrewer package is loaded for additional colors, and a palette is added to R. Use brackets after vector name for specific colors when creating plots (for example: `col=set1[4:14]`).
-- I chose the `Pastel1` palette. 'I'm a very vivacious man... Earth tones are so passe. I'm a pastel man.' Larry David
+- I chose the `Pastel1` palette. "I'm a very vivacious man... Earth tones are so passe. I'm a pastel man." Larry David, _Curb Your Enthusiasm_ S01E05 "Interior Decorator"
 
 ```{r code-anova-adipose-weights-02-run-multcomp}
 # Standard Tukey Honest Significant Differences
@@ -952,6 +955,9 @@ attach(cardiacMg)
 ##### Perform Kruskal-Wallis test
 
 ```{r code-kruskal-cardiacmg-02-run}
+# Convert independent variable to a factor for use later by PMCMRplus
+cardiacMg$diet = as.factor(cardiacMg$diet)
+# Perform Kruskal-Wallis test
 kruskal.test(mg~diet, data = cardiacMg)
 ```
 
