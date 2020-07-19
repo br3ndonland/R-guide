@@ -3,6 +3,3 @@
 .Rhistory
 .RData
 .Ruserdata
-*.pdf
-packrat/lib*/
-packrat/src/
