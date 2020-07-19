@@ -12,14 +12,19 @@ title: 'R sample code'
 ##### Sample data frame
 
 ```{r code-dataframe-sample-01}
-sample_data <- data.frame (id=1:3, weight=c(20,27,24), size=c('small', 'large', 'medium'))
+sample_data <-
+  data.frame (
+    id = 1:3,
+    weight = c(20, 27, 24),
+    size = c('small', 'large', 'medium')
+  )
 sample_data
 ```
 
 ##### Sort data frame by column number
 
 ```{r code-dataframe-sample-02}
-sample_data[c(1,3,2)]
+sample_data[c(1, 3, 2)]
 # To actually change 'data', run:
 # data <- data[c(1,3,2)]
 ```
@@ -35,7 +40,17 @@ sample_data[c('size', 'id', 'weight')]
 ##### Sample data frame
 
 ```{r code-dataframe-sample-04-so}
-dd <- data.frame(b = factor(c('Hi', 'Med', 'Hi', 'Low'), levels = c('Low', 'Med', 'Hi'), ordered = TRUE), x = c('A', 'D', 'A', 'C'), y = c(8, 3, 9, 9), z = c(1, 1, 1, 2))
+dd <-
+  data.frame(
+    b = factor(
+      c('Hi', 'Med', 'Hi', 'Low'),
+      levels = c('Low', 'Med', 'Hi'),
+      ordered = TRUE
+    ),
+    x = c('A', 'D', 'A', 'C'),
+    y = c(8, 3, 9, 9),
+    z = c(1, 1, 1, 2)
+  )
 dd
 ```
 
@@ -44,7 +59,7 @@ dd
 Sorting the frame by column z (descending) then by column b(ascending)
 
 ```{r code-dataframe-sample-05}
-dd[with(dd, order(-z, b)), ]
+dd[with(dd, order(-z, b)),]
 ```
 
 ##### Sort data frame by column index
@@ -52,7 +67,7 @@ dd[with(dd, order(-z, b)), ]
 > Edit some 2+ years later: It was just asked how to do this by column index. The answer is to simply pass the desired sorting column(s) to the order() function rather than using the name of the column (and with() for easier/more direct access).
 
 ```{r code-dataframe-sample-06}
-dd[ order(-dd[,4], dd[,1]), ]
+dd[order(-dd[, 4], dd[, 1]),]
 ```
 
 ## Statistical models
@@ -67,8 +82,8 @@ Atheroma thickness data from Smith BW J Food Res 2013 (doi: [10.5539/jfr.v2n1p16
 
 ```{r code-ttest-atheroma-01-import}
 jfr2013_atheroma <- read.table('data/t_test_jfr2013_atheroma.csv',
-                               header=TRUE, sep=','
-                               )
+                               header = TRUE,
+                               sep = ',')
 attach(jfr2013_atheroma)
 names(jfr2013_atheroma)
 ```
@@ -79,10 +94,13 @@ names(jfr2013_atheroma)
 - var.equal = TRUE is used to specify equal variances and a pooled variance estimate.
 
 ```{r code-ttest-atheroma-02-run}
-t.test(jfr2013_atheroma$thickness~jfr2013_atheroma$diet,
-       paired=FALSE, alternative='two.sided', var.equal=TRUE,
-       conf.level=0.95
-       )
+t.test(
+  jfr2013_atheroma$thickness ~ jfr2013_atheroma$diet,
+  paired = FALSE,
+  alternative = 'two.sided',
+  var.equal = TRUE,
+  conf.level = 0.95
+)
 ```
 
 ##### Test assumptions
@@ -100,10 +118,19 @@ shapiro.test(thickness)
 
 # Normal Quantile-Quantile Plot
 # Set graphical parameters
-par(cex = 1, cex.main = 3, cex.lab = 2, font.lab = 2,
-    cex.axis = 1.5, lwd = 5, lend = 0, ljoin = 0, tcl = -0.5,
-    pch = 1, mar = c(5,5,3,5)
-    )
+par(
+  cex = 1,
+  cex.main = 3,
+  cex.lab = 2,
+  font.lab = 2,
+  cex.axis = 1.5,
+  lwd = 5,
+  lend = 0,
+  ljoin = 0,
+  tcl = -0.5,
+  pch = 1,
+  mar = c(5, 5, 3, 5)
+)
 
 # Load RColorBrewer and set palette
 library(RColorBrewer)
@@ -113,26 +140,39 @@ set1 <- brewer.pal(8, 'Set1')
 categories <- factor(jfr2013_atheroma$diet)
 
 # Create plot
-qqnorm(jfr2013_atheroma$thickness,
-       ylab=expression(bold(paste('Thickness, ',mu, 'm'))),
-       axes = FALSE, col=set1[categories], lwd=4, cex=2
-       )
+qqnorm(
+  jfr2013_atheroma$thickness,
+  ylab = expression(bold(paste(
+    'Thickness, ', mu, 'm'
+  ))),
+  axes = FALSE,
+  col = set1[categories],
+  lwd = 4,
+  cex = 2
+)
 # Add normal line
-qqline(jfr2013_atheroma$thickness, lwd=5)
+qqline(jfr2013_atheroma$thickness, lwd = 5)
 # Add border to complete axes
-box(which = 'plot', bty = 'o', lwd=5)
+box(which = 'plot', bty = 'o', lwd = 5)
 axis(1, lwd = 5, tcl = -0.5) # x axis
 axis(2, lwd = 5, tcl = -0.5) # y axis
 # Add legend
-legend('topleft', legend=levels(categories),
-       box.lwd=3, pch=1.5, cex=1.75, pt.cex=2, pt.lwd=4, col=set1
-       )
+legend(
+  'topleft',
+  legend = levels(categories),
+  box.lwd = 3,
+  pch = 1.5,
+  cex = 1.75,
+  pt.cex = 2,
+  pt.lwd = 4,
+  col = set1
+)
 ```
 
 ###### Equality of variances
 
 ```{r code-ttest-atheroma-03-assumptions-02}
-var.test(jfr2013_atheroma$thickness~jfr2013_atheroma$diet)
+var.test(jfr2013_atheroma$thickness ~ jfr2013_atheroma$diet)
 ```
 
 ##### Boxplot
@@ -143,28 +183,58 @@ var.test(jfr2013_atheroma$thickness~jfr2013_atheroma$diet)
 
 ```{r code-ttest-atheroma-04-plots}
 # Set graphical parameters
-par(cex = 1, cex.main = 3, cex.lab = 2, font.lab = 2,
-    cex.axis = 1.5, lwd = 5, lend = 0, ljoin = 0, tcl = -0.5,
-    pch = 1, mar = c(5,5,3,5)
-    )
+par(
+  cex = 1,
+  cex.main = 3,
+  cex.lab = 2,
+  font.lab = 2,
+  cex.axis = 1.5,
+  lwd = 5,
+  lend = 0,
+  ljoin = 0,
+  tcl = -0.5,
+  pch = 1,
+  mar = c(5, 5, 3, 5)
+)
 
 # Create boxplot
-boxplot(jfr2013_atheroma$thickness~jfr2013_atheroma$diet,
-        main='Atheroma Thickness', xlab='Diet',
-        ylab=expression(bold(paste('Thickness, ',mu, 'm'))),
-        axes = FALSE, lwd=4, medlwd=7, outlwd=4, cex=2, col=set1
-        )
+boxplot(
+  jfr2013_atheroma$thickness ~ jfr2013_atheroma$diet,
+  main = 'Atheroma Thickness',
+  xlab = 'Diet',
+  ylab = expression(bold(paste(
+    'Thickness, ', mu, 'm'
+  ))),
+  axes = FALSE,
+  lwd = 4,
+  medlwd = 7,
+  outlwd = 4,
+  cex = 2,
+  col = set1
+)
 
 # Add border to complete axes
 box(which = 'plot', bty = 'l', lwd = 5)
 
 # Create vector with means of each group
-means <- aggregate(thickness~diet, jfr2013_atheroma, mean)
+means <- aggregate(thickness ~ diet, jfr2013_atheroma, mean)
 # Add points for group means to boxplot
-points(means$thickness, cex=2, pch=23, bg=0, lwd=4)
+points(
+  means$thickness,
+  cex = 2,
+  pch = 23,
+  bg = 0,
+  lwd = 4
+)
 
 # X axis
-axis(1, lwd = 5, tcl = -0.5, labels=levels(categories), at=c(1:2))
+axis(
+  1,
+  lwd = 5,
+  tcl = -0.5,
+  labels = levels(categories),
+  at = c(1:2)
+)
 
 # Y axis
 axis(2, lwd = 5, tcl = -0.5)
@@ -178,8 +248,8 @@ Aorta Hsp70 data from Smith BW J Ultrasound Med 2015 (doi: [10.7863/ultra.34.7.1
 
 ```{r code-ttest-hsp70-01-import}
 AortaHsp70 <- read.table('data/t_test_jum2015_hsp70.csv',
-                         header=TRUE, sep=','
-                         )
+                         header = TRUE,
+                         sep = ',')
 attach(AortaHsp70)
 names(AortaHsp70)
 ```
@@ -190,10 +260,13 @@ names(AortaHsp70)
 - var.equal = TRUE is used to specify equal variances and a pooled variance estimate.
 
 ```{r code-ttest-hsp70-02-run}
-t.test(AortaHsp70$Hsp70~AortaHsp70$exposure,
-       paired=FALSE, alternative='two.sided',
-       var.equal=TRUE, conf.level=0.95
-       )
+t.test(
+  AortaHsp70$Hsp70 ~ AortaHsp70$exposure,
+  paired = FALSE,
+  alternative = 'two.sided',
+  var.equal = TRUE,
+  conf.level = 0.95
+)
 ```
 
 ##### Test assumptions
@@ -211,10 +284,19 @@ shapiro.test(AortaHsp70$Hsp70)
 
 # Normal Quantile-Quantile Plot
 # Set graphical parameters
-par(cex = 1, cex.main = 3, cex.lab = 2, font.lab = 2,
-    cex.axis = 1.5, lwd = 5, lend = 0, ljoin = 0, tcl = -0.5,
-    pch = 1, mar = c(5,5,3,5)
-    )
+par(
+  cex = 1,
+  cex.main = 3,
+  cex.lab = 2,
+  font.lab = 2,
+  cex.axis = 1.5,
+  lwd = 5,
+  lend = 0,
+  ljoin = 0,
+  tcl = -0.5,
+  pch = 1,
+  mar = c(5, 5, 3, 5)
+)
 
 # Load RColorBrewer and set palette
 library(RColorBrewer)
@@ -224,26 +306,39 @@ set1 <- brewer.pal(8, 'Set1')
 categories <- factor(AortaHsp70$exposure)
 
 # Create plot
-qqnorm(Hsp70,
-       ylab=expression(bold(paste('Hsp70/',beta, '-actin'))),
-       axes = FALSE, col=set1[categories], lwd=4, cex=2
-       )
+qqnorm(
+  Hsp70,
+  ylab = expression(bold(paste(
+    'Hsp70/', beta, '-actin'
+  ))),
+  axes = FALSE,
+  col = set1[categories],
+  lwd = 4,
+  cex = 2
+)
 # Add normal line
-qqline(AortaHsp70$Hsp70, lwd=5)
+qqline(AortaHsp70$Hsp70, lwd = 5)
 # Add border to complete axes
-box(which = 'plot', bty = 'o', lwd=5)
+box(which = 'plot', bty = 'o', lwd = 5)
 axis(1, lwd = 5, tcl = -0.5) # x axis
 axis(2, lwd = 5, tcl = -0.5) # y axis
 # Add legend
-legend('topleft', legend=levels(categories),
-       box.lwd=3, pch=1.5, cex=1.75, pt.cex=2, pt.lwd=4, col=set1
-       )
+legend(
+  'topleft',
+  legend = levels(categories),
+  box.lwd = 3,
+  pch = 1.5,
+  cex = 1.75,
+  pt.cex = 2,
+  pt.lwd = 4,
+  col = set1
+)
 ```
 
 ###### Equality of variances
 
 ```{r code-ttest-hsp70-03-assumptions-02}
-var.test(AortaHsp70$Hsp70~AortaHsp70$exposure)
+var.test(AortaHsp70$Hsp70 ~ AortaHsp70$exposure)
 ```
 
 ##### Boxplot
@@ -254,27 +349,58 @@ var.test(AortaHsp70$Hsp70~AortaHsp70$exposure)
 
 ```{r code-ttest-hsp70-04-plots}
 # Set graphical parameters
-par(cex = 1, cex.main = 3, cex.lab = 2, font.lab = 2,
-    cex.axis = 1.5, lwd = 5, lend = 0, ljoin = 0, tcl = -0.5,
-    pch = 1, mar = c(5,5,3,5)
-    )
+par(
+  cex = 1,
+  cex.main = 3,
+  cex.lab = 2,
+  font.lab = 2,
+  cex.axis = 1.5,
+  lwd = 5,
+  lend = 0,
+  ljoin = 0,
+  tcl = -0.5,
+  pch = 1,
+  mar = c(5, 5, 3, 5)
+)
 
 # Create boxplot
-boxplot(AortaHsp70$Hsp70~AortaHsp70$exposure, main='Aorta Hsp70', xlab='Exposure',
-        ylab=expression(bold(paste('Hsp70/',beta, '-actin'))),
-        axes = FALSE, lwd=4, medlwd=7, outlwd=4, cex=2, col=set1
-        )
+boxplot(
+  AortaHsp70$Hsp70 ~ AortaHsp70$exposure,
+  main = 'Aorta Hsp70',
+  xlab = 'Exposure',
+  ylab = expression(bold(paste(
+    'Hsp70/', beta, '-actin'
+  ))),
+  axes = FALSE,
+  lwd = 4,
+  medlwd = 7,
+  outlwd = 4,
+  cex = 2,
+  col = set1
+)
 
 # Add border to complete axes
 box(which = 'plot', bty = 'l', lwd = 5)
 
 # Create vector with means of each group
-means <- aggregate(Hsp70~exposure, AortaHsp70, mean)
+means <- aggregate(Hsp70 ~ exposure, AortaHsp70, mean)
 # Add points for group means to boxplot
-points(means$Hsp70, cex=2, pch=23, bg=0, lwd=4)
+points(
+  means$Hsp70,
+  cex = 2,
+  pch = 23,
+  bg = 0,
+  lwd = 4
+)
 
 # X axis
-axis(1, lwd = 5, tcl = -0.5, labels=levels(categories), at=c(1:2))
+axis(
+  1,
+  lwd = 5,
+  tcl = -0.5,
+  labels = levels(categories),
+  at = c(1:2)
+)
 
 # Y axis
 axis(2, lwd = 5, tcl = -0.5)
@@ -293,7 +419,7 @@ axis(2, lwd = 5, tcl = -0.5)
 ##### Import dataset
 
 ```{r code-lm-simple-aztcpm-01-import}
-aztcpm <- read.table('data/lm_aztcpm.csv', header=TRUE, sep=',')
+aztcpm <- read.table('data/lm_aztcpm.csv', header = TRUE, sep = ',')
 attach(aztcpm)
 names(aztcpm)
 ```
@@ -311,7 +437,7 @@ library(gvlma)
 gvlmalm1 <- gvlma(lm1)
 summary(gvlmalm1)
 shapiro.test(rstandard(lm1))
-cor.test(fitted(lm1), abs(rstandard(lm1)), method='spearman')
+cor.test(fitted(lm1), abs(rstandard(lm1)), method = 'spearman')
 library(car)
 durbinWatsonTest(lm1)
 outlierTest(lm1)
@@ -321,14 +447,14 @@ outlierTest(lm1)
 
 ```{r code-lm-simple-aztcpm-04-plots}
 plot(gvlmalm1, onepage = FALSE)
-plot(lm1, which=3:5)
-acf(rstandard(lm1), main='Autocorrelation plot')
+plot(lm1, which = 3:5)
+acf(rstandard(lm1), main = 'Autocorrelation plot')
 ```
 
 ##### Log transform
 
 ```{r code-lm-simple-aztcpm-05-transform}
-lmlog <- update(lm1, log(CPM)~DOSE)
+lmlog <- update(lm1, log(CPM) ~ DOSE)
 ```
 
 ##### Perform regression diagnostics and test assumptions
@@ -340,7 +466,7 @@ library(gvlma)
 gvlmalog <- gvlma(lmlog)
 summary(gvlmalog)
 shapiro.test(rstandard(lmlog))
-cor.test(fitted(lmlog), abs(rstandard(lmlog)), method='spearman')
+cor.test(fitted(lmlog), abs(rstandard(lmlog)), method = 'spearman')
 library(car)
 durbinWatsonTest(lmlog)
 outlierTest(lmlog)
@@ -350,8 +476,8 @@ outlierTest(lmlog)
 
 ```{r code-lm-simple-aztcpm-07-transform-plots}
 plot(gvlmalog, onepage = FALSE)
-plot(lmlog, which=3:5)
-acf(rstandard(lmlog), main='Autocorrelation plot')
+plot(lmlog, which = 3:5)
+acf(rstandard(lmlog), main = 'Autocorrelation plot')
 ```
 
 #### Simple linear regression jfs data
@@ -362,8 +488,8 @@ Feed intake vs total cholesterol data from Smith BW J Food Sci 2015 (doi: [10.11
 
 ```{r code-lm-simple-jfs-feedtc-01-import}
 feedtc <- read.table('data/lm_jfs2015_feed_vs_tc.csv',
-                     header=TRUE, sep=','
-                     )
+                     header = TRUE,
+                     sep = ',')
 attach(feedtc)
 names(feedtc)
 ```
@@ -371,7 +497,7 @@ names(feedtc)
 ##### Perform linear regression
 
 ```{r code-lm-simple-jfs-feedtc-02-run}
-feedtclm1 <- lm(feedtc$tc~feedtc$feed)
+feedtclm1 <- lm(feedtc$tc ~ feedtc$feed)
 ```
 
 ##### Perform regression diagnostics and test assumptions
@@ -391,7 +517,7 @@ library(gvlma)
 feedtcgvlmalm1 <- gvlma(feedtclm1)
 summary(feedtcgvlmalm1)
 shapiro.test(rstandard(feedtclm1))
-cor.test(fitted(feedtclm1), abs(rstandard(feedtclm1)), method='spearman')
+cor.test(fitted(feedtclm1), abs(rstandard(feedtclm1)), method = 'spearman')
 library(car)
 durbinWatsonTest(feedtclm1)
 outlierTest(feedtclm1)
@@ -401,12 +527,12 @@ outlierTest(feedtclm1)
 
 ```{r code-lm-simple-jfs-feedtc-04-plots}
 plot(feedtcgvlmalm1, onepage = FALSE)
-plot(feedtclm1, which=3)
-cookscritical <- 4/(nrow(feedtc)-length(feedtclm1$coefficients)-2)
-plot(feedtclm1, which=4, cook.levels=cookscritical)
-abline(h=cookscritical, lty=2, col='red')
-plot(feedtclm1, which=5)
-acf(rstandard(feedtclm1), main='Autocorrelation plot')
+plot(feedtclm1, which = 3)
+cookscritical <- 4 / (nrow(feedtc) - length(feedtclm1$coefficients) - 2)
+plot(feedtclm1, which = 4, cook.levels = cookscritical)
+abline(h = cookscritical, lty = 2, col = 'red')
+plot(feedtclm1, which = 5)
+acf(rstandard(feedtclm1), main = 'Autocorrelation plot')
 ```
 
 ##### Calculate Spearman correlation
@@ -414,7 +540,7 @@ acf(rstandard(feedtclm1), main='Autocorrelation plot')
 The Spearman rank order correlation between the independent and dependent variable is another type of correlation that is more widely valid, especially in situations where F test assumptions are violated.
 
 ```{r code-lm-simple-jfs-feedtc-05-spearman}
-cor.test(feedtc$tc, feedtc$feed, method='spearman')
+cor.test(feedtc$tc, feedtc$feed, method = 'spearman')
 ```
 
 #### Multiple linear regression and ANOVA example
@@ -426,7 +552,7 @@ This dataset from Doug Simpson at University of Illinois contains information on
 ##### Import dataset
 
 ```{r code-lm-simple-beer-01-import}
-beer <- read.table('data/anova_mlr_beer.csv', header=TRUE, sep=',')
+beer <- read.table('data/anova_mlr_beer.csv', header = TRUE, sep = ',')
 attach(beer)
 ```
 
@@ -444,7 +570,7 @@ library(gvlma)
 beergvlmalm1 <- gvlma(beerlm1)
 summary(beergvlmalm1)
 shapiro.test(rstandard(beerlm1))
-cor.test(fitted(beerlm1), abs(rstandard(beerlm1)), method='spearman')
+cor.test(fitted(beerlm1), abs(rstandard(beerlm1)), method = 'spearman')
 library(car)
 durbinWatsonTest(beerlm1)
 leveneTest(beer$Calories, beer$Brewery)
@@ -454,7 +580,7 @@ leveneTest(beer$Calories, beer$Brewery)
 
 ```{r code-lm-simple-beer-04-plots}
 plot(beergvlmalm1, onepage = FALSE)
-plot(beerlm1, which=3:5)
+plot(beerlm1, which = 3:5)
 ```
 
 ##### Perform ANOVA in aov for comparison
@@ -474,9 +600,10 @@ Gonadal adipose weights from Smith BW J Food Sci 2015 (doi: [10.1111/1750-3841.1
 ##### Import dataset
 
 ```{r code-anova-adipose-weights-01-import}
-adipose_weights <- read.table('data/anova_one_way_jfs2015_adipose.csv',
-                              header=TRUE, sep=','
-                              )
+adipose_weights <-
+  read.table('data/anova_one_way_jfs2015_adipose.csv',
+             header = TRUE,
+             sep = ',')
 attach(adipose_weights)
 names(adipose_weights)
 ```
@@ -487,7 +614,7 @@ names(adipose_weights)
 # Convert independent variable to a factor for use later by glht()
 adipose_weights$diet <- as.factor(adipose_weights$diet)
 # Perform ANOVA
-adiposeaov1 <- aov(adipose~diet, data=adipose_weights)
+adiposeaov1 <- aov(adipose ~ diet, data = adipose_weights)
 summary(adiposeaov1)
 ```
 
@@ -499,17 +626,17 @@ summary(adiposeaov1)
 ```{r code-anova-adipose-weights-02-run-multcomp}
 # Standard Tukey Honest Significant Differences
 TukeyHSD(adiposeaov1)
-par(las=2, mar=c(5,8,4,2))
+par(las = 2, mar = c(5, 8, 4, 2))
 plot(TukeyHSD(adiposeaov1))
 
 # More comprehensive method in multcomp package
-par(las=1, mar=c(5,4,6,2))
+par(las = 1, mar = c(5, 4, 6, 2))
 library(multcomp)
 library(RColorBrewer)
-tuk <- glht(adiposeaov1, linfct=mcp(diet='Tukey'))
-means <- aggregate(adipose~diet, adipose_weights, mean)
-plot(cld(tuk, level=.05), col=brewer.pal(8,'Pastel1'))
-points(means,pch=23)
+tuk <- glht(adiposeaov1, linfct = mcp(diet = 'Tukey'))
+means <- aggregate(adipose ~ diet, adipose_weights, mean)
+plot(cld(tuk, level = .05), col = brewer.pal(8, 'Pastel1'))
+points(means, pch = 23)
 ```
 
 ##### Test assumptions
@@ -535,7 +662,7 @@ leveneTest(adipose_weights$adipose, adipose_weights$diet)
 ##### Perform ANOVA in lm for comparison
 
 ```{r code-anova-adipose-weights-04-lm-comparison-01-import}
-adiposelm1 <- lm(adipose_weights$adipose~adipose_weights$diet)
+adiposelm1 <- lm(adipose_weights$adipose ~ adipose_weights$diet)
 anova(adiposelm1)
 ```
 
@@ -546,7 +673,7 @@ library(gvlma)
 adiposegvlmalm1 <- gvlma(adiposelm1)
 summary(adiposegvlmalm1)
 shapiro.test(rstandard(adiposelm1))
-cor.test(fitted(adiposelm1), abs(rstandard(adiposelm1)), method='spearman')
+cor.test(fitted(adiposelm1), abs(rstandard(adiposelm1)), method = 'spearman')
 library(car)
 durbinWatsonTest(adiposelm1)
 outlierTest(adiposelm1)
@@ -564,14 +691,14 @@ R in Action 9.5, ToothGrowth dataset
 ```{r code-anova-2way-tooth-01-load}
 attach(ToothGrowth)
 table(supp, dose)
-aggregate(len, by=list(supp, dose), FUN=mean)
-aggregate(len, by=list(supp, dose), FUN=sd)
+aggregate(len, by = list(supp, dose), FUN = mean)
+aggregate(len, by = list(supp, dose), FUN = sd)
 ```
 
 ##### Perform factorial analysis of variance
 
 ```{r code-anova-2way-tooth-02-run}
-fit <- lm(len~supp*dose)
+fit <- lm(len ~ supp * dose)
 anova(fit)
 ```
 
@@ -582,7 +709,7 @@ library(gvlma)
 gvlmafit <- gvlma(fit)
 summary(gvlmafit)
 shapiro.test(rstandard(fit))
-cor.test(fitted(fit), abs(rstandard(fit)), method='spearman')
+cor.test(fitted(fit), abs(rstandard(fit)), method = 'spearman')
 library(car)
 durbinWatsonTest(fit)
 outlierTest(fit)
@@ -591,11 +718,17 @@ outlierTest(fit)
 ##### Generate plots
 
 ```{r code-anova-2way-tooth-04-plots}
-plot(gvlmafit, onepage=FALSE)
-plot(fit, which=3:5)
-interaction.plot(dose, supp, len, type='b', col=c('red','blue'), pch=c(16, 18),
-                 main = 'Interaction between Dose and Supplement Type'
-                 )
+plot(gvlmafit, onepage = FALSE)
+plot(fit, which = 3:5)
+interaction.plot(
+  dose,
+  supp,
+  len,
+  type = 'b',
+  col = c('red', 'blue'),
+  pch = c(16, 18),
+  main = 'Interaction between Dose and Supplement Type'
+)
 ```
 
 #### Two-way factorial ANOVA example
@@ -605,9 +738,12 @@ Atheroma thickness data from Smith BW et al, J Ultrasound Med 2012 (doi: [10.786
 ##### Import dataset
 
 ```{r code-anova-2way-fall2009thickness-01-load}
-fall2009thickness <- read.table('data/anova_factorial_jum2012_atheroma_thickness.csv',
-                                header=TRUE, sep=','
-                                )
+fall2009thickness <-
+  read.table(
+    'data/anova_factorial_jum2012_atheroma_thickness.csv',
+    header = TRUE,
+    sep = ','
+  )
 attach(fall2009thickness)
 head(fall2009thickness)
 ```
@@ -615,7 +751,7 @@ head(fall2009thickness)
 ##### Perform factorial analysis of variance
 
 ```{r code-anova-2way-fall2009thickness-02-run}
-thick_fit <- lm(thickness~uca*mpa, data=fall2009thickness)
+thick_fit <- lm(thickness ~ uca * mpa, data = fall2009thickness)
 anova(thick_fit)
 ```
 
@@ -626,7 +762,7 @@ library(gvlma)
 gvlmathick_fit <- gvlma(thick_fit)
 summary(gvlmathick_fit)
 shapiro.test(rstandard(thick_fit))
-cor.test(fitted(thick_fit), abs(rstandard(thick_fit)), method='spearman')
+cor.test(fitted(thick_fit), abs(rstandard(thick_fit)), method = 'spearman')
 library(car)
 durbinWatsonTest(thick_fit)
 outlierTest(thick_fit)
@@ -635,18 +771,24 @@ outlierTest(thick_fit)
 ##### Generate plots
 
 ```{r code-anova-2way-fall2009thickness-04-plots}
-plot(gvlmathick_fit, onepage=FALSE)
-plot(thick_fit, which=3:5)
-interaction.plot(uca, mpa, thickness, data=fall2009thickness,
-                 type='b', col=c('red','blue'), pch=c(16, 18),
-                 main = 'Interaction between contrast agent and pressure level'
-                 )
+plot(gvlmathick_fit, onepage = FALSE)
+plot(thick_fit, which = 3:5)
+interaction.plot(
+  uca,
+  mpa,
+  thickness,
+  data = fall2009thickness,
+  type = 'b',
+  col = c('red', 'blue'),
+  pch = c(16, 18),
+  main = 'Interaction between contrast agent and pressure level'
+)
 ```
 
 ##### Log transform to correct non-normality, heteroscedasticity, and outlier
 
 ```{r code-anova-2way-fall2009thickness-05-transform}
-log_thick_fit <- lm(log(thickness)~uca*mpa, data=fall2009thickness)
+log_thick_fit <- lm(log(thickness) ~ uca * mpa, data = fall2009thickness)
 anova(log_thick_fit)
 ```
 
@@ -659,7 +801,7 @@ summary(gvlma_log_thick_fit)
 shapiro.test(rstandard(log_thick_fit))
 cor.test(fitted(log_thick_fit),
          abs(rstandard(log_thick_fit)),
-         method='spearman')
+         method = 'spearman')
 library(car)
 durbinWatsonTest(log_thick_fit)
 outlierTest(log_thick_fit)
@@ -668,12 +810,18 @@ outlierTest(log_thick_fit)
 ##### Generate plots
 
 ```{r code-anova-2way-fall2009thickness-07-transform-plots}
-plot(gvlma_log_thick_fit, onepage=FALSE)
-plot(log_thick_fit, which=3:5)
-interaction.plot(uca, mpa, thickness, data=fall2009thickness,
-                 type='b', col=c('red','blue'), pch=c(16, 18),
-                 main = 'Interaction between contrast agent and pressure level'
-                 )
+plot(gvlma_log_thick_fit, onepage = FALSE)
+plot(log_thick_fit, which = 3:5)
+interaction.plot(
+  uca,
+  mpa,
+  thickness,
+  data = fall2009thickness,
+  type = 'b',
+  col = c('red', 'blue'),
+  pch = c(16, 18),
+  main = 'Interaction between contrast agent and pressure level'
+)
 ```
 
 #### ANOVA Compact Letter Display
@@ -691,7 +839,7 @@ tuk <- glht(amod, linfct = mcp(tension = 'Tukey'))
 # extract information
 tuk.cld <- cld(tuk)
 # use sufficiently large upper margin
-old.par <- par( mai=c(1,1,1.5,1))
+old.par <- par(mai = c(1, 1, 1.5, 1))
 # plot
 plot(tuk.cld)
 par(old.par)
@@ -713,22 +861,33 @@ R in Action 2nd ed, 9.6, CO2 dataset
 
 ```{r code-anova-rm-co2-01-load}
 CO2$conc <- factor(CO2$conc)
-w1b1 <- subset(CO2, Treatment=='chilled')
-co2_fit <- aov(uptake ~ conc*Type + Error(Plant/(conc)), w1b1)
+w1b1 <- subset(CO2, Treatment == 'chilled')
+co2_fit <- aov(uptake ~ conc * Type + Error(Plant / (conc)), w1b1)
 summary(co2_fit)
 ```
 
 ```{r code-anova-rm-co2-02-plot}
-par(las=2)
-par(mar=c(10,4,4,2))
-with(w1b1, interaction.plot(conc,Type,uptake,
-       type='b', col=c('red','blue'), pch=c(16,18),
-       main='Interaction Plot for Plant Type and Concentration')
-     )
-boxplot(uptake ~ Type*conc, data=w1b1, col=(c('gold', 'green')),
-         main='Chilled Quebec and Mississippi Plants',
-          ylab='Carbon dioxide uptake rate (umol/m^2 sec)'
-        )
+par(las = 2)
+par(mar = c(10, 4, 4, 2))
+with(
+  w1b1,
+  interaction.plot(
+    conc,
+    Type,
+    uptake,
+    type = 'b',
+    col = c('red', 'blue'),
+    pch = c(16, 18),
+    main = 'Interaction Plot for Plant Type and Concentration'
+  )
+)
+boxplot(
+  uptake ~ Type * conc,
+  data = w1b1,
+  col = (c('gold', 'green')),
+  main = 'Chilled Quebec and Mississippi Plants',
+  ylab = 'Carbon dioxide uptake rate (umol/m^2 sec)'
+)
 ```
 
 
@@ -757,13 +916,13 @@ R in Action 9.4, litter dataset from multcomp package
 library(multcomp)
 attach(litter)
 table(dose)
-aggregate(weight, by=list(dose), FUN=mean)
+aggregate(weight, by = list(dose), FUN = mean)
 ```
 
 ##### Perform analysis of covariance
 
 ```{r code-ancova-litter-02-run}
-litter_fit <- aov(weight~gesttime+dose)
+litter_fit <- aov(weight ~ gesttime + dose)
 summary(litter_fit)
 ```
 
@@ -782,8 +941,8 @@ effect('dose', litter_fit)
 
 ```{r code-ancova-litter-02-run-multcomp}
 library(multcomp)
-litter_contrast <- rbind('no drug vs. drug' = c(3, -1, -1, -1))
-summary(glht(litter_fit, linfct=mcp(dose=litter_contrast)))
+litter_contrast <- rbind('no drug vs. drug' = c(3,-1,-1,-1))
+summary(glht(litter_fit, linfct = mcp(dose = litter_contrast)))
 ```
 
 > The contrast c(3, -1, -1, -1) specifies a comparison of the first group with the average of the other three. The hypothesis is tested with a t statistic (2.581 in this case), which is significant at the p < .05 level. Therefore, you can conclude that the no-drug group has a higher birth weight than drug conditions. Other contrasts can be added to the rbind() function (see help(glht) for details).
@@ -793,7 +952,7 @@ summary(glht(litter_fit, linfct=mcp(dose=litter_contrast)))
 ```{r code-ancova-litter-03-assumptions}
 # global validation of linear model assumptions
 library(gvlma)
-gvlmalitter <- gvlma(lm(weight~gesttime+dose, data=litter))
+gvlmalitter <- gvlma(lm(weight ~ gesttime + dose, data = litter))
 summary(gvlmalitter)
 ```
 
@@ -814,7 +973,7 @@ Note that the Brown-Forsythe test returns a significant result, indicating heter
 
 ```{r code-ancova-litter-03-assumptions-hov}
 library(car)
-leveneTest(weight, dose, data=litter)
+leveneTest(weight, dose, data = litter)
 ```
 
 ### MANOVA
@@ -829,7 +988,7 @@ Ultrasound data
 
 
 ```{r code-manova-hr-01-read}
-hr <- read.table('data/manova_hr.csv', header=TRUE, sep = ',')
+hr <- read.table('data/manova_hr.csv', header = TRUE, sep = ',')
 attach(hr)
 names(hr)
 ```
@@ -837,7 +996,7 @@ names(hr)
 ##### Perform multivariate ANOVA
 
 ```{r code-manova-hr-02-run}
-skull.manova1=manova(cbind(US,USC,V,VC) ~ as.factor(Time), data=hr)
+skull.manova1 = manova(cbind(US, USC, V, VC) ~ as.factor(Time), data = hr)
 summary(skull.manova1)
 summary(skull.manova1, test = 'Wilks')
 summary(skull.manova1, test = 'Hotelling-Lawley')
@@ -857,7 +1016,7 @@ Arthritis data from vcd package
 library(vcd)
 summary(Arthritis)
 attach(Arthritis)
-arthritis_table <- xtabs(~Treatment+Improved, data=Arthritis)
+arthritis_table <- xtabs( ~ Treatment + Improved, data = Arthritis)
 arthritis_table
 ```
 
@@ -889,7 +1048,7 @@ PCaTomatoSoy
 ##### Create contingency table from data frame
 
 ```{r code-fishers-pcatomatosoy-01-load-table}
-cancertable <- xtabs(count~diet+cancer, data=PCaTomatoSoy)
+cancertable <- xtabs(count ~ diet + cancer, data = PCaTomatoSoy)
 cancertable
 ```
 
@@ -918,10 +1077,14 @@ with(UScrime, by(Prob, So, median))
 ##### Perform Wilcoxon test
 
 ```{r code-wilcoxon-uscrime-02-run}
-wilcox.test(Prob~So, data=UScrime, paired=FALSE,
-            alternative='two.sided',
-            var.equal=TRUE, conf.level=0.95
-            )
+wilcox.test(
+  Prob ~ So,
+  data = UScrime,
+  paired = FALSE,
+  alternative = 'two.sided',
+  var.equal = TRUE,
+  conf.level = 0.95
+)
 ```
 
 ##### Test assumptions
@@ -931,7 +1094,7 @@ wilcox.test(Prob~So, data=UScrime, paired=FALSE,
 Note that, although the Wilcoxon rank sum test does not require normality, it does require homogeneity of variances and independence of random samples.
 
 ```{r code-wilcoxon-uscrime-03-assumptions-hov}
-var.test(Prob~So, data=UScrime)
+var.test(Prob ~ So, data = UScrime)
 ```
 
 ### Kruskal-Wallis
@@ -947,8 +1110,8 @@ Cardiac magnesium levels from Smith BW J Food Res 2013 (doi: [10.5539/jfr.v2n1p1
 
 ```{r code-kruskal-cardiacmg-01-load}
 cardiacMg <- read.table('data/kruskal_wallis_jfr2013_mg_cardiac.csv',
-                        header=TRUE, sep=','
-                        )
+                        header = TRUE,
+                        sep = ',')
 attach(cardiacMg)
 ```
 
@@ -958,7 +1121,7 @@ attach(cardiacMg)
 # Convert independent variable to a factor for use later by PMCMRplus
 cardiacMg$diet = as.factor(cardiacMg$diet)
 # Perform Kruskal-Wallis test
-kruskal.test(mg~diet, data = cardiacMg)
+kruskal.test(mg ~ diet, data = cardiacMg)
 ```
 
 ###### Multiple comparisons
@@ -969,15 +1132,18 @@ kruskal.test(mg~diet, data = cardiacMg)
 
 ```{r code-kruskal-cardiacmg-02-run-multcomp}
 # Pairwise Wilcoxon
-pairwise.wilcox.test(cardiacMg$mg, cardiacMg$diet, p.adjust.method='holm')
+pairwise.wilcox.test(cardiacMg$mg, cardiacMg$diet, p.adjust.method = 'holm')
 
 # Nemenyi
 library(PMCMRplus)
-kwAllPairsNemenyiTest(cardiacMg$mg, cardiacMg$diet, method='Tukey')
+kwAllPairsNemenyiTest(cardiacMg$mg, cardiacMg$diet, method = 'Tukey')
 
 # Dunnett
 library(nparcomp)
-nparcomp(mg~diet, data = cardiacMg, type='Dunnett', control='chow')
+nparcomp(mg ~ diet,
+         data = cardiacMg,
+         type = 'Dunnett',
+         control = 'chow')
 ```
 
 ##### Test assumptions
@@ -994,9 +1160,19 @@ shapiro.test(cardiacMg$mg)
 
 # Normal Quantile-Quantile Plot
 # Set graphical parameters
-par(cex = 1, cex.main = 3, cex.lab = 2, font.lab = 2, cex.axis = 1.5,
-    lwd = 5, lend = 0, ljoin = 0, tcl = -0.5, pch = 1, mar = c(5,5,3,5)
-    )
+par(
+  cex = 1,
+  cex.main = 3,
+  cex.lab = 2,
+  font.lab = 2,
+  cex.axis = 1.5,
+  lwd = 5,
+  lend = 0,
+  ljoin = 0,
+  tcl = -0.5,
+  pch = 1,
+  mar = c(5, 5, 3, 5)
+)
 
 # Load RColorBrewer and set palette
 library(RColorBrewer)
@@ -1006,17 +1182,31 @@ set1 <- brewer.pal(8, 'Set1')
 categories <- factor(cardiacMg$diet)
 
 # Create plot
-qqnorm(mg, ylab='Mg, mg/g', axes = FALSE, col=set1[categories], lwd=4, cex=2)
+qqnorm(
+  mg,
+  ylab = 'Mg, mg/g',
+  axes = FALSE,
+  col = set1[categories],
+  lwd = 4,
+  cex = 2
+)
 # Add normal line
-qqline(cardiacMg$mg, lwd=5)
+qqline(cardiacMg$mg, lwd = 5)
 # Add border to complete axes
-box(which = 'plot', bty = 'o', lwd=5)
+box(which = 'plot', bty = 'o', lwd = 5)
 axis(1, lwd = 5, tcl = -0.5)  # x axis
 axis(2, lwd = 5, tcl = -0.5)  # y axis
 # Add legend
-legend('topleft', legend=levels(categories),
-       box.lwd=3, pch=1.5, cex=1.75, pt.cex=2, pt.lwd=4, col=set1
-       )
+legend(
+  'topleft',
+  legend = levels(categories),
+  box.lwd = 3,
+  pch = 1.5,
+  cex = 1.75,
+  pt.cex = 2,
+  pt.lwd = 4,
+  col = set1
+)
 ```
 
 ###### Equality of variances
@@ -1029,7 +1219,7 @@ library(lawstat)
 levene.test(cardiacMg$mg, cardiacMg$diet)
 
 # Fligner test
-fligner.test(cardiacMg$mg~cardiacMg$diet)
+fligner.test(cardiacMg$mg ~ cardiacMg$diet)
 ```
 
 ##### Generate boxplot
@@ -1040,28 +1230,56 @@ fligner.test(cardiacMg$mg~cardiacMg$diet)
 
 ```{r code-kruskal-cardiacmg-04-plot}
 # Set graphical parameters
-par(cex = 1, cex.main = 3, cex.lab = 2, font.lab = 2, cex.axis = 1.5,
-    lwd = 5, lend = 0, ljoin = 0, tcl = -0.5, pch = 1,
-    mar = c(5,5,3,5)
-    )
+par(
+  cex = 1,
+  cex.main = 3,
+  cex.lab = 2,
+  font.lab = 2,
+  cex.axis = 1.5,
+  lwd = 5,
+  lend = 0,
+  ljoin = 0,
+  tcl = -0.5,
+  pch = 1,
+  mar = c(5, 5, 3, 5)
+)
 
 # Create boxplot
-boxplot(cardiacMg$mg~cardiacMg$diet, main='Cardiac mg', xlab='diet', ylab='Mg, mg/g',
-        axes = FALSE, lwd=4, medlwd=7, outlwd=4, cex=2, col=set1
-        )
+boxplot(
+  cardiacMg$mg ~ cardiacMg$diet,
+  main = 'Cardiac mg',
+  xlab = 'diet',
+  ylab = 'Mg, mg/g',
+  axes = FALSE,
+  lwd = 4,
+  medlwd = 7,
+  outlwd = 4,
+  cex = 2,
+  col = set1
+)
 
 # Add border to complete axes
 box(which = 'plot', bty = 'l', lwd = 5)
 
 # Create vector with means of each group
-means <- aggregate(mg~diet, data=cardiacMg, mean)
+means <- aggregate(mg ~ diet, data = cardiacMg, mean)
 # Add points for group means to boxplot
-points(means$mg, cex=2, pch=23, bg=0, lwd=4)
+points(
+  means$mg,
+  cex = 2,
+  pch = 23,
+  bg = 0,
+  lwd = 4
+)
 
 # X axis
-axis(1, lwd = 5, tcl = -0.5,
-     labels=levels(categories), at=c(1:3)
-     )
+axis(
+  1,
+  lwd = 5,
+  tcl = -0.5,
+  labels = levels(categories),
+  at = c(1:3)
+)
 
 # Y axis
 axis(2, lwd = 5, tcl = -0.5)
@@ -1091,10 +1309,10 @@ head(mtcars)
 ```{r code-plot-ggplot2-02-plot}
 # from ggplot2 documentation p.135
 # Use data from data.frame
-qplot(mpg, wt, data=mtcars)
-qplot(mpg, wt, data=mtcars, colour=cyl)
-qplot(mpg, wt, data=mtcars, size=cyl)
-qplot(mpg, wt, data=mtcars, facets=vs ~ am)
+qplot(mpg, wt, data = mtcars)
+qplot(mpg, wt, data = mtcars, colour = cyl)
+qplot(mpg, wt, data = mtcars, size = cyl)
+qplot(mpg, wt, data = mtcars, facets = vs ~ am)
 # It will use data from local environment
 hp <- mtcars$hp
 wt <- mtcars$wt
@@ -1102,18 +1320,19 @@ cyl <- mtcars$cyl
 vs <- mtcars$vs
 am <- mtcars$am
 qplot(hp, wt)
-qplot(hp, wt, colour=cyl)
-qplot(hp, wt, size=cyl)
-qplot(hp, wt, facets=vs ~ am)
+qplot(hp, wt, colour = cyl)
+qplot(hp, wt, size = cyl)
+qplot(hp, wt, facets = vs ~ am)
 qplot(1:10, rnorm(10), colour = runif(10))
 qplot(1:10, letters[1:10])
-mod <- lm(mpg ~ wt, data=mtcars)
+mod <- lm(mpg ~ wt, data = mtcars)
 qplot(resid(mod), fitted(mod))
 qplot(resid(mod), fitted(mod), facets = . ~ vs)
 f <- function() {
   a <- 1:10
   b <- a ^ 2
-  qplot(a, b) }
+  qplot(a, b)
+}
 f()
 # qplot will attempt to guess what geom you want depending on the input
 # both x and y supplied = scatterplot
@@ -1123,8 +1342,11 @@ qplot(mpg, data = mtcars)
 # just y supplied = scatterplot, with x = seq_along(y)
 qplot(y = mpg, data = mtcars)
 # Use different geoms
-qplot(mpg, wt, data = mtcars, geom='path')
-qplot(factor(cyl), wt, data = mtcars, geom=c('boxplot', 'jitter'))
+qplot(mpg, wt, data = mtcars, geom = 'path')
+qplot(factor(cyl),
+      wt,
+      data = mtcars,
+      geom = c('boxplot', 'jitter'))
 qplot(mpg, data = mtcars, geom = 'dotplot')
 
 ```
@@ -1143,15 +1365,20 @@ To rotate axis labels (using base graphics), you need to use text(), rather than
 # Increase bottom margin to make room for rotated labels
 par(mar = c(7, 4, 4, 2) + 0.1)
 # Create plot with no x axis and no x axis label
-plot(1 : 8, xaxt = 'n',  xlab = '')
+plot(1:8, xaxt = 'n',  xlab = '')
 # Set up x axis with tick marks alone
 axis(1, labels = FALSE)
 # Create some text labels
 labels <- paste('Label', 1:8, sep = ' ')
 # Plot x axis labels at default tick marks
-text(1:8, par('usr')[3] - 0.25, srt = 45, adj = 1,
-     labels = labels, xpd = TRUE
-     )
+text(
+  1:8,
+  par('usr')[3] - 0.25,
+  srt = 45,
+  adj = 1,
+  labels = labels,
+  xpd = TRUE
+)
 # Plot x axis label at line 6 (of 7)
 mtext(1, text = 'X Axis Label', line = 6)
 ```
@@ -1170,7 +1397,7 @@ Volcano plot example from [Getting Genetics Done](http://www.gettinggeneticsdone
 ##### Import dataset from GitHub
 
 ```{r code-plot-volcano-ggd-01-load}
-res <- read.table('data/volcano_ggd_data.txt', header=TRUE)
+res <- read.table('data/volcano_ggd_data.txt', header = TRUE)
 head(res)
 ```
 
@@ -1180,32 +1407,48 @@ The `-log10(pvalue)` is used so p values can be plotted as whole numbers. Note t
 
 ```{r code-plot-volcano-ggd-02-plot}
 with(res,
-     plot(log2FoldChange, -log10(pvalue), pch=20,
-          main='Volcano plot', xlim=c(-2.5,2)
-          )
-     )
+     plot(
+       log2FoldChange,
+       -log10(pvalue),
+       pch = 20,
+       main = 'Volcano plot',
+       xlim = c(-2.5, 2)
+     ))
 # Add colored points:
 # red if padj<0.05
 # orange if log2FC>1
 # green if both
-with(subset(res, padj<.05 ),
-     points(log2FoldChange, -log10(pvalue),
-            pch=20, col='red')
-     )
-with(subset(res, abs(log2FoldChange)>1),
-     points(log2FoldChange, -log10(pvalue),
-            pch=20, col='orange')
-     )
-with(subset(res, padj<.05 & abs(log2FoldChange)>1),
-     points(log2FoldChange, -log10(pvalue),
-            pch=20, col='green')
-     )
+with(subset(res, padj < .05),
+     points(
+       log2FoldChange,
+       -log10(pvalue),
+       pch = 20,
+       col = 'red'
+     ))
+with(subset(res, abs(log2FoldChange) > 1),
+     points(
+       log2FoldChange,
+       -log10(pvalue),
+       pch = 20,
+       col = 'orange'
+     ))
+with(subset(res, padj < .05 & abs(log2FoldChange) > 1),
+     points(
+       log2FoldChange,
+       -log10(pvalue),
+       pch = 20,
+       col = 'green'
+     ))
 
 # Label points with the textxy function from the calibrate package
 library(calibrate)
-with(subset(res, padj<.05 & abs(log2FoldChange)>1),
-     textxy(log2FoldChange, -log10(pvalue), labs=Gene, cex=.8)
-     )
+with(subset(res, padj < .05 & abs(log2FoldChange) > 1),
+     textxy(
+       log2FoldChange,
+       -log10(pvalue),
+       labs = Gene,
+       cex = .8
+     ))
 ```
 
 #### Nrf1 proteomics volcano plot
@@ -1215,7 +1458,12 @@ Experimental data example from [Nrf1 proteomics project](https://github.com/br3n
 ##### Import data
 
 ```{r code-plot-volcano-nrf1-01-import}
-proteomics_data <- read.table('https://raw.githubusercontent.com/br3ndonland/R-proteomics-Nrf1/master/data/R-proteomics-Nrf1.csv',header=TRUE, sep=',')
+proteomics_data <-
+  read.table(
+    'https://raw.githubusercontent.com/br3ndonland/R-proteomics-Nrf1/master/data/R-proteomics-Nrf1.csv',
+    header = TRUE,
+    sep = ','
+  )
 attach(proteomics_data)
 head(proteomics_data)
 ```
@@ -1235,64 +1483,69 @@ This plot compares chow-fed mice with mice fed the Paigen diet to promote accumu
 
 ```{r code-plot-volcano-nrf1-02-plot-hachol}
 # bold axis titles
-par(font.lab=2)
+par(font.lab = 2)
 
 # create plot
-with(proteomics_data,
-     plot(
-       log2_FC_HAchol_HAchow,
-       -log10(pvalue),
-       pch=20,
-       xlim=c(-2,2),
-       ylim=c(0,3),
-       yaxp=c(0,3,3),
-       main='Cholesterol-induced Nrf1 interacting proteins',
-       xlab='log2(FC HA chol/HA chow)',
-       ylab='-log10(pvalue HA chol vs HA chow)',
-       family='Raleway'
-       )
-     )
+with(
+  proteomics_data,
+  plot(
+    log2_FC_HAchol_HAchow,
+    -log10(pvalue),
+    pch = 20,
+    xlim = c(-2, 2),
+    ylim = c(0, 3),
+    yaxp = c(0, 3, 3),
+    main = 'Cholesterol-induced Nrf1 interacting proteins',
+    xlab = 'log2(FC HA chol/HA chow)',
+    ylab = '-log10(pvalue HA chol vs HA chow)'
+  )
+)
 
 # Add colored points:
 # red if pvalue<0.05, orange if [log2FC]>1, green if both)
-with(subset(proteomics_data, pvalue<.05),
-     points(
-       log2_FC_HAchol_HAchow,
-       -log10(pvalue),
-       pch=20,
-       col='red'
-       )
-     )
+with(
+  subset(proteomics_data, pvalue < .05),
+  points(
+    log2_FC_HAchol_HAchow,
+    -log10(pvalue),
+    pch = 20,
+    col = 'red'
+  )
+)
 
-with(subset(proteomics_data, abs(log2_FC_HAchol_HAchow)>1),
-     points(
-       log2_FC_HAchol_HAchow,
-       -log10(pvalue),
-       pch=20,
-       col='orange'
-       )
-     )
+with(
+  subset(proteomics_data, abs(log2_FC_HAchol_HAchow) > 1),
+  points(
+    log2_FC_HAchol_HAchow,
+    -log10(pvalue),
+    pch = 20,
+    col = 'orange'
+  )
+)
 
-with(subset(proteomics_data, pvalue<.05 & abs(log2_FC_HAchol_HAchow)>1),
-     points(
-       log2_FC_HAchol_HAchow,
-       -log10(pvalue),
-       pch=20,
-       col='green'
-       )
-     )
+with(
+  subset(proteomics_data, pvalue < .05 &
+           abs(log2_FC_HAchol_HAchow) > 1),
+  points(
+    log2_FC_HAchol_HAchow,
+    -log10(pvalue),
+    pch = 20,
+    col = 'green'
+  )
+)
 
 # Label points with the textxy function from the calibrate package
 library(calibrate)
-with(subset(proteomics_data, pvalue<.05 & abs(log2_FC_HAchol_HAchow)>1),
-     textxy(
-       log2_FC_HAchol_HAchow,
-       -log10(pvalue),
-       labs=Gene,
-       cex=1,
-       family='Raleway'
-       )
-     )
+with(
+  subset(proteomics_data, pvalue < .05 &
+           abs(log2_FC_HAchol_HAchow) > 1),
+  textxy(
+    log2_FC_HAchol_HAchow,
+    -log10(pvalue),
+    labs = Gene,
+    cex = 1
+  )
+)
 
 ```
 
@@ -1302,60 +1555,71 @@ Bortezomib treatment alters the proteome.
 
 ```{r code-plot-volcano-nrf1-02-plot-bort}
 # bold axis titles
-par(font.lab=2)
+par(font.lab = 2)
 
 # create plot
-with(proteomics_data,
-     plot(
-       log2_FC_HAbort_HAchow,
-       -log10(pvaluebort),
-       pch=20,
-       xlim=c(-3,3),
-       ylim=c(0,4),
-       main='Nrf1 AP-MS volcano plot Bortezomib vs chow',
-       xlab='log2(FC HA bort/HA chow)',
-       ylab='-log10(pvalue HA bort vs HA chow)'
-       )
-     )
+with(
+  proteomics_data,
+  plot(
+    log2_FC_HAbort_HAchow,
+    -log10(pvaluebort),
+    pch = 20,
+    xlim = c(-3, 3),
+    ylim = c(0, 4),
+    main = 'Nrf1 AP-MS volcano plot Bortezomib vs chow',
+    xlab = 'log2(FC HA bort/HA chow)',
+    ylab = '-log10(pvalue HA bort vs HA chow)'
+  )
+)
 # Add colored points:
 # red if pvalue<0.05, orange if log2FC>1, green if both)
-with(subset(proteomics_data, pvaluebort<.05 ),
-     points(
-       log2_FC_HAbort_HAchow,
-       -log10(pvaluebort),
-       pch=20,
-       col='red'
-       )
-     )
+with(
+  subset(proteomics_data, pvaluebort < .05),
+  points(
+    log2_FC_HAbort_HAchow,
+    -log10(pvaluebort),
+    pch = 20,
+    col = 'red'
+  )
+)
 
-with(subset(proteomics_data, abs(log2_FC_HAbort_HAchow)>1),
-     points(
-       log2_FC_HAbort_HAchow,
-       -log10(pvaluebort),
-       pch=20,
-       col='orange'
-       )
-     )
+with(
+  subset(proteomics_data, abs(log2_FC_HAbort_HAchow) > 1),
+  points(
+    log2_FC_HAbort_HAchow,
+    -log10(pvaluebort),
+    pch = 20,
+    col = 'orange'
+  )
+)
 
-with(subset(proteomics_data, pvaluebort<.05 & abs(log2_FC_HAbort_HAchow)>1),
-     points(
-       log2_FC_HAbort_HAchow,
-       -log10(pvaluebort),
-       pch=20,
-       col='green'
-       )
-     )
+with(
+  subset(
+    proteomics_data,
+    pvaluebort < .05 & abs(log2_FC_HAbort_HAchow) > 1
+  ),
+  points(
+    log2_FC_HAbort_HAchow,
+    -log10(pvaluebort),
+    pch = 20,
+    col = 'green'
+  )
+)
 
 # Label points with the textxy function from the calibrate package
 library(calibrate)
-with(subset(proteomics_data, pvaluebort<.05 & abs(log2_FC_HAbort_HAchow)>1),
-     textxy(
-       log2_FC_HAbort_HAchow,
-       -log10(pvaluebort),
-       labs=Gene,
-       cex=1
-       )
-     )
+with(
+  subset(
+    proteomics_data,
+    pvaluebort < .05 & abs(log2_FC_HAbort_HAchow) > 1
+  ),
+  textxy(
+    log2_FC_HAbort_HAchow,
+    -log10(pvaluebort),
+    labs = Gene,
+    cex = 1
+  )
+)
 
 ```
 
@@ -1365,62 +1629,64 @@ The proteome was not significantly different with or without the HA tag, indicat
 
 ```{r code-plot-volcano-nrf1-02-plot-halacz}
 # bold axis titles
-par(font.lab=2)
+par(font.lab = 2)
 
 # create plot
-with(proteomics_data,
-     plot(
-       log2_FC_HAchow_lacZ,
-       -log10(pvaluechow),
-       pch=20,
-       xlim=c(-2,2),
-       ylim=c(0,3),
-       yaxp=c(0,3,3),
-       main='Nrf1 AP-MS volcano plot HA vs lacZ',
-       xlab='log2(FC HA chow/lacZ chow)',
-       ylab='-log10(pvalue HA chow vs lacZ chow)'
-       )
-     )
+with(
+  proteomics_data,
+  plot(
+    log2_FC_HAchow_lacZ,-log10(pvaluechow),
+    pch = 20,
+    xlim = c(-2, 2),
+    ylim = c(0, 3),
+    yaxp = c(0, 3, 3),
+    main = 'Nrf1 AP-MS volcano plot HA vs lacZ',
+    xlab = 'log2(FC HA chow/lacZ chow)',
+    ylab = '-log10(pvalue HA chow vs lacZ chow)'
+  )
+)
 
 # Add colored points:
 # red if pvalue<0.05, orange if [log2FC]>1, green if both)
-with(subset(proteomics_data, pvaluechow<.05),
-     points(
-       log2_FC_HAchow_lacZ,
-       -log10(pvaluechow),
-       pch=20,
-       col='red'
-       )
-     )
+with(
+  subset(proteomics_data, pvaluechow < .05),
+  points(
+    log2_FC_HAchow_lacZ,-log10(pvaluechow),
+    pch = 20,
+    col = 'red'
+  )
+)
 
-with(subset(proteomics_data, abs(log2_FC_HAchow_lacZ)>1),
-     points(
-       log2_FC_HAchow_lacZ,
-       -log10(pvaluechow),
-       pch=20,
-       col='orange'
-       )
-     )
+with(
+  subset(proteomics_data, abs(log2_FC_HAchow_lacZ) > 1),
+  points(
+    log2_FC_HAchow_lacZ,-log10(pvaluechow),
+    pch = 20,
+    col = 'orange'
+  )
+)
 
-with(subset(proteomics_data, pvaluechow<.05 & abs(log2_FC_HAchow_lacZ)>1),
-     points(
-       log2_FC_HAchow_lacZ,
-       -log10(pvaluechow),
-       pch=20,
-       col='green'
-       )
-     )
+with(
+  subset(proteomics_data, pvaluechow < .05 &
+           abs(log2_FC_HAchow_lacZ) > 1),
+  points(
+    log2_FC_HAchow_lacZ,-log10(pvaluechow),
+    pch = 20,
+    col = 'green'
+  )
+)
 
 # Label points with the textxy function from the calibrate package
 library(calibrate)
-with(subset(proteomics_data, pvaluechow<.05 & abs(log2_FC_HAchow_lacZ)>1),
-     textxy(
-       log2_FC_HAchow_lacZ,
-       -log10(pvaluechow),
-       labs=Gene,
-       cex=1
-       )
-     )
+with(
+  subset(proteomics_data, pvaluechow < .05 &
+           abs(log2_FC_HAchow_lacZ) > 1),
+  textxy(
+    log2_FC_HAchow_lacZ,-log10(pvaluechow),
+    labs = Gene,
+    cex = 1
+  )
+)
 
 ```
 
@@ -1442,29 +1708,30 @@ then put `cex=dotsize` inside the `plot()` and `points()` functions.
 dotsize <- -log10(pvalue)
 
 # bold axis titles
-par(font.lab=2)
+par(font.lab = 2)
 
 # create plot
-with(proteomics_data,
-     plot(
-       log2_FC_HAchol_HAchow,
-       log2_FC_HAbort_HAchow,
-       pch=20,
-       main='Nrf1 AP-MS scatter plot',
-       xlab='log2(FC HA chol/HA chow)',
-       ylab='log2(FC HA bort/HA chow)',
-       cex=dotsize
-       )
-     )
+with(
+  proteomics_data,
+  plot(
+    log2_FC_HAchol_HAchow,
+    log2_FC_HAbort_HAchow,
+    pch = 20,
+    main = 'Nrf1 AP-MS scatter plot',
+    xlab = 'log2(FC HA chol/HA chow)',
+    ylab = 'log2(FC HA bort/HA chow)',
+    cex = dotsize
+  )
+)
 
 # Label points with the textxy function from the calibrate package
 library(calibrate)
-with(subset(proteomics_data, pvalue<.05 & abs(log2_FC_HAchol_HAchow)>1),
-     textxy(
-       log2_FC_HAchol_HAchow,
-       log2_FC_HAbort_HAchow,
-       labs=Gene
-       )
-     )
+with(
+  subset(proteomics_data, pvalue < .05 &
+           abs(log2_FC_HAchol_HAchow) > 1),
+  textxy(log2_FC_HAchol_HAchow,
+         log2_FC_HAbort_HAchow,
+         labs = Gene)
+)
 
 ```

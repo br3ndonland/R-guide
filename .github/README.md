@@ -38,5 +38,7 @@ The website was generated with the [R Markdown static site builder](https://book
 - Open the project in RStudio: File -> Open Project
   - Build settings are located in Tools -> Project Options -> Build Tools
   - Site settings are in [\_site.yml](../_site.yml).
-- In the Build pane, click "Build Website." The site will output to the docs directory.
+- Build the site:
+  - In the console, run `rmarkdown::render_site(encoding = 'UTF-8')`. If you prefer to use the user interface, in the Build pane, click "Build Website."
+  - The site will output to the docs directory.
 - [GitHub Pages](https://pages.github.com/) builds the site from the docs directory.

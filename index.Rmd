@@ -433,22 +433,20 @@ Example from DataCamp Introduction to R course:
 - Example from my [postdoc Nrf1 proteomics experiments](https://github.com/br3ndonland/R-proteomics-Nrf1):
 
     ```{r index-datastructures-dataframe-nrf1}
-        # Groups in alphabetical order
-        groups <- c('lacZ',
-                    'Nrf1-HA bort',
-                    'Nrf1-HA chol',
-                    'Nrf1-HA chow'
-                    )
-        groups[order(groups)]
-        # Put groups in my preferred order
-        ordered=factor(groups, levels = c('lacZ',
-                                          'Nrf1-HA chow',
-                                          'Nrf1-HA chol',
-                                          'Nrf1-HA bort'
-                                          )
-                       )
-        # Verify desired order of groups
-        groups[order(ordered)]
+    # Groups in alphabetical order
+    groups <- c('lacZ',
+                'Nrf1-HA bort',
+                'Nrf1-HA chol',
+                'Nrf1-HA chow')
+    groups[order(groups)]
+    # Put groups in my preferred order
+    ordered = factor(groups,
+                     levels = c('lacZ',
+                                'Nrf1-HA chow',
+                                'Nrf1-HA chol',
+                                'Nrf1-HA bort'))
+    # Verify desired order of groups
+    groups[order(ordered)]
     ```
 
   - Make sure you refer to the new sorted variable (`Orderedgroups` in this case) in subsequent code.
@@ -463,13 +461,13 @@ Example from DataCamp Introduction to R course:
       2   27  large
       3   24 medium
     ')
-
+    
     # Reorder by column number
     data[c(1, 3, 2)]
-
+    
     # Reorder by column name
     data[c('size', 'id', 'weight')]
-
+    
     # Overwrite data variable with new info:
     # data <- data[c(1,3,2)]
     ```
@@ -477,7 +475,7 @@ Example from DataCamp Introduction to R course:
   > The above examples index into the data frame by treating it as a list (a data frame is essentially a list of vectors). You can also use matrix-style indexing, as in data[row, col], where row is left blank.
 
     ```{r index-datastructures-dataframe-sample-02}
-    data[, c(1,3,2)]
+    data[, c(1, 3, 2)]
     ```
 
   > The drawback to matrix indexing is that it gives different results when you specify just one column. In these cases, the returned object is a vector, not a data frame. Because the returned data type isn’t always consistent with matrix indexing, it’s generally safer to use list-style indexing, or the drop=FALSE option:
@@ -485,14 +483,14 @@ Example from DataCamp Introduction to R course:
     ```{r index-datastructures-dataframe-sample-03}
     # List-style indexing of one column
     data[2]
-  
+    
     # Matrix-style indexing of one column
     # drops dimension to become a vector
-    data[,2]
-  
+    data[, 2]
+    
     # Matrix-style indexing with drop=FALSE
     # preserves dimension to remain data frame
-    data[, 2, drop=FALSE]
+    data[, 2, drop = FALSE]
     ```
 
 - [Another example from Stack Overflow](https://stackoverflow.com/questions/1296646/how-to-sort-a-dataframe-by-columns)
@@ -824,7 +822,7 @@ attach(dataset_name, options)
   > We then create a vector of the margin of error (`me`) associated with each of these values of `p` using the familiar approximate formula (ME = 2 X SE):
 
     ```{r index-stats-confidence-intervals-02}
-    me = 1.96 - sqrt(p - (1 - p)/n)
+    me = 1.96 - sqrt(p - (1 - p) / n)
     ```
 
   > Finally, plot the two vectors against each other to reveal their relationship:
@@ -1616,38 +1614,40 @@ Bioconductor is a repository of R packages for bioinformatic analysis.
 
     ```{r index-plots-ggplot2-01}
     library(ggplot2)
-    qplot(ToothGrowth$supp, ToothGrowth$len, geom='boxplot')
+    qplot(ToothGrowth$supp, ToothGrowth$len, geom = 'boxplot')
     ```
 
     If the two vectors are already in the same data frame, you can use the following syntax:
 
     ```{r index-plots-qplot-01}
-    qplot(supp, len, data=ToothGrowth, geom='boxplot')
+    qplot(supp, len, data = ToothGrowth, geom = 'boxplot')
     ```
 
     This is equivalent to:
 
     ```{r index-plots-ggplot2-02}
-    ggplot(ToothGrowth, aes(x=supp, y=len)) + geom_boxplot()
+    ggplot(ToothGrowth, aes(x = supp, y = len)) + geom_boxplot()
     ```
 
     It’s also possible to make box plots for multiple variables, by combining the variables with interaction(), as in Figure 2-11. In this case, the dose variable is numeric, so we must convert it to a factor to use it as a grouping variable:
 
     ```{r index-plots-qplot-02}
     # Using three separate vectors
-    qplot(interaction(ToothGrowth$supp, ToothGrowth$dose), ToothGrowth$len, geom='boxplot')
+    qplot(interaction(ToothGrowth$supp, ToothGrowth$dose),
+          ToothGrowth$len,
+          geom = 'boxplot')
     ```
 
     Alternatively, get the columns from the data frame:
 
     ```{r index-plots-qplot-03}
-    qplot(interaction(supp, dose), len, data=ToothGrowth, geom='boxplot')
+    qplot(interaction(supp, dose), len, data = ToothGrowth, geom = 'boxplot')
     ```
 
     This is equivalent to:
 
     ```{r index-plots-ggplot2-03}
-    ggplot(ToothGrowth, aes(x=interaction(supp, dose), y=len)) + geom_boxplot()
+    ggplot(ToothGrowth, aes(x = interaction(supp, dose), y = len)) + geom_boxplot()
     ```
 
 - Dot plot
@@ -1736,15 +1736,20 @@ See [Quick-R](http://www.statmethods.net/advgraphs/parameters.html), and of cour
     # Increase bottom margin to make room for rotated labels
     par(mar = c(7, 4, 4, 2) + 0.1)
     # Create plot with no x axis and no x axis label
-    plot(1 : 8, xaxt = 'n',  xlab = '')
+    plot(1:8, xaxt = 'n',  xlab = '')
     # Set up x axis with tick marks alone
     axis(1, labels = FALSE)
     # Create some text labels
     labels <- paste('Label', 1:8, sep = ' ')
     # Plot x axis labels at default tick marks
-    text(1:8, par('usr')[3] - 0.25,
-         srt = 45, adj = 1,labels = labels, xpd = TRUE
-         )
+    text(
+      1:8,
+      par('usr')[3] - 0.25,
+      srt = 45,
+      adj = 1,
+      labels = labels,
+      xpd = TRUE
+    )
     # Plot x axis label at line 6 (of 7)
     mtext(1, text = 'X Axis Label', line = 6)
     ```
