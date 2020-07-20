@@ -32,13 +32,14 @@ I would like to share this resource broadly, and have made an effort to respect 
 
 ## Building the site locally
 
-The website was generated with the [R Markdown static site builder](https://bookdown.org/yihui/rmarkdown/rmarkdown-site.html). The static site builder uses [Bootstrap](https://getbootstrap.com/), and themes come from [Bootswatch](https://bootswatch.com/3/). For more info on themes and options, see the [R Markdown HTML document docs](https://bookdown.org/yihui/rmarkdown/html-document.html) or run `?rmarkdown::html_document`.
+The website is generated with the [R Markdown static site builder](https://bookdown.org/yihui/rmarkdown/rmarkdown-site.html). The static site builder uses [Bootstrap](https://getbootstrap.com/), and themes come from [Bootswatch](https://bootswatch.com/3/). For more info on themes and options, see the [R Markdown HTML document docs](https://bookdown.org/yihui/rmarkdown/html-document.html) or run `?rmarkdown::html_document`.
 
 - Clone the Git repo: `git clone https://github.com/br3ndonland/R-guide.git ~/dev`
-- Open the project in RStudio: File -> Open Project
-  - Build settings are located in Tools -> Project Options -> Build Tools
+- Open the project in RStudio: _File -> Open Project_
+  - Build settings are located in _Tools -> Project Options -> Build Tools_
   - Site settings are in [\_site.yml](../_site.yml).
+- Install the `renv` environment with `renv::restore()`. [`renv`](https://rstudio.github.io/renv/index.html) is a package dependency management system for R projects. It helps avoid problems caused by different package versions and installations by giving each project its own isolated package library.
 - Build the site:
   - In the console, run `rmarkdown::render_site(encoding = 'UTF-8')`. If you prefer to use the user interface, in the Build pane, click "Build Website."
   - The site will output to the docs directory.
-- [GitHub Pages](https://pages.github.com/) builds the site from the docs directory.
+- When changes are committed and pushed to GitHub, [GitHub Pages](https://pages.github.com/) reads the docs directory and creates the website automatically.
