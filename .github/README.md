@@ -34,7 +34,8 @@ I would like to share this resource broadly, and have made an effort to respect 
 
 The website is generated with the [R Markdown static site builder](https://bookdown.org/yihui/rmarkdown/rmarkdown-site.html). The static site builder uses [Bootstrap](https://getbootstrap.com/), and themes come from [Bootswatch](https://bootswatch.com/3/). For more info on themes and options, see the [R Markdown HTML document docs](https://bookdown.org/yihui/rmarkdown/html-document.html) or run `?rmarkdown::html_document`.
 
-- Clone the Git repo: `git clone https://github.com/br3ndonland/R-guide.git ~/dev`
+- Install [Git](https://www.git-scm.com/) and [Git LFS](https://git-lfs.github.com/) with [Homebrew](https://brew.sh/): `brew install git git-lfs`
+- Clone the Git repo: `git clone git@github.com:br3ndonland/R-guide.git`
 - Open the project in RStudio: _File -> Open Project_
   - Build settings are located in _Tools -> Project Options -> Build Tools_
   - Site settings are in [\_site.yml](../_site.yml).
