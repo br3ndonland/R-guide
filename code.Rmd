@@ -410,7 +410,7 @@ axis(2, lwd = 5, tcl = -0.5)
 
 #### Simple linear regression aztcpm
 
-`aztcpm` dataset from University of Illinois statistics course [PATH 591 lab 02](https://github.com/br3ndonland/R-guide/tree/master/lfs/PATH591-Lab-02.pdf) and [PATH 591 lecture 04 A](https://github.com/br3ndonland/R-guide/tree/master/lfs/PATH591-Lecture-04A-annotated.pdf)
+`aztcpm` dataset from University of Illinois statistics course [PATH 591 lab 02](https://github.com/br3ndonland/R-guide/tree/master/lfs/PATH591-Lab-02.url) and [PATH 591 lecture 04 A](https://github.com/br3ndonland/R-guide/tree/master/lfs/PATH591-Lecture-04A-annotated.url)
 
 ##### Intro
 

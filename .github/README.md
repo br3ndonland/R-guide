@@ -28,7 +28,7 @@ I would like to share this resource broadly, and have made an effort to respect 
 - **Webpages (.html) can be viewed on the [GitHub Pages site](https://br3ndonland.github.io/R-guide) for this repository.**
 - **Markdown files (.md) can be viewed on GitHub.**
 - **R Markdown files (.Rmd) can be run in RStudio.**
-- PDFs in the _lfs/_ directory are managed with [Git LFS](https://git-lfs.github.com/). See the [GitHub docs](https://docs.github.com/en/github/managing-large-files/versioning-large-files) for information on how Git LFS integrates with GitHub.
+- Supplementary PDFs can be downloaded [here](https://drive.proton.me/urls/HE8KGEK36G#BDZktYXUwgjT).
 
 ## Building the site locally
 
