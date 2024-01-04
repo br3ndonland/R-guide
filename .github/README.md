@@ -46,4 +46,4 @@ The website is generated with the [R Markdown static site builder](https://bookd
 - Build the site:
   - In the console, run `rmarkdown::render_site(encoding = 'UTF-8')`. If you prefer to use the user interface, in the Build pane, click "Build Website."
   - The site will output to the `site/` directory.
-- When changes are committed and pushed to GitHub, [GitHub Pages](https://pages.github.com/) reads the docs directory and creates the website automatically.
+- When changes are committed and pushed to GitHub, [GitHub Actions builds the site and deploys it to GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages).
