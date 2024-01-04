@@ -36,10 +36,13 @@ The website is generated with the [R Markdown static site builder](https://bookd
 
 - Install [Git](https://www.git-scm.com/) and [Git LFS](https://git-lfs.github.com/) with [Homebrew](https://brew.sh/): `brew install git git-lfs`
 - Clone the Git repo: `git clone git@github.com:br3ndonland/R-guide.git`
-- Open the project in RStudio: _File -> Open Project_
-  - Build settings are located in _Tools -> Project Options -> Build Tools_
+- Open the project.
+  - R command-line console: type `R` (capitalized) on the command-line.
+  - [RStudio](https://posit.co/products/open-source/rstudio/): _File -> Open Project_. Build settings are located in _Tools -> Project Options -> Build Tools_.
   - Site settings are in [\_site.yml](../_site.yml).
-- Install the `renv` environment with `renv::restore()`. [`renv`](https://rstudio.github.io/renv/index.html) is a package dependency management system for R projects. It helps avoid problems caused by different package versions and installations by giving each project its own isolated package library.
+- Install the `renv` environment with `renv::restore()`.
+  - [`renv`](https://rstudio.github.io/renv/index.html) is a package dependency management system for R projects. It helps avoid problems caused by different package versions and installations by giving each project its own isolated package library.
+  - Note that the package `nloptr` requires CMake.
 - Build the site:
   - In the console, run `rmarkdown::render_site(encoding = 'UTF-8')`. If you prefer to use the user interface, in the Build pane, click "Build Website."
   - The site will output to the docs directory.
