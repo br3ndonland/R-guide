@@ -1,0 +1,50 @@
+name: ci
+
+on:
+  pull_request:
+  push:
+    branches: [develop, main]
+    tags: ["*"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+  pages: write
+
+concurrency:
+  cancel-in-progress: true
+  group: "pages"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install dependencies for R
+        run: sudo apt-get install libmpfr-dev pandoc
+      - uses: actions/checkout@v4
+        with:
+          lfs: true
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: renv
+      - uses: r-lib/actions/setup-renv@v2
+      - name: Build site
+        run: rmarkdown::render_site(encoding = 'UTF-8')
+        shell: Rscript {0}
+      - name: Upload build artifact
+        if: github.ref == 'refs/heads/main' || github.ref_type == 'tag'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: "site"
+  deploy:
+    if: github.ref == 'refs/heads/main' || github.ref_type == 'tag'
+    needs: [build]
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy site
+        id: deploy
+        uses: actions/deploy-pages@v4

@@ -45,5 +45,5 @@ The website is generated with the [R Markdown static site builder](https://bookd
   - Note that the package `nloptr` requires CMake.
 - Build the site:
   - In the console, run `rmarkdown::render_site(encoding = 'UTF-8')`. If you prefer to use the user interface, in the Build pane, click "Build Website."
-  - The site will output to the docs directory.
+  - The site will output to the `site/` directory.
 - When changes are committed and pushed to GitHub, [GitHub Pages](https://pages.github.com/) reads the docs directory and creates the website automatically.
