@@ -27,7 +27,7 @@ I would like to share this resource broadly, and have made an effort to respect 
 
 - **Webpages (.html) can be viewed on the [GitHub Pages site](https://br3ndonland.github.io/R-guide) for this repository.**
 - **Markdown files (.md) can be viewed on GitHub.**
-- **R Markdown files (.Rmd) can be run in RStudio.**
+- **R Markdown files (.Rmd) can be run in [RStudio](https://posit.co/products/open-source/rstudio/).**
 - Supplementary PDFs can be downloaded [here](https://drive.proton.me/urls/HE8KGEK36G#BDZktYXUwgjT).
 
 ## Building the site locally
@@ -38,7 +38,7 @@ The website is generated with the [R Markdown static site builder](https://bookd
 - Clone the Git repo: `git clone git@github.com:br3ndonland/R-guide.git`
 - Open the project.
   - R command-line console: type `R` (capitalized) on the command-line.
-  - [RStudio](https://posit.co/products/open-source/rstudio/): _File -> Open Project_. Build settings are located in _Tools -> Project Options -> Build Tools_.
+  - RStudio user interface: _File -> Open Project_. Build settings are located in _Tools -> Project Options -> Build Tools_.
 - Install the `renv` environment with `renv::restore()`.
   - [`renv`](https://rstudio.github.io/renv/index.html) is a package dependency management system for R projects. It helps avoid problems caused by different package versions and installations by giving each project its own isolated package library.
   - Note that the package `nloptr` requires CMake.
