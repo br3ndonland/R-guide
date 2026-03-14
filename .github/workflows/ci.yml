@@ -22,7 +22,7 @@ jobs:
     steps:
       - name: Install dependencies for R
         run: sudo apt-get install libmpfr-dev pandoc
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           lfs: true
       - uses: r-lib/actions/setup-r@v2
