@@ -34,7 +34,7 @@ jobs:
         shell: Rscript {0}
       - name: Upload build artifact
         if: github.ref == 'refs/heads/main' || github.ref_type == 'tag'
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
         with:
           path: "site"
   deploy:
